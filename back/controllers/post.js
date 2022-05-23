@@ -20,15 +20,16 @@ exports.getAllPost = (req, res, next) => {
 
 exports.createPost = (req, res, next) => {
       const data = {
+            id: req.body.id,
             title: req.body.title,
             description: req.body.description,
       };
 
-      const query = "INSERT INTO post VALUES (?, ?)";
+      const query = "INSERT INTO post VALUES (?, ?, ?)";
 
       pool.query(query, Object.values(data), (error) => {
             if (error) {
-                  res.json({ status: "Failure", reason: error.code });
+                  res.json({ status: "Failure", reason: error.code, MyBody: req.body });
             } else {
                   res.json({ status: "Success", data: data });
             }
