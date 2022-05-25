@@ -1,11 +1,8 @@
-const mysql = require("mysql");
+// On créé l'accès aux variable du .env
+const dotenv = require("dotenv").config();
 
-const pool = mysql.createPool({
-      host: "localhost",
-      user: "root",
-      password: "mdpdatabase",
-      database: "groupomania",
-});
+// Connexion à la base de données
+const dbConnect = process.env.DB_CONNECT;
 
 console.log("Connected with the database");
 
@@ -73,7 +70,7 @@ exports.deletePost = (req, res, next) => {
             if (error) {
                   res.json({ status: "Fail to delete", reason: error.code });
             } else {
-                  res.json({ status: "Successfully deleted" });
+                  res.json({ status: "Successfully deleted", data: req.params.title });
             }
       });
 };
