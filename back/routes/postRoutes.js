@@ -5,7 +5,7 @@ const express = require("express");
 const router = express.Router();
 
 // On importe le controller pour les sauces
-const postCtrl = require("../controllers/post");
+const postCtrl = require("../controllers/postController");
 
 router.get("/", postCtrl.getAllPost);
 router.get("/:id", postCtrl.getOnePost);

@@ -1,8 +1,5 @@
-// On créé l'accès aux variable du .env
-const dotenv = require("dotenv").config();
-
 // Connexion à la base de données
-const dbConnect = process.env.DB_CONNECT;
+const pool = require("../config/database");
 
 console.log("Connected with the database");
 
