@@ -1,2 +1,4 @@
 /back/node_modules
 /back/.env
+/back/.DS_STORE
+/front/.DS_STORE
