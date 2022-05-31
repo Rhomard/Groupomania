@@ -28,11 +28,15 @@ exports.getOnePost = (req, res, next) => {
 exports.createPost = (req, res, next) => {
       const data = {
             id: req.body.id,
+            userId: req.body.userId,
             title: req.body.title,
             description: req.body.description,
+            imageURL: req.body.imageUrl,
+            creationTime: req.body.creationTime,
+            modificationTime: req.body.modificationTime,
       };
 
-      const query = "INSERT INTO post VALUES (?, ?, ?)";
+      const query = "INSERT INTO post VALUES (?, ?, ?, ?, ?, now(), now())";
 
       pool.query(query, Object.values(data), (error) => {
             if (error) {
@@ -47,9 +51,11 @@ exports.modifyPost = (req, res, next) => {
       const dataChange = {
             title: req.body.title,
             description: req.body.description,
+            imageURL: req.body.imageUrl,
+            modificationTime: req.body.modificationTime,
       };
 
-      const query = `UPDATE post SET title = ?, description = ? WHERE id = ${req.params.id}`;
+      const query = `UPDATE post SET title = ?, description = ?, imageUrl = ?, modificationTime = now() WHERE id = ${req.params.id}`;
 
       pool.query(query, Object.values(dataChange), (error) => {
             if (error) {
