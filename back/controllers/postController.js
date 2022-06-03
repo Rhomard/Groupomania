@@ -1,10 +1,10 @@
 // Connexion à la base de données
 const pool = require("../config/database");
 
-console.log("Connected with the database");
+console.log("postController connected with the database");
 
 exports.getAllPost = (req, res, next) => {
-      const query = "SELECT * FROM post";
+      const query = "SELECT * FROM post ORDER BY creationTime DESC";
       pool.query(query, (error, results) => {
             if (!results) {
                   res.json({ status: "Not found!" });
@@ -26,9 +26,9 @@ exports.getOnePost = (req, res, next) => {
 };
 
 exports.createPost = (req, res, next) => {
-      const data = {
+      const postData = {
             id: req.body.id,
-            userId: req.body.userId,
+            userId: req.auth.userId,
             title: req.body.title,
             description: req.body.description,
             imageURL: req.body.imageUrl,
@@ -36,19 +36,19 @@ exports.createPost = (req, res, next) => {
             modificationTime: req.body.modificationTime,
       };
 
-      const query = "INSERT INTO post VALUES (?, ?, ?, ?, ?, now(), now())";
+      const query = `INSERT INTO post VALUES (?, ?, ?, ?, ?, now(), now())`;
 
-      pool.query(query, Object.values(data), (error) => {
+      pool.query(query, Object.values(postData), (error) => {
             if (error) {
-                  res.json({ status: "Fail to create", reason: error.code });
+                  res.json({ status: "Failed to create post", reason: error.code });
             } else {
-                  res.json({ status: "Successfully created", data: data });
+                  res.json({ status: "Post successfully created", postData: postData });
             }
       });
 };
 
 exports.modifyPost = (req, res, next) => {
-      const dataChange = {
+      const postDataChange = {
             title: req.body.title,
             description: req.body.description,
             imageURL: req.body.imageUrl,
@@ -57,11 +57,11 @@ exports.modifyPost = (req, res, next) => {
 
       const query = `UPDATE post SET title = ?, description = ?, imageUrl = ?, modificationTime = now() WHERE id = ${req.params.id}`;
 
-      pool.query(query, Object.values(dataChange), (error) => {
+      pool.query(query, Object.values(postDataChange), (error) => {
             if (error) {
                   res.json({ status: "Fail to modify", reason: error.code });
             } else {
-                  res.json({ status: "Successfully modify", data: dataChange });
+                  res.json({ status: "Successfully modify", postDataChange: postDataChange });
             }
       });
 };

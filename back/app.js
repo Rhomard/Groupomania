@@ -5,6 +5,9 @@ const app = express();
 // On importe le routeur pour les sauces
 const postRoutes = require("./routes/postRoutes");
 
+// On importe le routeur pour les users
+const userRoutes = require("./routes/userRoutes");
+
 app.use(express.json());
 
 // Middleware qui résout les erreurs de CORS
@@ -17,5 +20,8 @@ app.use((req, res, next) => {
 
 // On enregistre les routes pour les posts
 app.use("/api/post", postRoutes);
+
+// On enregistre les routes pour les users
+app.use("/api/auth", userRoutes);
 
 module.exports = app;

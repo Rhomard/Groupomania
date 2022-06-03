@@ -22,9 +22,10 @@
 /front/yarn-debug.log*
 /front/yarn-error.log*
 
+/front/.DS_STORE
+
 #BACK
 
 /back/node_modules
 /back/.env
 /back/.DS_STORE
-/front/.DS_STORE
