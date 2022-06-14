@@ -11,7 +11,8 @@ console.log("tokenAuth connected with the database");
 const jwt = require("jsonwebtoken");
 
 module.exports = (req, res, next) => {
-      const query = `SELECT * FROM post where id = ${req.params.id} `;
+
+      const query = `SELECT * FROM post WHERE id = ${req.params.id} `;
       pool.query(query, (error, results) => {
             if (results) {
                   const token = req.headers.authorization.split(" ")[1];
@@ -27,5 +28,11 @@ module.exports = (req, res, next) => {
                         next();
                   }
             }
+
+
       });
+      
 };
+
+
+   
