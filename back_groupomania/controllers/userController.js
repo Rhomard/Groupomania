@@ -26,16 +26,17 @@ exports.signup = (req, res, next) => {
                         password: hash,
                         imageUrl: req.body.imageUrl,
                         creationTime: req.body.creationTime,
+                        roleId: req.body.roleId,
                   };
                   console.log(userData);
 
-                  const query = "INSERT INTO user VALUES (?, ?, ?, ?, ?, ?, now())";
+                  const query = "INSERT INTO user VALUES (?, ?, ?, ?, ?, ?, now(), default)";
 
                   pool.query(query, Object.values(userData), (error) => {
                         if (error) {
-                              res.json({ status: "Fail to create user", reason: error.code });
+                              res.status(400).json({ status: "Fail to create user", reason: error.code, reason2: error });
                         } else {
-                              res.json({ status: "User successfully created", userData: userData });
+                              res.status(201).json({ status: "User successfully created", userData: userData });
                         }
                   });
             })
@@ -60,6 +61,8 @@ exports.login = (req, res, next) => {
                                     // Si l'utilisateur entre le bon mot de passe
                                     res.status(200).json({
                                           userId: results[0].id,
+                                          // roleId: results[0].roleId,
+                                          
                                           // On encode le userId pour que seul l'utilisateur qui a entré une sauce puisse la modifier ou supprimer
                                           token: jwt.sign({ userId: results[0].id }, secretToken, { expiresIn: "24h" }),
                                     });

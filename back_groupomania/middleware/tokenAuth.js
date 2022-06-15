@@ -23,7 +23,16 @@ module.exports = (req, res, next) => {
 
                   // Comparaison du userId de la sauce et celui du token
                   if (results[0].userId && results[0].userId !== userId) {
-                        res.status(403).json({ message: "Unauthorized request !" });
+                        const query = `SELECT * FROM user WHERE roleId = ${req.auth.userId}`;
+                        pool.query(query, (error, results) => {
+                              if (results[0].roleId == 1){
+                                    next();
+                              }
+                              else {
+                                    res.status(403).json({ message: "Unauthorized request !" });
+                              }
+                        })
+                        
                   } else {
                         next();
                   }

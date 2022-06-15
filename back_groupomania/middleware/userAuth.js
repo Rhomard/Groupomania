@@ -19,7 +19,16 @@ module.exports = (req, res, next) => {
 
             // On vérifie que le userId correspond bien avec celui du token
             if (req.body.userId && req.body.userId !== userId) {
-                  throw "Invalid user ID";
+                  const query = `SELECT * FROM user WHERE roleId = ${req.auth.userId}`;
+                        pool.query(query, (error, results) => {
+                              if (results[0].roleId == 1){
+                                    next();
+                              }
+                              else {
+                                    throw "Invalid user ID";
+                              }
+                        })
+                  
             } else {
                   next();
             }

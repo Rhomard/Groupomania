@@ -35,7 +35,7 @@ exports.createPost = (req, res, next) => {
             creationTime: req.body.creationTime,
             modificationTime: req.body.modificationTime,
       };
-
+console.log(postData);
       const query = `INSERT INTO post VALUES (?, ?, ?, ?, ?, now(), now())`;
 
       pool.query(query, Object.values(postData), (error) => {
