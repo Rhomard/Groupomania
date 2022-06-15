@@ -1,39 +1,132 @@
 import styled from 'styled-components'
+import { NavLink } from 'react-router-dom'
+import colors from '../../utils/style/colors'
 
-const PageTitle = styled.h1`
-  font-size: 30px;
-  color: black;
-  text-align: center;
-  padding-bottom: 30px;
+const LoginContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 550px;
+  margin: auto;
+  background-color: lightgray;
+  border-radius: 20px;
 `
 
-const PageForm = styled.form`
+const NavLinks = styled.nav`
+  width: 550px;
+  display: flex;
+  justify-content: space-around;
+  background-color: lightgray;
+  border-radius: 20px 20px 0px;
+`
+
+const Form = styled.form`
   font-weight: bold;
-  padding-left: 30px;
+  border-radius: 0px 20px 20px 20px;
+  padding: 25px;
+  width: 500px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+  background-color: ${colors.secondary};
 `
 
-const PageFormLign = styled.div`
+const FormLign = styled.div`
   padding: 5px;
+`
+
+const FormSubmit = styled.button`
+  padding-top: 10px;
+  border: none;
+  background: none;
 `
 
 function Login() {
   return (
-    <div>
-      <PageTitle>Ici c'est pour se connecter :)</PageTitle>
-      <PageForm>
-        <PageFormLign>
-          <label for="email">Entrez votre email : </label>
-          <input type="email" name="email" id="email" required />
-        </PageFormLign>
-        <PageFormLign>
-          <label for="password">Entrez votre mot de passe : </label>
-          <input type="text" name="password" id="password" required />
-        </PageFormLign>
-        <div>
-          <input type="submit" value="Me Connecter" />
-        </div>
-      </PageForm>
-    </div>
+    <LoginContainer>
+      <NavLinks>
+        <NavLink
+          to="/"
+          className="nav-link"
+          style={({ isActive }) =>
+            isActive
+              ? {
+                  padding: '25px 15px 15px 15px',
+                  color: 'black',
+                  fontWeight: 'bold',
+                  textDecoration: 'none',
+                  fontSize: '18px',
+                  textAlign: 'center',
+                  backgroundColor: `${colors.secondary}`,
+                  borderRadius: '20px 20px 0px 0px',
+                  width: '55%',
+                }
+              : {
+                  padding: '25px 15px 15px 15px',
+                  color: `${colors.tertiary}`,
+                  textDecoration: 'none',
+                  fontSize: '18px',
+                  textAlign: 'center',
+                  backgroundColor: 'lightgray',
+                  borderRadius: '20px 20px 0px 0px',
+                  width: '45%',
+                }
+          }
+        >
+          Connexion
+        </NavLink>
+        <NavLink
+          to="/inscription"
+          className="nav-link"
+          style={({ isActive }) =>
+            isActive
+              ? {
+                  padding: '25px 15px 15px 15px',
+                  color: 'black',
+                  fontWeight: 'bold',
+                  textDecoration: 'none',
+                  fontSize: '18px',
+                  textAlign: 'center',
+                  backgroundColor: `${colors.secondary}`,
+                  borderRadius: '20px 20px 0px 0px',
+                  width: '55%',
+                }
+              : {
+                  padding: '25px 15px 15px 15px',
+                  color: `${colors.tertiary}`,
+                  textDecoration: 'none',
+                  fontSize: '18px',
+                  textAlign: 'center',
+                  backgroundColor: 'lightgray',
+                  borderRadius: '20px 20px 0px 0px',
+                  width: '45%',
+                  paddingRight: '25px',
+                }
+          }
+        >
+          Inscription
+        </NavLink>
+      </NavLinks>
+
+      <div>
+        <Form>
+          <FormLign>
+            <label for="email">Email : </label>
+            <input type="email" name="email" id="email" required />
+          </FormLign>
+          <FormLign>
+            <label for="password">Mot de passe : </label>
+            <input type="text" name="password" id="password" required />
+          </FormLign>
+          <FormSubmit>
+            <input type="submit" value="Me Connecter" />
+          </FormSubmit>
+        </Form>
+      </div>
+    </LoginContainer>
   )
 }
 

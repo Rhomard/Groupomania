@@ -1,6 +1,5 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
-import SignupLogin from './pages/SignupLogin'
 import { createGlobalStyle } from 'styled-components'
 import Header from './components/Header'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
@@ -26,9 +25,9 @@ root.render(
       <GlobalStyle />
       <Header />
       <Routes>
-        <Route path="/" element={<SignupLogin />} />
-        <Route path="/inscription" element={<Signup />} />
+        <Route path="/" element={<Login />} />
         <Route path="/connexion" element={<Login />} />
+        <Route path="/inscription" element={<Signup />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </Router>
