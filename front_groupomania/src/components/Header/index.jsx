@@ -9,7 +9,7 @@ const HeaderStyle = styled.header`
 `
 
 const HomeLogo = styled.img`
-  height: 100px;
+  height: 250px;
 `
 
 function Header() {

@@ -7,7 +7,7 @@ const router = express.Router();
 // On importe le controller pour les users
 const userCtrl = require("../controllers/userController");
 
-// Route POST puisque le frontend va envoyer ces informations
+router.get("/users", userCtrl.users)
 router.post("/signup", userCtrl.signup);
 router.post("/login", userCtrl.login);
 

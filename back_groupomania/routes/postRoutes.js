@@ -13,7 +13,7 @@ const tokenAuth = require("../middleware/tokenAuth");
 // On importe le controller pour les sauces
 const postCtrl = require("../controllers/postController");
 
-router.get("/", userAuth, postCtrl.getAllPost);
+router.get("/", postCtrl.getAllPost);
 router.get("/:id", userAuth, postCtrl.getOnePost);
 router.post("/", userAuth, postCtrl.createPost);
 router.put("/:id", userAuth, tokenAuth, postCtrl.modifyPost);

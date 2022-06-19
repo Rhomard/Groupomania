@@ -13,6 +13,19 @@ const bcrypt = require("bcrypt");
 // On importe le package jsonwebtoken qui va permettre de créer des tokens et de les vérifier
 const jwt = require("jsonwebtoken");
 
+// Middleware pour connecter des utilisateurs existants
+exports.users = (req, res, next) => {
+      // On cherche dans la base de données un utilisateur qui à la même adresse mail que celle envoyée dans la requête
+      const user = "SELECT * FROM user WHERE id IN ( SELECT userId FROM post)"
+  pool.query(user, (error, results) => {
+      if (!results) {
+            res.json({ status: "Not found!" });
+      } else {
+            res.json(results);
+      }
+});
+};
+
 // Middleware pour l'enregistrement de nouvels utilisateurs
 exports.signup = (req, res, next) => {
       // On crypte le mot de passe. On exécute 10 fois l'algorithme de hashage.
