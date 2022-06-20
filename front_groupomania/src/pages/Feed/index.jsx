@@ -3,6 +3,12 @@ import colors from '../../utils/style/colors'
 import Post from '../../components/Post'
 import { useEffect } from 'react'
 import { useState } from 'react'
+import CreatePost from '../../components/CreatePost'
+
+const PageContainer = styled.div`
+  width: 500px;
+  margin: auto;
+`
 
 const FeedWrapper = styled.div`
   background-color: ${colors.secondary};
@@ -19,16 +25,22 @@ const FeedTitle = styled.h1`
 const PostContainer = styled.div``
 
 function Feed() {
-  // let login = JSON.parse(localStorage.getItem('login'))
+  let login = JSON.parse(localStorage.getItem('login'))
 
-  // if (!login) {
-  //   window.location = `./`
-  // }
+  if (!login) {
+    window.location = `./`
+  }
 
   const [postData, setPostData] = useState([])
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/post`).then((response) =>
+    fetch(`http://localhost:3000/api/post`, {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${login.token}`,
+      },
+    }).then((response) =>
       response
         .json()
         .then((postData) => {
@@ -36,7 +48,7 @@ function Feed() {
         })
         .catch((error) => console.log(error))
     )
-  }, [])
+  }, [login.token])
 
   const [userData, setUsersData] = useState([])
 
@@ -61,20 +73,23 @@ function Feed() {
   }
 
   return (
-    <FeedWrapper>
-      <FeedTitle>Fil d'actualités</FeedTitle>
-      <PostContainer>
-        {postData.map((post, index) => (
-          <Post
-            key={`${post.id}-${index}`}
-            firstName={post.authorFirstName}
-            lastName={post.authorLastName}
-            title={post.title}
-            description={post.description}
-          />
-        ))}
-      </PostContainer>
-    </FeedWrapper>
+    <PageContainer>
+      <CreatePost></CreatePost>
+      <FeedWrapper>
+        <FeedTitle>Fil d'actualités</FeedTitle>
+        <PostContainer>
+          {postData.map((post, index) => (
+            <Post
+              key={`${post.id}-${index}`}
+              firstName={post.authorFirstName}
+              lastName={post.authorLastName}
+              title={post.title}
+              description={post.description}
+            />
+          ))}
+        </PostContainer>
+      </FeedWrapper>
+    </PageContainer>
   )
 }
 

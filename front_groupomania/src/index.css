@@ -1,0 +1,16 @@
+.active {
+  text-decoration: none;
+  color: #fd2d01;
+  font-weight: bold;
+}
+
+.inactive {
+  text-decoration: none;
+  color: black;
+}
+
+.inactive:hover {
+  text-decoration: none;
+  color: #fd2d01;
+  font-weight: bold;
+}

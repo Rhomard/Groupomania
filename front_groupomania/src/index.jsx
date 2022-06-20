@@ -8,6 +8,9 @@ import Home from './pages/SignupLogin'
 import Feed from './pages/Feed'
 import styled from 'styled-components'
 import colors from './utils/style/colors'
+import Profile from './pages/Profile'
+import { NavLink } from 'react-router-dom'
+import '../src/index.css'
 
 const rootElement = document.getElementById('root')
 const root = createRoot(rootElement)
@@ -21,7 +24,7 @@ const GlobalStyle = createGlobalStyle`
     }
 `
 
-const LogoutControlStyle = styled.header`
+const NavControlStyle = styled.header`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -32,12 +35,36 @@ const Buttonstyle = styled.button`
   border: none;
   background: none;
   font-size: 15px;
-  font-weight: bold;
   &:hover {
     cursor: pointer;
+    font-weight: bold;
     color: ${colors.primary};
   }
 `
+
+function ProfileButton(props) {
+  return (
+    <NavLink
+      to="/profil"
+      className={({ isActive }) => (isActive ? 'active' : 'inactive')}
+      onClick={props.onClick}
+    >
+      Profil
+    </NavLink>
+  )
+}
+
+function FeedButton(props) {
+  return (
+    <NavLink
+      to="/accueil"
+      className={({ isActive }) => (isActive ? 'active' : 'inactive')}
+      onClick={props.onClick}
+    >
+      Fil d'actus
+    </NavLink>
+  )
+}
 
 function LogoutButton(props) {
   return <Buttonstyle onClick={props.onClick}>Déconnexion</Buttonstyle>
@@ -47,7 +74,19 @@ class LogoutControl extends React.Component {
   constructor(props) {
     super(props)
     this.handleLogoutClick = this.handleLogoutClick.bind(this)
+    this.handleProfileClick = this.handleProfileClick.bind(this)
+    this.handleFeedClick = this.handleFeedClick.bind(this)
     this.state = { isLoggedIn: false }
+  }
+
+  handleProfileClick() {
+    this.setState({ isLoggedIn: false })
+    window.location = `./profil`
+  }
+
+  handleFeedClick() {
+    this.setState({ isLoggedIn: false })
+    window.location = `./accueil`
   }
 
   handleLogoutClick() {
@@ -59,15 +98,21 @@ class LogoutControl extends React.Component {
   render() {
     let login = JSON.parse(localStorage.getItem('login'))
     let button
+    let button1
+    let button2
     if (login) {
       button = <LogoutButton onClick={this.handleLogoutClick} />
+      button1 = <ProfileButton onClick={this.handleProfileClick} />
+      button2 = <FeedButton onClick={this.handleFeedClick} />
     }
 
     return (
-      <LogoutControlStyle>
+      <NavControlStyle>
         <Header isLoggedIn={login} />
+        {button2}
+        {button1}
         {button}
-      </LogoutControlStyle>
+      </NavControlStyle>
     )
   }
 }
@@ -80,6 +125,7 @@ root.render(
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/accueil" element={<Feed />} />
+        <Route path="/profil" element={<Profile />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </Router>

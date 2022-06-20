@@ -74,7 +74,7 @@ exports.login = (req, res, next) => {
                                     // Si l'utilisateur entre le bon mot de passe
                                     res.status(200).json({
                                           userId: results[0].id,
-                                          // roleId: results[0].roleId,
+                                          roleId: results[0].roleId,
                                           
                                           // On encode le userId pour que seul l'utilisateur qui a entré une sauce puisse la modifier ou supprimer
                                           token: jwt.sign({ userId: results[0].id }, secretToken, { expiresIn: "24h" }),

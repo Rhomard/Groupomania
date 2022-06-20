@@ -99,13 +99,13 @@ const FormSubmit = styled.div`
 `
 
 function Home() {
-  // let login = JSON.parse(localStorage.getItem('login'))
+  let login = JSON.parse(localStorage.getItem('login'))
 
-  // if (login) {
-  //   window.location = `./accueil`
-  // } else if (login === null) {
-  //   window.location = `./`
-  // }
+  if (login) {
+    window.location = `./accueil`
+  } else if (login === undefined) {
+    window.location = `./`
+  }
 
   const [loginInfo, setloginInfo] = useState({
     email: '',
@@ -138,7 +138,11 @@ function Home() {
       // Redirect to the feed
       .then(function (value) {
         window.location = `./accueil`
-        let login = { userId: value.userId, token: value.token }
+        let login = {
+          roleId: value.roleId,
+          userId: value.userId,
+          token: value.token,
+        }
         localStorage.setItem('login', JSON.stringify(login))
       })
       // If the API cannot be called

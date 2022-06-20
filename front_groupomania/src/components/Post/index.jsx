@@ -2,9 +2,10 @@ import styled from 'styled-components'
 import profileDefault from '../../assets/profileDefault.png'
 import PropTypes from 'prop-types'
 
-const PostWrapper = styled.div`
+const PostContainer = styled.div`
   width: 500px;
   margin: auto;
+  padding: 20px 0px;
 `
 
 const PostUser = styled.div`
@@ -27,12 +28,22 @@ const PostTitle = styled.h2`
 
 const PostDescription = styled.p`
   padding-left: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
 `
 
 function Post({ title, description, firstName, lastName }) {
+  const HandleDelete = (event) => {
+    event.preventDefault()
+
+    fetch('http://localhost:3000/api/post/id', {
+      method: 'DELETE',
+    })
+      .then((res) => res.json())
+      .then((res) => console.log(res))
+  }
+
   return (
-    <PostWrapper>
+    <PostContainer>
       <PostUser>
         <PostUserImg src={profileDefault} />
         <PostUserName>
@@ -41,7 +52,8 @@ function Post({ title, description, firstName, lastName }) {
       </PostUser>
       <PostTitle>{title}</PostTitle>
       <PostDescription>{description}</PostDescription>
-    </PostWrapper>
+      <button onChange={HandleDelete}>Supprimer</button>
+    </PostContainer>
   )
 }
 
