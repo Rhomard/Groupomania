@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 
 const ProfileContainer = styled.div`
   width: 500px;
+  margin: auto;
 `
 
 function Profile() {
@@ -13,7 +14,13 @@ function Profile() {
   const [userData, setUsersData] = useState([])
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/auth/users`).then((response) =>
+    fetch(`http://localhost:3000/api/auth/users`, {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${login.token}`,
+      },
+    }).then((response) =>
       response
         .json()
         .then((userData) => {
@@ -21,22 +28,23 @@ function Profile() {
         })
         .catch((error) => console.log(error))
     )
-  }, [])
+  }, [login.token])
 
-  const [myProfile, setMyProfile] = useState([])
+  const myProfile = [{ firstName: '', lastName: '' }]
 
   for (let i = 0; i < userData.length; i++) {
     if (userData[i].id === login.userId) {
-      setMyProfile(userData[i])
+      myProfile[0].firstName = userData[i].firstName
+      myProfile[0].lastName = userData[i].lastName
     }
   }
 
-  console.log(myProfile)
-
   return (
     <ProfileContainer>
-      {myProfile[0].firstName}
-      {myProfile[0].lastName}
+      <ProfileInfo
+        firstName={myProfile[0].firstName}
+        lastName={myProfile[0].lastName}
+      />
     </ProfileContainer>
   )
 }

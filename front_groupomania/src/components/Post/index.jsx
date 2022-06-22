@@ -1,6 +1,13 @@
 import styled from 'styled-components'
 import profileDefault from '../../assets/profileDefault.png'
 import PropTypes from 'prop-types'
+// import { useState } from 'react'
+// import { useEffect } from 'react'
+import React from 'react'
+import ModifButton from '../ModifPost/ModifButton'
+import SupprButton from '../SupprButton'
+import { dateFormat } from '../../utils/DateFormat'
+import LikeButton from '../LikeButton'
 
 const PostContainer = styled.div`
   width: 500px;
@@ -28,19 +35,30 @@ const PostTitle = styled.h2`
 
 const PostDescription = styled.p`
   padding-left: 20px;
-  padding-bottom: 10px;
 `
 
-function Post({ title, description, firstName, lastName }) {
-  const HandleDelete = (event) => {
-    event.preventDefault()
+const PostCreation = styled.p`
+  padding-left: 20px;
+`
 
-    fetch('http://localhost:3000/api/post/id', {
-      method: 'DELETE',
-    })
-      .then((res) => res.json())
-      .then((res) => console.log(res))
+function Post({
+  title,
+  description,
+  firstName,
+  lastName,
+  creationTime,
+  modificationTime,
+  postUserId,
+  postId,
+}) {
+  let login = JSON.parse(localStorage.getItem('login'))
+
+  let isAuth = false
+  if (postUserId === login.userId || login.userId === 1) {
+    isAuth = true
   }
+
+  const isModify = creationTime !== modificationTime ? true : false
 
   return (
     <PostContainer>
@@ -52,11 +70,32 @@ function Post({ title, description, firstName, lastName }) {
       </PostUser>
       <PostTitle>{title}</PostTitle>
       <PostDescription>{description}</PostDescription>
-      <button onChange={HandleDelete}>Supprimer</button>
+
+      {isModify ? (
+        <PostCreation>
+          Modifié il y a{' '}
+          {modificationTime &&
+            dateFormat(new Date(modificationTime), 'MMM dd yyyy')}
+        </PostCreation>
+      ) : (
+        <PostCreation>
+          Créé il y a{' '}
+          {creationTime &&
+            dateFormat(new Date(modificationTime), 'MMM dd yyyy')}
+        </PostCreation>
+      )}
+
+      <LikeButton id={postId} />
+
+      {isAuth ? (
+        <div>
+          <SupprButton id={postId} />
+          <ModifButton id={postId} />
+        </div>
+      ) : null}
     </PostContainer>
   )
 }
-
 Post.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
@@ -69,6 +108,7 @@ Post.defaultProps = {
   description: 'Description du post',
   firstName: 'Prénom',
   lastName: 'Nom',
+  creationTime: '00:00:00',
 }
 
 export default Post

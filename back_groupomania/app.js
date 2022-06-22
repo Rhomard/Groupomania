@@ -8,6 +8,9 @@ const postRoutes = require("./routes/postRoutes");
 // On importe le routeur pour les users
 const userRoutes = require("./routes/userRoutes");
 
+// On importe le routeur pour les likes
+const likesRoutes = require("./routes/likeRoutes");
+
 app.use(express.json());
 
 // Middleware qui résout les erreurs de CORS
@@ -23,5 +26,8 @@ app.use("/api/post", postRoutes);
 
 // On enregistre les routes pour les users
 app.use("/api/auth", userRoutes);
+
+// On enregistre les routes pour les users
+app.use("/api/like", likesRoutes);
 
 module.exports = app;

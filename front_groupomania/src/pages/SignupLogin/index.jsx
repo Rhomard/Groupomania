@@ -98,27 +98,29 @@ const FormSubmit = styled.div`
   }
 `
 
-function Home() {
+function SignupLogin() {
   let login = JSON.parse(localStorage.getItem('login'))
 
   if (login) {
-    window.location = `./accueil`
+    window.location = `./fildactu`
   } else if (login === undefined) {
     window.location = `./`
   }
 
-  const [loginInfo, setloginInfo] = useState({
+  // ============================ LOGIN ============================
+
+  const [loginInfo, setLoginInfo] = useState({
     email: '',
     password: '',
   })
 
-  const handleChange = (event) => {
-    setloginInfo({ ...loginInfo, [event.target.name]: event.target.value })
+  const handleChangeLogin = (event) => {
+    setLoginInfo({ ...loginInfo, [event.target.name]: event.target.value })
   }
 
-  const HandleSubmit = (event) => {
+  const handleSubmitLogin = (event) => {
     event.preventDefault()
-    setloginInfo({ email: '', password: '' })
+    setLoginInfo({ email: '', password: '' })
 
     fetch('http://localhost:3000/api/auth/login', {
       method: 'POST',
@@ -137,13 +139,57 @@ function Home() {
       })
       // Redirect to the feed
       .then(function (value) {
-        window.location = `./accueil`
+        window.location = `./fildactu`
         let login = {
           roleId: value.roleId,
           userId: value.userId,
           token: value.token,
         }
         localStorage.setItem('login', JSON.stringify(login))
+      })
+      // If the API cannot be called
+      .catch(function (err) {
+        console.log(err)
+      })
+  }
+
+  // ============================ SIGNUP ============================
+  const [signupInfo, setSignupInfo] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+  })
+
+  const handleChangeSignup = (event) => {
+    setSignupInfo({ ...signupInfo, [event.target.name]: event.target.value })
+  }
+
+  const handleSubmitSignup = (event) => {
+    event.preventDefault()
+    setSignupInfo({ firstName: '', lastName: '', email: '', password: '' })
+
+    fetch('http://localhost:3000/api/auth/signup', {
+      method: 'POST',
+      // Tell to the API that I will give it json object
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      // Send my json object
+      body: JSON.stringify(signupInfo),
+    })
+      .then(function (res) {
+        if (res.ok) {
+          return res.json()
+        }
+      })
+      // Redirect to the feed
+      .then(function (value) {
+        alert(
+          'Compte créé avec succès ! Vous pouvez vous connecter désormais :)'
+        )
+        setIsOpen(true)
       })
       // If the API cannot be called
       .catch(function (err) {
@@ -168,7 +214,7 @@ function Home() {
         </NavLinkInactive>
       </NavLinks>
 
-      <FormLogin onSubmit={HandleSubmit}>
+      <FormLogin onSubmit={handleSubmitLogin}>
         <FormLign>
           <label>Email : </label>
           <input
@@ -176,7 +222,7 @@ function Home() {
             name="email"
             placeholder="exemple@groupomania.fr"
             value={loginInfo.email}
-            onChange={handleChange}
+            onChange={handleChangeLogin}
             required
           />
         </FormLign>
@@ -187,7 +233,7 @@ function Home() {
             name="password"
             placeholder="Mot de passe"
             value={loginInfo.password}
-            onChange={handleChange}
+            onChange={handleChangeLogin}
             autoComplete="off"
             required
           />
@@ -207,29 +253,58 @@ function Home() {
           Inscription
         </NavLinkActive>
       </NavLinks>
-      <FormSignup>
+      <FormSignup onSubmit={handleSubmitSignup}>
         <FormLign>
           <label>Entrez votre prénom : </label>
-          <input type="text" name="firstName" id="firstName" required />
+          <input
+            type="text"
+            name="firstName"
+            placeholder="Prénom"
+            value={signupInfo.firstName}
+            onChange={handleChangeSignup}
+            required
+          />
         </FormLign>
         <FormLign>
           <label>Entrez votre nom : </label>
-          <input type="text" name="lastName" id="lastName" required />
+          <input
+            type="text"
+            name="lastName"
+            placeholder="Nom"
+            value={signupInfo.lastName}
+            onChange={handleChangeSignup}
+            required
+          />
         </FormLign>
         <FormLign>
           <label>Entrez votre email : </label>
-          <input type="email" name="email" id="email" required />
+          <input
+            type="email"
+            name="email"
+            placeholder="exemple@groupomania.fr"
+            value={signupInfo.email}
+            onChange={handleChangeSignup}
+            required
+          />
         </FormLign>
         <FormLign>
           <label>Entrez votre mot de passe : </label>
-          <input type="text" name="password" id="password" required />
+          <input
+            type="password"
+            name="password"
+            placeholder="Mot de passe"
+            value={signupInfo.password}
+            onChange={handleChangeSignup}
+            autoComplete="off"
+            required
+          />
         </FormLign>
         <FormSubmit>
-          <input type="submit" value="Créer mon compte" />
+          <button>Créer mon compte</button>
         </FormSubmit>
       </FormSignup>
     </SignupContainer>
   )
 }
 
-export default Home
+export default SignupLogin

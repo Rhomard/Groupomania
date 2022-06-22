@@ -1,9 +1,11 @@
 import styled from 'styled-components'
 import { useState } from 'react'
+import colors from '../../utils/style/colors'
 
 const CreatePostContainer = styled.div`
   width: 480px;
-  border: 2px solid black;
+  background-color: ${colors.secondary};
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
   padding: 10px 10px;
@@ -14,6 +16,8 @@ const FormLign = styled.div`
   padding-left: 20px;
   padding-bottom: 10px;
 `
+
+const CreatePostTitle = styled.h2``
 
 const FormPost = styled.form``
 
@@ -58,7 +62,7 @@ function CreatePost() {
       })
       // Redirect to the feed
       .then(function (value) {
-        window.location = `./accueil`
+        window.location = `./fildactu`
       })
       // If the API cannot be called
       .catch(function (err) {
@@ -68,7 +72,7 @@ function CreatePost() {
 
   return (
     <CreatePostContainer>
-      Créez votre publication :
+      <CreatePostTitle>Créez votre publication :</CreatePostTitle>
       <FormPost onSubmit={HandleSubmit}>
         <FormLign>
           <input

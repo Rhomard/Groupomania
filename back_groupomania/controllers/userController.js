@@ -16,7 +16,7 @@ const jwt = require("jsonwebtoken");
 // Middleware pour connecter des utilisateurs existants
 exports.users = (req, res, next) => {
       // On cherche dans la base de données un utilisateur qui à la même adresse mail que celle envoyée dans la requête
-      const user = "SELECT * FROM user WHERE id IN ( SELECT userId FROM post)"
+      const user = "SELECT * FROM user"
   pool.query(user, (error, results) => {
       if (!results) {
             res.json({ status: "Not found!" });
@@ -59,9 +59,9 @@ exports.signup = (req, res, next) => {
 // Middleware pour connecter des utilisateurs existants
 exports.login = (req, res, next) => {
       // On cherche dans la base de données un utilisateur qui à la même adresse mail que celle envoyée dans la requête
-      const user = `SELECT * FROM user where email = "${req.body.email}"`;
+      const user = `SELECT * FROM user WHERE email = "${req.body.email}"`;
       pool.query(user, (error, results) => {
-            if (!results) {
+            if (!results.length) {
                   return res.status(401).json({ error: "Utilisateur non trouvé !" });
             } else {
                   bcrypt.compare(req.body.password, results[0].password)

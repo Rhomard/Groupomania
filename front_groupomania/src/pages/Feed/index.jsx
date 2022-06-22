@@ -4,6 +4,7 @@ import Post from '../../components/Post'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import CreatePost from '../../components/CreatePost'
+import React from 'react'
 
 const PageContainer = styled.div`
   width: 500px;
@@ -24,12 +25,8 @@ const FeedTitle = styled.h1`
 
 const PostContainer = styled.div``
 
-function Feed() {
+function MapData() {
   let login = JSON.parse(localStorage.getItem('login'))
-
-  if (!login) {
-    window.location = `./`
-  }
 
   const [postData, setPostData] = useState([])
 
@@ -50,26 +47,31 @@ function Feed() {
     )
   }, [login.token])
 
-  const [userData, setUsersData] = useState([])
+  return (
+    <PostContainer>
+      {postData.map((post, index) => (
+        <Post
+          key={`${post.id}-${index}`}
+          imageUrl={post.imageUrl}
+          firstName={post.firstName}
+          lastName={post.lastName}
+          title={post.title}
+          description={post.description}
+          creationTime={post.creationTime}
+          modificationTime={post.modificationTime}
+          postUserId={post.userId}
+          postId={post.id}
+        />
+      ))}
+    </PostContainer>
+  )
+}
 
-  useEffect(() => {
-    fetch(`http://localhost:3000/api/auth/users`).then((response) =>
-      response
-        .json()
-        .then((usersData) => {
-          setUsersData(usersData)
-        })
-        .catch((error) => console.log(error))
-    )
-  }, [])
+function Feed() {
+  let login = JSON.parse(localStorage.getItem('login'))
 
-  for (let i = 0; i < postData.length; i++) {
-    for (let j = 0; j < userData.length; j++) {
-      if (postData[i].userId === userData[j].id) {
-        postData[i].authorFirstName = userData[j].firstName
-        postData[i].authorLastName = userData[j].lastName
-      }
-    }
+  if (!login) {
+    window.location = `./`
   }
 
   return (
@@ -77,17 +79,7 @@ function Feed() {
       <CreatePost></CreatePost>
       <FeedWrapper>
         <FeedTitle>Fil d'actualités</FeedTitle>
-        <PostContainer>
-          {postData.map((post, index) => (
-            <Post
-              key={`${post.id}-${index}`}
-              firstName={post.authorFirstName}
-              lastName={post.authorLastName}
-              title={post.title}
-              description={post.description}
-            />
-          ))}
-        </PostContainer>
+        <MapData />
       </FeedWrapper>
     </PageContainer>
   )

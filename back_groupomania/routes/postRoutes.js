@@ -10,7 +10,7 @@ const userAuth = require("../middleware/userAuth");
 // On importe le middleware d'authentification pour les tokens
 const tokenAuth = require("../middleware/tokenAuth");
 
-// On importe le controller pour les sauces
+// On importe le controller pour les posts
 const postCtrl = require("../controllers/postController");
 
 router.get("/", userAuth,postCtrl.getAllPost);

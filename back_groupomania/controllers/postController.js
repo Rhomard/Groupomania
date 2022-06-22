@@ -4,7 +4,7 @@ const pool = require("../config/database");
 console.log("postController connected with the database");
 
 exports.getAllPost = (req, res, next) => {
-      const query = "SELECT * FROM post ORDER BY creationTime DESC";
+      const query = "SELECT  post.*, user.imageUrl, user.firstName, user.lastName FROM post, user  WHERE post.userId = user.id ORDER BY post.creationTime DESC";
       pool.query(query, (error, results) => {
             if (!results) {
                   res.json({ status: "Not found!" });
