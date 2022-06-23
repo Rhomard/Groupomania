@@ -46,6 +46,10 @@ const PostCreation = styled.p`
   padding-left: 20px;
 `
 
+const ButtonLign = styled.div`
+  padding-left: 20px;
+`
+
 function Post({
   title,
   description,
@@ -66,7 +70,7 @@ function Post({
 
   const isModify = creationTimePost !== modificationTimePost ? true : false
 
-  const isImage = imageUrlPost !== null ? true : false
+  const isImage = imageUrlPost !== 'undefined' ? true : false
 
   return (
     <PostContainer>
@@ -77,8 +81,7 @@ function Post({
         </PostUserName>
       </PostUser>
       <PostTitle>{title}</PostTitle>
-      {/* {isImage ? <PostImg>{imageUrl}</PostImg> : null} */}
-      <PostImg src={imageUrlPost} />
+      {isImage ? <PostImg src={imageUrlPost} /> : null}
       <PostDescription>{description}</PostDescription>
 
       {isModify ? (
@@ -98,10 +101,10 @@ function Post({
       <LikeButton id={postId} />
 
       {isAuth ? (
-        <div>
+        <ButtonLign>
           <SupprButton id={postId} />
           <ModifButton id={postId} />
-        </div>
+        </ButtonLign>
       ) : null}
     </PostContainer>
   )

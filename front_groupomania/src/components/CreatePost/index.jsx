@@ -1,6 +1,7 @@
-import styled from 'styled-components'
 import { useState } from 'react'
 import colors from '../../utils/style/colors'
+import styled from 'styled-components'
+import axios from 'axios'
 
 const CreatePostContainer = styled.div`
   width: 480px;
@@ -22,79 +23,48 @@ const CreatePostTitle = styled.h2``
 const FormPost = styled.form``
 
 const FormSubmit = styled.div`
+  padding-bottom: 30px;
   padding-top: 10px;
+  padding-left: 20px;
   &hover {
     cursor: pointer;
   }
 `
 
 function CreatePost() {
-  let login = JSON.parse(localStorage.getItem('login'))
+  const [title, setTitle] = useState()
+  const [description, setDescription] = useState()
+  const [imageUrlPost, setImageUrlPost] = useState()
 
-  const [postInfo, setPostInfo] = useState({
-    title: '',
-    description: '',
-    imageUrlPost: '',
-  })
-
-  const handleChangeText = (e) => {
-    setPostInfo({ ...postInfo, [e.target.name]: e.target.value })
-  }
-
-  const handleChangeImg = (e) => {
-    // const filename = document.getElementById('filename').files[0].name
-    setPostInfo({ ...postInfo, imageUrlPost: e.target.files[0].name })
-  }
-
-  const handleImgTakeBack = () => {
-    setPostInfo({ ...postInfo, imageUrlPost: '' })
-  }
-
-  console.log(postInfo)
-
-  const handleSubmit = (event) => {
+  const send = (event) => {
     event.preventDefault()
-    removeSelectedImage()
-    setPostInfo({
-      title: '',
-      description: '',
-      imageUrlPost: '',
-    })
+    const data = new FormData()
+    data.append('title', title)
+    data.append('description', description)
+    data.append('imageUrlPost', imageUrlPost)
 
-    // const files = event.target.files
-    // console.log(files)
+    let login = JSON.parse(localStorage.getItem('login'))
 
-    fetch('http://localhost:3000/api/post', {
-      method: 'POST',
-      // Tell to the API that I will give it json object
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${login.token}`,
-      },
-      // Send my json object
-      body: JSON.stringify(postInfo),
-    })
-      .then(function (res) {
-        if (res.ok) {
-          return res.json()
-        }
+    const headers = {
+      Authorization: `Bearer ${login.token}`,
+    }
+
+    axios
+      .post('http://localhost:3000/api/post', data, {
+        headers: headers,
       })
-      // Redirect to the feed
+      .then((res) => console.log(res))
       .then(function (value) {
-        // window.location = `./fildactu`
+        window.location = `./fildactu`
       })
-      // If the API cannot be called
-      .catch(function (err) {
-        console.log(err)
-      })
+      .catch((err) => console.log(err))
   }
 
   const [selectedImage, setSelectedImage] = useState()
 
-  const imageChange = (e) => {
-    if (e.target.files && e.target.files.length > 0) {
-      setSelectedImage(e.target.files[0])
+  const imageChange = (event) => {
+    if (event.target.files && event.target.files.length > 0) {
+      setSelectedImage(event.target.files[0])
     }
   }
 
@@ -102,65 +72,64 @@ function CreatePost() {
     setSelectedImage()
   }
 
+  //   const handleImgTakeBack = () => {
+  //     setImageUrlPost(undefined)
+  //   }
+
   return (
     <CreatePostContainer>
       <CreatePostTitle>Créez votre publication :</CreatePostTitle>
-      <FormPost onSubmit={handleSubmit} enctype="multipart/form-data">
+      <FormPost>
         <FormLign>
           <input
             type="text"
-            name="title"
             placeholder="Titre de la publication"
-            value={postInfo.title}
-            onChange={handleChangeText}
-            required
+            onChange={(event) => {
+              const { value } = event.target
+              setTitle(value)
+            }}
           />
         </FormLign>
         <FormLign>
           <input
             type="text"
-            name="description"
             placeholder="Description de la publication"
-            value={postInfo.description}
-            onChange={handleChangeText}
-            required
+            onChange={(event) => {
+              const { value } = event.target
+              setDescription(value)
+            }}
           />
         </FormLign>
         <FormLign>
-          <div>
-            <input
-              accept="image/*"
-              id="filename"
-              type="file"
-              name="imageUrl"
-              value={undefined}
-              onChange={(e) => {
-                handleChangeImg(e)
-                imageChange(e)
-              }}
-            />
-
-            {selectedImage && (
-              <div>
-                <img
-                  src={URL.createObjectURL(selectedImage)}
-                  alt="Aperçu"
-                  width="200"
-                />
-                <button
-                  onClick={() => {
-                    removeSelectedImage()
-                    handleImgTakeBack()
-                  }}
-                >
-                  Retirer cette image
-                </button>
-              </div>
-            )}
-          </div>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(event) => {
+              const imageUrlPost = event.target.files[0]
+              setImageUrlPost(imageUrlPost)
+              imageChange(event)
+            }}
+          />
+          {selectedImage && (
+            <div>
+              <img
+                src={URL.createObjectURL(selectedImage)}
+                alt="Aperçu"
+                width="200"
+              />
+              <button
+                onClick={() => {
+                  removeSelectedImage()
+                  //   handleImgTakeBack()
+                }}
+              >
+                Retirer cette image
+              </button>
+            </div>
+          )}
         </FormLign>
         <FormSubmit>
-          <button>Publier</button>
+          <button onClick={send}>Publier</button>
         </FormSubmit>
       </FormPost>
     </CreatePostContainer>

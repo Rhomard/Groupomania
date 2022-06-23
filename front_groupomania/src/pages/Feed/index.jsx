@@ -47,8 +47,6 @@ function MapData() {
     )
   }, [login.token])
 
-  console.log(postData)
-
   const isEmpty = postData.length !== 0 ? true : false
 
   const isAnyData = !postData ? false : true
@@ -92,7 +90,7 @@ function Feed() {
 
   return (
     <PageContainer>
-      <CreatePost></CreatePost>
+      <CreatePost />
       <FeedWrapper>
         <FeedTitle>Fil d'actualités</FeedTitle>
         <MapData />

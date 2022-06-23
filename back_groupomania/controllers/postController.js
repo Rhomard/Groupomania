@@ -26,11 +26,14 @@ exports.getOnePost = (req, res, next) => {
                   res.json({ status: "Not found!" });
             } else {
                   res.json(results);
+                  console.log(results);
             }
       });
 };
 
 exports.createPost = (req, res, next) => {
+
+      if (req.file){
       const postData = {
             id: req.body.id,
             userId: req.auth.userId,
@@ -41,15 +44,39 @@ exports.createPost = (req, res, next) => {
             modificationTime: req.body.modificationTime,
       };
 
+
       const query = `INSERT INTO post VALUES (?, ?, ?, ?, ?, now(), now())`;
 
       pool.query(query, Object.values(postData), (error) => {
             if (error) {
-                  res.json({ status: "Failed to create post", reason: error.code });
+                  res.json({ status: "Failed to create post", reason: error.code, reason2: error });
             } else {
                   res.json({ status: "Post successfully created", postData: postData });
             }
-      });
+      });}
+      else{
+            const postData = {
+                  id: req.body.id,
+                  userId: req.auth.userId,
+                  title: req.body.title,
+                  description: req.body.description,
+                  imageUrlPost: req.body.imageUrlPost,
+                  creationTime: req.body.creationTime,
+                  modificationTime: req.body.modificationTime,
+            };
+      
+      
+            const query = `INSERT INTO post VALUES (?, ?, ?, ?, ?, now(), now())`;
+      
+            pool.query(query, Object.values(postData), (error) => {
+                  if (error) {
+                        res.json({ status: "Failed to create post", reason: error.code, reason2: error });
+                  } else {
+                        res.json({ status: "Post successfully created", postData: postData });
+                  }
+            });
+
+      }
 };
 
 exports.modifyPost = (req, res, next) => {
@@ -73,6 +100,12 @@ exports.modifyPost = (req, res, next) => {
 
 exports.deletePost = (req, res, next) => {
       const query = `DELETE FROM post WHERE id = ${req.params.id}`;
+
+      const imageUrlPost = `SELECT post.imageUrlPost FROM post WHERE id = ${req.params.id}`
+
+      const filename = imageUrlPost.split("/imagesPost/")[1];
+
+      fs.unlink(`imagesPost/${filename}`, () => {})
 
       pool.query(query, (error) => {
             if (error) {
