@@ -39,7 +39,7 @@ function ModifButton({ id }) {
       })
       // Redirect to the feed
       .then(function (value) {
-        // window.location = `./fildactu`
+        window.location = `./fildactu`
       })
       // If the API cannot be called
       .catch(function (err) {

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import colors from '../../utils/style/colors'
 import styled from 'styled-components'
 import axios from 'axios'
@@ -36,6 +36,8 @@ function CreatePost() {
   const [description, setDescription] = useState()
   const [imageUrlPost, setImageUrlPost] = useState()
 
+  console.log(imageUrlPost)
+
   const send = (event) => {
     event.preventDefault()
     const data = new FormData()
@@ -59,7 +61,6 @@ function CreatePost() {
       })
       .catch((err) => console.log(err))
   }
-
   const [selectedImage, setSelectedImage] = useState()
 
   const imageChange = (event) => {
@@ -71,10 +72,6 @@ function CreatePost() {
   const removeSelectedImage = () => {
     setSelectedImage()
   }
-
-  //   const handleImgTakeBack = () => {
-  //     setImageUrlPost(undefined)
-  //   }
 
   return (
     <CreatePostContainer>
@@ -120,7 +117,6 @@ function CreatePost() {
               <button
                 onClick={() => {
                   removeSelectedImage()
-                  //   handleImgTakeBack()
                 }}
               >
                 Retirer cette image

@@ -99,13 +99,21 @@ exports.modifyPost = (req, res, next) => {
 };
 
 exports.deletePost = (req, res, next) => {
-      const query = `DELETE FROM post WHERE id = ${req.params.id}`;
 
       const imageUrlPost = `SELECT post.imageUrlPost FROM post WHERE id = ${req.params.id}`
 
-      const filename = imageUrlPost.split("/imagesPost/")[1];
+        pool.query(imageUrlPost, (error, results) => {
+            if (results[0].imageUrlPost !== 'undefined') {
+                  const filename = results[0].imageUrlPost.split("/imagesPost/")[1];
+                   fs.unlink(`imagesPost/${filename}`, function (err) {
+                              if (err) throw err;
+                              // if no error, file has been deleted successfully
+                              console.log('File deleted!');
+                          });
+            }
+      });
 
-      fs.unlink(`imagesPost/${filename}`, () => {})
+      const query = `DELETE FROM post WHERE id = ${req.params.id}`;
 
       pool.query(query, (error) => {
             if (error) {
