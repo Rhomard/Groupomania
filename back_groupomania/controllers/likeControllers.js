@@ -5,7 +5,6 @@ console.log("likeController connected with the database");
 
 exports.getLike = (req, res, next) => {
       const query = `SELECT * FROM postLike WHERE postLike.postId = ${req.params.id}`;
-      console.log(req.params.id);
       pool.query(query, (error, results) => {
             if (!results) {
                   res.json({ status: "Not found!" });
@@ -20,7 +19,6 @@ exports.like = (req, res, next) => {
             userId: req.auth.userId,
             postId: req.body.id,
       };
-console.log(postLikeData);
       const query = `INSERT INTO postLike VALUES (?, ?)`;
 
       pool.query(query, Object.values(postLikeData), (error) => {

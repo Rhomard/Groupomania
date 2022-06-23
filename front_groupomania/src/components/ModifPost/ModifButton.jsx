@@ -16,7 +16,8 @@ function ModifButton({ id }) {
       [event.target.name]: event.target.value,
     })
   }
-  const HandleSubmit = (event) => {
+
+  const handleSubmit = (event) => {
     event.preventDefault()
     setChangePostInfo({ title: '', description: '' })
 
@@ -38,7 +39,7 @@ function ModifButton({ id }) {
       })
       // Redirect to the feed
       .then(function (value) {
-        window.location = `./fildactu`
+        // window.location = `./fildactu`
       })
       // If the API cannot be called
       .catch(function (err) {
@@ -48,7 +49,7 @@ function ModifButton({ id }) {
 
   return isOpen ? (
     <div>
-      <form onSubmit={HandleSubmit}>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           name="title"

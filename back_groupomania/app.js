@@ -11,6 +11,9 @@ const userRoutes = require("./routes/userRoutes");
 // On importe le routeur pour les likes
 const likesRoutes = require("./routes/likeRoutes");
 
+// On donne accès au chemin de notre système de fichier
+const path = require("path");
+
 app.use(express.json());
 
 // Middleware qui résout les erreurs de CORS
@@ -20,6 +23,9 @@ app.use((req, res, next) => {
       res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
       next();
 });
+
+// Middlware qui répond aux requêtes envoyées au dossier static /images
+app.use("/imagesPost", express.static(path.join(__dirname, "imagesPost")));
 
 // On enregistre les routes pour les posts
 app.use("/api/post", postRoutes);

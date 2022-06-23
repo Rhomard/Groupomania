@@ -1,10 +1,15 @@
+// On importe le package fs (file system) de Node
+const fs = require("fs");
+const { execFileSync } = require("child_process");
+
 // Connexion à la base de données
 const pool = require("../config/database");
+const { log } = require("console");
 
 console.log("postController connected with the database");
 
 exports.getAllPost = (req, res, next) => {
-      const query = "SELECT  post.*, user.imageUrl, user.firstName, user.lastName FROM post, user  WHERE post.userId = user.id ORDER BY post.creationTime DESC";
+      const query = "SELECT post.*, user.firstName, user.lastName, user.imageUrlUser FROM post, user WHERE post.userId = user.id ORDER BY post.creationTimePost DESC";
       pool.query(query, (error, results) => {
             if (!results) {
                   res.json({ status: "Not found!" });
@@ -31,11 +36,11 @@ exports.createPost = (req, res, next) => {
             userId: req.auth.userId,
             title: req.body.title,
             description: req.body.description,
-            imageURL: req.body.imageUrl,
+            imageUrlPost: `${req.protocol}://${req.get("host")}/imagesPost/${req.file.filename}`,
             creationTime: req.body.creationTime,
             modificationTime: req.body.modificationTime,
       };
-console.log(postData);
+
       const query = `INSERT INTO post VALUES (?, ?, ?, ?, ?, now(), now())`;
 
       pool.query(query, Object.values(postData), (error) => {
@@ -51,11 +56,11 @@ exports.modifyPost = (req, res, next) => {
       const postDataChange = {
             title: req.body.title,
             description: req.body.description,
-            imageURL: req.body.imageUrl,
-            modificationTime: req.body.modificationTime,
+            imageUrlPost: req.body.imageUrlPost,
+            modificationTimePost: req.body.modificationTimePost,
       };
 
-      const query = `UPDATE post SET title = ?, description = ?, imageUrl = ?, modificationTime = now() WHERE id = ${req.params.id}`;
+      const query = `UPDATE post SET title = ?, description = ?, imageUrlPost = ?, modificationTimePost = now() WHERE id = ${req.params.id}`;
 
       pool.query(query, Object.values(postDataChange), (error) => {
             if (error) {

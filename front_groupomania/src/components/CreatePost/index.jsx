@@ -34,15 +34,35 @@ function CreatePost() {
   const [postInfo, setPostInfo] = useState({
     title: '',
     description: '',
+    imageUrlPost: '',
   })
 
-  const handleChange = (event) => {
-    setPostInfo({ ...postInfo, [event.target.name]: event.target.value })
+  const handleChangeText = (e) => {
+    setPostInfo({ ...postInfo, [e.target.name]: e.target.value })
   }
 
-  const HandleSubmit = (event) => {
+  const handleChangeImg = (e) => {
+    // const filename = document.getElementById('filename').files[0].name
+    setPostInfo({ ...postInfo, imageUrlPost: e.target.files[0].name })
+  }
+
+  const handleImgTakeBack = () => {
+    setPostInfo({ ...postInfo, imageUrlPost: '' })
+  }
+
+  console.log(postInfo)
+
+  const handleSubmit = (event) => {
     event.preventDefault()
-    setPostInfo({ title: '', description: '' })
+    removeSelectedImage()
+    setPostInfo({
+      title: '',
+      description: '',
+      imageUrlPost: '',
+    })
+
+    // const files = event.target.files
+    // console.log(files)
 
     fetch('http://localhost:3000/api/post', {
       method: 'POST',
@@ -62,7 +82,7 @@ function CreatePost() {
       })
       // Redirect to the feed
       .then(function (value) {
-        window.location = `./fildactu`
+        // window.location = `./fildactu`
       })
       // If the API cannot be called
       .catch(function (err) {
@@ -70,17 +90,29 @@ function CreatePost() {
       })
   }
 
+  const [selectedImage, setSelectedImage] = useState()
+
+  const imageChange = (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setSelectedImage(e.target.files[0])
+    }
+  }
+
+  const removeSelectedImage = () => {
+    setSelectedImage()
+  }
+
   return (
     <CreatePostContainer>
       <CreatePostTitle>Créez votre publication :</CreatePostTitle>
-      <FormPost onSubmit={HandleSubmit}>
+      <FormPost onSubmit={handleSubmit} enctype="multipart/form-data">
         <FormLign>
           <input
             type="text"
             name="title"
             placeholder="Titre de la publication"
             value={postInfo.title}
-            onChange={handleChange}
+            onChange={handleChangeText}
             required
           />
         </FormLign>
@@ -90,9 +122,42 @@ function CreatePost() {
             name="description"
             placeholder="Description de la publication"
             value={postInfo.description}
-            onChange={handleChange}
+            onChange={handleChangeText}
             required
           />
+        </FormLign>
+        <FormLign>
+          <div>
+            <input
+              accept="image/*"
+              id="filename"
+              type="file"
+              name="imageUrl"
+              value={undefined}
+              onChange={(e) => {
+                handleChangeImg(e)
+                imageChange(e)
+              }}
+            />
+
+            {selectedImage && (
+              <div>
+                <img
+                  src={URL.createObjectURL(selectedImage)}
+                  alt="Aperçu"
+                  width="200"
+                />
+                <button
+                  onClick={() => {
+                    removeSelectedImage()
+                    handleImgTakeBack()
+                  }}
+                >
+                  Retirer cette image
+                </button>
+              </div>
+            )}
+          </div>
         </FormLign>
         <FormSubmit>
           <button>Publier</button>

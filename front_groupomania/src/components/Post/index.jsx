@@ -37,6 +37,11 @@ const PostDescription = styled.p`
   padding-left: 20px;
 `
 
+const PostImg = styled.img`
+  height: 100px;
+  padding-left: 20px;
+`
+
 const PostCreation = styled.p`
   padding-left: 20px;
 `
@@ -44,10 +49,11 @@ const PostCreation = styled.p`
 function Post({
   title,
   description,
+  imageUrlPost,
   firstName,
   lastName,
-  creationTime,
-  modificationTime,
+  creationTimePost,
+  modificationTimePost,
   postUserId,
   postId,
 }) {
@@ -58,7 +64,9 @@ function Post({
     isAuth = true
   }
 
-  const isModify = creationTime !== modificationTime ? true : false
+  const isModify = creationTimePost !== modificationTimePost ? true : false
+
+  const isImage = imageUrlPost !== null ? true : false
 
   return (
     <PostContainer>
@@ -69,19 +77,21 @@ function Post({
         </PostUserName>
       </PostUser>
       <PostTitle>{title}</PostTitle>
+      {/* {isImage ? <PostImg>{imageUrl}</PostImg> : null} */}
+      <PostImg src={imageUrlPost} />
       <PostDescription>{description}</PostDescription>
 
       {isModify ? (
         <PostCreation>
           Modifié il y a{' '}
-          {modificationTime &&
-            dateFormat(new Date(modificationTime), 'MMM dd yyyy')}
+          {modificationTimePost &&
+            dateFormat(new Date(modificationTimePost), 'MMM dd yyyy')}
         </PostCreation>
       ) : (
         <PostCreation>
           Créé il y a{' '}
-          {creationTime &&
-            dateFormat(new Date(modificationTime), 'MMM dd yyyy')}
+          {creationTimePost &&
+            dateFormat(new Date(creationTimePost), 'MMM dd yyyy')}
         </PostCreation>
       )}
 

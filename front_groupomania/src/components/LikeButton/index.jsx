@@ -81,27 +81,25 @@ function LikeButton({ id }) {
 
   let login = JSON.parse(localStorage.getItem('login'))
 
-  useEffect(() => {
-    fetch(`http://localhost:3000/api/like/${id}`, {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${login.token}`,
-      },
-    }).then((response) =>
-      response
-        .json()
-        .then((likesData) => {
-          if (likesData.length) {
-            const like = likesData.find((e) => e.userId === login.userId)
-            if (like) {
-              setIsOpen(true)
-            }
+  fetch(`http://localhost:3000/api/like/${id}`, {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${login.token}`,
+    },
+  }).then((response) =>
+    response
+      .json()
+      .then((likesData) => {
+        if (likesData.length) {
+          const like = likesData.find((e) => e.userId === login.userId)
+          if (like) {
+            setIsOpen(true)
           }
-        })
-        .catch((error) => console.log(error))
-    )
-  }, [])
+        }
+      })
+      .catch((error) => console.log(error))
+  )
 
   return isLiked ? (
     <LikeButtonStyle>
