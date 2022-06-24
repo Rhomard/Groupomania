@@ -19,10 +19,6 @@ const PostUser = styled.div`
   padding-left: 20px;
 `
 
-const PostUserImg = styled.img`
-  height: 50px;
-`
-
 const PostUserName = styled.p`
   padding-left: 10px;
 `
@@ -48,6 +44,12 @@ const ButtonLign = styled.div`
   padding-left: 20px;
 `
 
+const ProfileUserImg = styled.img`
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+`
+
 function Post({
   title,
   description,
@@ -58,6 +60,7 @@ function Post({
   modificationTimePost,
   postUserId,
   postId,
+  imageUrlUser,
 }) {
   let login = JSON.parse(localStorage.getItem('login'))
 
@@ -70,10 +73,16 @@ function Post({
 
   const isImage = imageUrlPost !== 'undefined' ? true : false
 
+  const isProfilePicNull = imageUrlUser === null ? false : true
+
   return (
     <PostContainer>
       <PostUser>
-        <PostUserImg src={profileDefault} />
+        {isProfilePicNull ? (
+          <ProfileUserImg src={imageUrlUser} />
+        ) : (
+          <ProfileUserImg src={profileDefault} />
+        )}
         <PostUserName>
           {firstName} {lastName}
         </PostUserName>

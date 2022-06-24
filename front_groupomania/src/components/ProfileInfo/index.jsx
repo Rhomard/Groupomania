@@ -30,12 +30,12 @@ const ProfileUserName = styled.p`
 `
 
 function ProfileInfo({ firstName, lastName, imageUrlUser, creationTimeUser }) {
-  const isImageNull = imageUrlUser === null ? false : true
+  const isProfilePicNull = imageUrlUser === null ? false : true
 
   return (
     <ProfileContainer>
       <ProfileUser>
-        {isImageNull ? (
+        {isProfilePicNull ? (
           <ProfileUserImg src={imageUrlUser} />
         ) : (
           <ProfileUserImg src={profileDefault} />

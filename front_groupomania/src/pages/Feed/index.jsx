@@ -63,6 +63,7 @@ function MapData() {
           modificationTimePost={post.modificationTimePost}
           postUserId={post.userId}
           postId={post.id}
+          imageUrlUser={post.imageUrlUser}
         />
       ))}
     </PostContainer>
