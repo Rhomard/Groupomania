@@ -49,7 +49,7 @@ exports.createPost = (req, res, next) => {
 
       pool.query(query, Object.values(postData), (error) => {
             if (error) {
-                  res.json({ status: "Failed to create post", reason: error.code, reason2: error });
+                  res.json({ status: "Failed to create post", reason: error.code });
             } else {
                   res.json({ status: "Post successfully created", postData: postData });
             }
@@ -70,7 +70,7 @@ exports.createPost = (req, res, next) => {
       
             pool.query(query, Object.values(postData), (error) => {
                   if (error) {
-                        res.json({ status: "Failed to create post", reason: error.code, reason2: error });
+                        res.json({ status: "Failed to create post", reason: error.code });
                   } else {
                         res.json({ status: "Post successfully created", postData: postData });
                   }
@@ -80,10 +80,24 @@ exports.createPost = (req, res, next) => {
 };
 
 exports.modifyPost = (req, res, next) => {
+      if (req.file){
+            const imageUrlPost = `SELECT post.imageUrlPost FROM post WHERE id = ${req.params.id}`
+
+            pool.query(imageUrlPost, (error, results) => {
+                if (results[0].imageUrlPost !== 'undefined') {
+                      const filename = results[0].imageUrlPost.split("/imagesPost/")[1];
+                       fs.unlink(`imagesPost/${filename}`, function (err) {
+                                  if (err) throw err;
+                                  // if no error, file has been deleted successfully
+                                  console.log('File deleted!');
+                              });
+                }
+          });
+
       const postDataChange = {
             title: req.body.title,
             description: req.body.description,
-            imageUrlPost: req.body.imageUrlPost,
+            imageUrlPost: `${req.protocol}://${req.get("host")}/imagesPost/${req.file.filename}`,
             modificationTimePost: req.body.modificationTimePost,
       };
 
@@ -95,7 +109,24 @@ exports.modifyPost = (req, res, next) => {
             } else {
                   res.json({ status: "Successfully modify", postDataChange: postDataChange });
             }
-      });
+      })}
+      else {
+            const postDataChange = {
+                  title: req.body.title,
+                  description: req.body.description,
+                  modificationTimePost: req.body.modificationTimePost,
+            };
+      
+            const query = `UPDATE post SET title = ?, description = ?, modificationTimePost = now() WHERE id = ${req.params.id}`;
+      
+            pool.query(query, Object.values(postDataChange), (error) => {
+                  if (error) {
+                        res.json({ status: "Fail to modify", reason: error.code });
+                  } else {
+                        res.json({ status: "Successfully modify", postDataChange: postDataChange });
+                  }
+            })
+      }
 };
 
 exports.deletePost = (req, res, next) => {

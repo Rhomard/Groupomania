@@ -47,33 +47,25 @@ function MapData() {
     )
   }, [login.token])
 
-  const isEmpty = postData.length !== 0 ? true : false
+  const isNoPost = postData.length !== 0 || !postData ? true : false
 
-  const isAnyData = !postData ? false : true
-
-  return isAnyData ? (
-    isEmpty ? (
-      <PostContainer>
-        {postData.map((post, index) => (
-          <Post
-            key={`${post.id}-${index}`}
-            imageUrlPost={post.imageUrlPost}
-            firstName={post.firstName}
-            lastName={post.lastName}
-            title={post.title}
-            description={post.description}
-            creationTimePost={post.creationTimePost}
-            modificationTimePost={post.modificationTimePost}
-            postUserId={post.userId}
-            postId={post.id}
-          />
-        ))}
-      </PostContainer>
-    ) : (
-      <PostContainer>
-        <h2>Pas de post pour l'instant</h2>
-      </PostContainer>
-    )
+  return isNoPost ? (
+    <PostContainer>
+      {postData.map((post, index) => (
+        <Post
+          key={`${post.id}-${index}`}
+          imageUrlPost={post.imageUrlPost}
+          firstName={post.firstName}
+          lastName={post.lastName}
+          title={post.title}
+          description={post.description}
+          creationTimePost={post.creationTimePost}
+          modificationTimePost={post.modificationTimePost}
+          postUserId={post.userId}
+          postId={post.id}
+        />
+      ))}
+    </PostContainer>
   ) : (
     <PostContainer>
       <h2>Pas de post pour l'instant</h2>

@@ -1,9 +1,9 @@
-function SupprButton({ id }) {
+function SupprButton({ postId }) {
   return (
     <button
       onClick={(e) => {
         e.preventDefault()
-        handleSupprClick({ id })
+        handleSupprClick({ postId })
       }}
     >
       Supprimer
@@ -11,9 +11,9 @@ function SupprButton({ id }) {
   )
 }
 
-function SupprOnePost({ id }) {
+function SupprOnePost({ postId }) {
   let login = JSON.parse(localStorage.getItem('login'))
-  fetch(`http://localhost:3000/api/post/${id}`, {
+  fetch(`http://localhost:3000/api/post/${postId}`, {
     method: 'DELETE',
     // Tell to the API that I will give it json object
     headers: {
@@ -36,8 +36,8 @@ function SupprOnePost({ id }) {
     })
 }
 
-function handleSupprClick({ id }) {
-  SupprOnePost({ id })
+function handleSupprClick({ postId }) {
+  SupprOnePost({ postId })
 }
 
 export default SupprButton

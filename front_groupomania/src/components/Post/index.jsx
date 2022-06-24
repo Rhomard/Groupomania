@@ -1,11 +1,9 @@
 import styled from 'styled-components'
 import profileDefault from '../../assets/profileDefault.png'
 import PropTypes from 'prop-types'
-// import { useState } from 'react'
-// import { useEffect } from 'react'
 import React from 'react'
-import ModifButton from '../ModifPost/ModifButton'
-import SupprButton from '../SupprButton'
+import ModifButton from '../ModifPost'
+import SupprButton from '../SupprPost'
 import { dateFormat } from '../../utils/DateFormat'
 import LikeButton from '../LikeButton'
 
@@ -98,12 +96,16 @@ function Post({
         </PostCreation>
       )}
 
-      <LikeButton id={postId} />
+      <LikeButton postId={postId} />
 
       {isAuth ? (
         <ButtonLign>
-          <SupprButton id={postId} />
-          <ModifButton id={postId} />
+          <SupprButton postId={postId} />
+          <ModifButton
+            postId={postId}
+            titleInput={title}
+            descriptionInput={description}
+          />
         </ButtonLign>
       ) : null}
     </PostContainer>

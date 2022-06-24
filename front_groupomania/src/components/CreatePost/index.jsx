@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import colors from '../../utils/style/colors'
 import styled from 'styled-components'
 import axios from 'axios'
@@ -35,8 +35,6 @@ function CreatePost() {
   const [title, setTitle] = useState()
   const [description, setDescription] = useState()
   const [imageUrlPost, setImageUrlPost] = useState()
-
-  console.log(imageUrlPost)
 
   const send = (event) => {
     event.preventDefault()
@@ -76,7 +74,7 @@ function CreatePost() {
   return (
     <CreatePostContainer>
       <CreatePostTitle>Créez votre publication :</CreatePostTitle>
-      <FormPost>
+      <FormPost onSubmit={send}>
         <FormLign>
           <input
             type="text"
@@ -85,6 +83,7 @@ function CreatePost() {
               const { value } = event.target
               setTitle(value)
             }}
+            required
           />
         </FormLign>
         <FormLign>
@@ -95,6 +94,7 @@ function CreatePost() {
               const { value } = event.target
               setDescription(value)
             }}
+            required
           />
         </FormLign>
         <FormLign>
@@ -125,7 +125,7 @@ function CreatePost() {
           )}
         </FormLign>
         <FormSubmit>
-          <button onClick={send}>Publier</button>
+          <button>Publier</button>
         </FormSubmit>
       </FormPost>
     </CreatePostContainer>

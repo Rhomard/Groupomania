@@ -27,6 +27,9 @@ app.use((req, res, next) => {
 // Middlware qui répond aux requêtes envoyées au dossier static /images
 app.use("/imagesPost", express.static(path.join(__dirname, "imagesPost")));
 
+// Middlware qui répond aux requêtes envoyées au dossier static /images
+app.use("/imagesUser", express.static(path.join(__dirname, "imagesUser")));
+
 // On enregistre les routes pour les posts
 app.use("/api/post", postRoutes);
 

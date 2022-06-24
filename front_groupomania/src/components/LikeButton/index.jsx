@@ -20,8 +20,18 @@ const LikeLogo = styled.img`
   height: 30px;
 `
 
-function LikeButton({ id }) {
-  const [isLiked, setIsOpen] = useState(false)
+const LikeLign = styled.div`
+  height: auto;
+  display: flex;
+  align-items: center;
+`
+
+const LikeCount = styled.p`
+  margin: 0px 0px 15px 15px;
+`
+
+function LikeButton({ postId }) {
+  const [isLiked, setIsLiked] = useState(false)
 
   const [apiCalled, setApiCalled] = useState(null)
 
@@ -36,7 +46,7 @@ function LikeButton({ id }) {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${login.token}`,
           },
-          body: JSON.stringify({ id }),
+          body: JSON.stringify({ postId }),
         })
           .then(function (res) {
             if (res.ok) {
@@ -45,14 +55,14 @@ function LikeButton({ id }) {
           })
           // Redirect to the feed
           .then(function (value) {
-            setIsOpen(true)
+            setIsLiked(true)
           })
           // If the API cannot be called
           .catch(function (err) {
             console.log(err)
           })
       } else if (apiCalled === false) {
-        fetch(`http://localhost:3000/api/like/${id}`, {
+        fetch(`http://localhost:3000/api/like/${postId}`, {
           method: 'DELETE',
           // Tell to the API that I will give it json object
           headers: {
@@ -60,7 +70,7 @@ function LikeButton({ id }) {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${login.token}`,
           },
-          body: JSON.stringify({ id }),
+          body: JSON.stringify({ postId }),
         })
           .then(function (res) {
             if (res.ok) {
@@ -69,7 +79,7 @@ function LikeButton({ id }) {
           })
           // Redirect to the feed
           .then(function (value) {
-            setIsOpen(false)
+            setIsLiked(false)
           })
           // If the API cannot be called
           .catch(function (err) {
@@ -81,45 +91,88 @@ function LikeButton({ id }) {
 
   let login = JSON.parse(localStorage.getItem('login'))
 
-  fetch(`http://localhost:3000/api/like/${id}`, {
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${login.token}`,
-    },
-  }).then((response) =>
-    response
-      .json()
-      .then((likesData) => {
-        if (likesData.length) {
-          const like = likesData.find((e) => e.userId === login.userId)
-          if (like) {
-            setIsOpen(true)
+  useEffect(() => {
+    fetch(`http://localhost:3000/api/like/${postId}`, {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${login.token}`,
+      },
+    }).then((response) =>
+      response
+        .json()
+        .then((likesData) => {
+          setLikeCount(likesData.length)
+          if (likesData.length) {
+            const like = likesData.find((e) => e.userId === login.userId)
+            if (like) {
+              setIsLiked(true)
+            }
           }
-        }
-      })
-      .catch((error) => console.log(error))
-  )
+        })
+        .catch((error) => console.log(error))
+    )
+  }, [isLiked])
 
-  return isLiked ? (
-    <LikeButtonStyle>
-      <LikeLogo
-        src={heartFull}
-        onClick={() => {
-          setApiCalled(false)
-        }}
-      />
-    </LikeButtonStyle>
-  ) : (
-    <LikeButtonStyle>
-      <LikeLogo
-        src={heartEmpty}
-        onClick={() => {
-          setApiCalled(true)
-        }}
-      />
-    </LikeButtonStyle>
-  )
+  const [likeCount, setLikeCount] = useState()
+
+  const isPlural = likeCount > 1 ? true : false
+
+  if (likeCount === 0) {
+    return isLiked ? (
+      <LikeLign>
+        <LikeButtonStyle>
+          <LikeLogo
+            src={heartFull}
+            onClick={() => {
+              setApiCalled(false)
+            }}
+          />
+        </LikeButtonStyle>
+      </LikeLign>
+    ) : (
+      <LikeLign>
+        <LikeButtonStyle>
+          <LikeLogo
+            src={heartEmpty}
+            onClick={() => {
+              setApiCalled(true)
+            }}
+          />
+        </LikeButtonStyle>
+      </LikeLign>
+    )
+  } else {
+    return isLiked ? (
+      <LikeLign>
+        <LikeButtonStyle>
+          <LikeLogo
+            src={heartFull}
+            onClick={() => {
+              setApiCalled(false)
+            }}
+          />
+        </LikeButtonStyle>
+        <LikeCount>
+          {likeCount} {isPlural ? 'personnes ont liké' : 'personne a liké'}
+        </LikeCount>
+      </LikeLign>
+    ) : (
+      <LikeLign>
+        <LikeButtonStyle>
+          <LikeLogo
+            src={heartEmpty}
+            onClick={() => {
+              setApiCalled(true)
+            }}
+          />
+        </LikeButtonStyle>
+        <LikeCount>
+          {likeCount} {isPlural ? 'personnes ont liké' : 'personne a liké'}
+        </LikeCount>
+      </LikeLign>
+    )
+  }
 }
 
 export default LikeButton

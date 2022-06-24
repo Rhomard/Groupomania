@@ -33,7 +33,7 @@ const HomeLogo = styled.img`
   height: 250px;
 `
 
-const MasterStyle = styled.h1`
+const SuperAdminStyle = styled.h1`
   text-align: center;
   font-size: 25px;
 `
@@ -45,7 +45,7 @@ function ProfileButton(props) {
       className={({ isActive }) => (isActive ? 'active' : 'inactive')}
       onClick={props.onClick}
     >
-      Profil
+      Mon profil
     </NavLink>
   )
 }
@@ -66,8 +66,8 @@ function LogoutButton(props) {
   return <Buttonstyle onClick={props.onClick}>Déconnexion</Buttonstyle>
 }
 
-function Master() {
-  return <MasterStyle>Connecté(e) en tant que SUPERADMIN</MasterStyle>
+function SuperAdmin() {
+  return <SuperAdminStyle>Connecté(e) en tant que SUPERADMIN</SuperAdminStyle>
 }
 
 class HeaderControl extends React.Component {
@@ -102,7 +102,7 @@ class HeaderControl extends React.Component {
       button1 = <ProfileButton onClick={this.handleProfileClick} />
       button2 = <FeedButton onClick={this.handleFeedClick} />
     } else if (login && login.roleId === 1) {
-      titleMaster = <Master />
+      titleMaster = <SuperAdmin />
       button = <LogoutButton onClick={this.handleLogoutClick} />
       button1 = <ProfileButton onClick={this.handleProfileClick} />
       button2 = <FeedButton onClick={this.handleFeedClick} />

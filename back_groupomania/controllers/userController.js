@@ -1,3 +1,7 @@
+// On importe le package fs (file system) de Node
+const fs = require("fs");
+const { execFileSync } = require("child_process");
+
 // On créé l'accès aux variable du .env
 const dotenv = require("dotenv").config();
 const secretToken = process.env.SECRET_TOKEN;
@@ -16,7 +20,7 @@ const jwt = require("jsonwebtoken");
 // Middleware pour connecter des utilisateurs existants
 exports.users = (req, res, next) => {
       // On cherche dans la base de données un utilisateur qui à la même adresse mail que celle envoyée dans la requête
-      const user = "SELECT * FROM user"
+      const user = "SELECT user.id, user.firstName, user.lastName, user.imageUrlUser, user.creationTimeUser FROM user"
   pool.query(user, (error, results) => {
       if (!results) {
             res.json({ status: "Not found!" });
@@ -25,6 +29,35 @@ exports.users = (req, res, next) => {
       }
 });
 };
+
+exports.modifyUser = (req, res, next) => {
+            const imageUrlUser = `SELECT user.imageUrlUser FROM user WHERE id = ${req.auth.userId}`
+
+            pool.query(imageUrlUser, (error, results) => {
+                if (results[0].imageUrlUser !== null) {
+                      const filename = results[0].imageUrlUser.split("/imagesUser/")[1];
+                       fs.unlink(`imagesUser/${filename}`, function (err) {
+                                  if (err) throw err;
+                                  // if no error, file has been deleted successfully
+                                  console.log('File deleted!');
+                              });
+                }
+          });
+
+      const userProfilePicChange = {
+            imageUrlUser: `${req.protocol}://${req.get("host")}/imagesUser/${req.file.filename}`,
+      };
+
+      const query = `UPDATE user SET imageUrlUser = ? WHERE id = ${req.auth.userId}`;
+
+      pool.query(query, Object.values(userProfilePicChange), (error) => {
+            if (error) {
+                  res.json({ status: "Fail to modify profile picture", reason: error.code });
+            } else {
+                  res.json({ status: "Successfully modify profile picture", userProfilePicChange: userProfilePicChange });
+            }
+      })
+}
 
 // Middleware pour l'enregistrement de nouvels utilisateurs
 exports.signup = (req, res, next) => {

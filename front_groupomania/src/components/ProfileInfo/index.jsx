@@ -1,11 +1,11 @@
 import styled from 'styled-components'
 import profileDefault from '../../assets/profileDefault.png'
 import PropTypes from 'prop-types'
+import { dateFormat } from '../../utils/DateFormat'
 
 const ProfileContainer = styled.div`
   width: 500px;
   margin: auto;
-  padding: 20px 0px;
 `
 
 const ProfileUser = styled.div`
@@ -15,20 +15,40 @@ const ProfileUser = styled.div`
   justify-content: center;
 `
 
-const ProfileUserImg = styled.img`
-  height: 50px;
+const MemberSince = styled.p`
+  margin: 50px 0px;
 `
 
-const ProfileUserName = styled.p``
+const ProfileUserImg = styled.img`
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+`
 
-function ProfileInfo({ firstName, lastName }) {
+const ProfileUserName = styled.p`
+  font-size: 50px;
+`
+
+function ProfileInfo({ firstName, lastName, imageUrlUser, creationTimeUser }) {
+  const isImageNull = imageUrlUser === null ? false : true
+
   return (
     <ProfileContainer>
       <ProfileUser>
-        <ProfileUserImg src={profileDefault} />
+        {isImageNull ? (
+          <ProfileUserImg src={imageUrlUser} />
+        ) : (
+          <ProfileUserImg src={profileDefault} />
+        )}
+
         <ProfileUserName>
           {firstName} {lastName}
         </ProfileUserName>
+        <MemberSince>
+          Membre depuis{' '}
+          {creationTimeUser &&
+            dateFormat(new Date(creationTimeUser), 'MMM dd yyyy')}
+        </MemberSince>
       </ProfileUser>
     </ProfileContainer>
   )
@@ -42,6 +62,7 @@ ProfileInfo.propTypes = {
 ProfileInfo.defaultProps = {
   firstName: 'Prénom',
   lastName: 'Nom',
+  imageUrlUser: 'undefined',
 }
 
 export default ProfileInfo

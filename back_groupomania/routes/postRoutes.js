@@ -19,7 +19,7 @@ const postCtrl = require("../controllers/postController");
 router.get("/", userAuth,postCtrl.getAllPost);
 router.get("/:id", userAuth, postCtrl.getOnePost);
 router.post("/", userAuth, multerPost, postCtrl.createPost);
-router.put("/:id", userAuth, tokenAuth, postCtrl.modifyPost);
+router.put("/:id", userAuth, multerPost, tokenAuth, postCtrl.modifyPost);
 router.delete("/:id", userAuth, tokenAuth, postCtrl.deletePost);
 
 // On exporte le routeur

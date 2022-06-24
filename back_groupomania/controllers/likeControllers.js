@@ -17,13 +17,14 @@ exports.getLike = (req, res, next) => {
 exports.like = (req, res, next) => {
       const postLikeData = {
             userId: req.auth.userId,
-            postId: req.body.id,
+            postId: req.body.postId,
       };
+
       const query = `INSERT INTO postLike VALUES (?, ?)`;
 
       pool.query(query, Object.values(postLikeData), (error) => {
             if (error) {
-                  res.json({ status: "Failed to like post", reason: error.code });
+                  res.json({ status: "Failed to like post", reason: error.code, reason2: error });
             } else {
                   res.json({ status: "Post successfully liked", postLikeData: postLikeData });
             }
