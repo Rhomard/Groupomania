@@ -6,7 +6,9 @@ import Error from './components/Error'
 import SignupLogin from './pages/SignupLogin'
 import Feed from './pages/Feed'
 import Profile from './pages/Profile'
+import LegalNotice from './pages/LegalNotice'
 import Header from './components/Header'
+import Footer from './components/Footer'
 
 const rootElement = document.getElementById('root')
 const root = createRoot(rootElement)
@@ -17,6 +19,8 @@ const GlobalStyle = createGlobalStyle`
     }
     body {
       margin: 0;
+      max-width: 1440px;
+      margin: auto;
     }
 `
 
@@ -29,8 +33,10 @@ root.render(
         <Route path="/" element={<SignupLogin />} />
         <Route path="/fildactu" element={<Feed />} />
         <Route path="/profil" element={<Profile />} />
+        <Route path="/mentions-legales" element={<LegalNotice />} />
         <Route path="*" element={<Error />} />
       </Routes>
+      <Footer />
     </Router>
   </React.StrictMode>
 )

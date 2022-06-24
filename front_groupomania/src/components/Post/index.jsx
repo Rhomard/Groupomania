@@ -5,10 +5,11 @@ import React from 'react'
 import ModifButton from '../ModifPost'
 import SupprButton from '../SupprPost'
 import { dateFormat } from '../../utils/DateFormat'
-import LikeButton from '../LikeButton'
+import LikeButton from '../LikeButtonTest'
 
 const PostContainer = styled.div`
-  width: 500px;
+  border-top: 2px solid white;
+  width: 85%;
   margin: auto;
   padding: 20px 0px;
 `
@@ -16,33 +17,28 @@ const PostContainer = styled.div`
 const PostUser = styled.div`
   display: flex;
   align-items: center;
-  padding-left: 20px;
 `
 
 const PostUserName = styled.p`
   padding-left: 10px;
 `
 
-const PostTitle = styled.h2`
-  padding-left: 20px;
-`
+const PostTitle = styled.h2``
 
 const PostDescription = styled.p`
-  padding-left: 20px;
+  font-weight: bold;
 `
 
 const PostImg = styled.img`
-  height: 100px;
-  padding-left: 20px;
+  width: 100%;
+  border-radius: 10px;
 `
 
 const PostCreation = styled.p`
-  padding-left: 20px;
+  font-size: 1vw;
 `
 
-const ButtonLign = styled.div`
-  padding-left: 20px;
-`
+const ButtonLign = styled.div``
 
 const ProfileUserImg = styled.img`
   height: 50px;
@@ -91,6 +87,8 @@ function Post({
       {isImage ? <PostImg src={imageUrlPost} /> : null}
       <PostDescription>{description}</PostDescription>
 
+      <LikeButton postId={postId} />
+
       {isModify ? (
         <PostCreation>
           Modifié il y a{' '}
@@ -104,8 +102,6 @@ function Post({
             dateFormat(new Date(creationTimePost), 'MMM dd yyyy')}
         </PostCreation>
       )}
-
-      <LikeButton postId={postId} />
 
       {isAuth ? (
         <ButtonLign>

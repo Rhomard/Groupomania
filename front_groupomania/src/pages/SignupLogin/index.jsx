@@ -3,31 +3,28 @@ import colors from '../../utils/style/colors'
 import { useState } from 'react'
 
 const LoginContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  width: 450px;
+  width: 30%;
   margin: auto;
   background-color: lightgray;
   border-radius: 20px;
+  @media (max-width: 768px) {
+  }
+  @media (max-width: 992px) {
+  }
+  @media (max-width: 1440px) {
+  }
 `
 
 const SignupContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  width: 450px;
+  width: 30%;
   margin: auto;
   background-color: lightgray;
   border-radius: 20px;
 `
 
-const NavLinks = styled.nav`
-  width: 450px;
+const NavLinks = styled.div`
   display: flex;
-  justify-content: space-around;
+  width: 100%;
   background-color: lightgray;
   border-radius: 20px 20px 0px;
 `
@@ -37,7 +34,7 @@ const NavLinkActive = styled.nav`
   color: black;
   font-weight: bold;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 1vw;
   text-align: center;
   background-color: ${colors.secondary};
   border-radius: 20px 20px 0px 0px;
@@ -51,7 +48,7 @@ const NavLinkInactive = styled.nav`
   padding: 25px 15px 15px 15px;
   color: ${colors.tertiary};
   text-decoration: none;
-  font-size: 18px;
+  font-size: 1vw;
   text-align: center;
   background-color: lightgray;
   border-radius: 20px 20px 0px 0px;
@@ -62,11 +59,11 @@ const NavLinkInactive = styled.nav`
 `
 
 const FormLogin = styled.form`
+  padding-top: 15px;
   font-weight: bold;
   border-radius: 0px 20px 20px 20px;
-  padding: 25px;
-  width: 400px;
-  height: 250px;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -74,11 +71,11 @@ const FormLogin = styled.form`
 `
 
 const FormSignup = styled.form`
+  padding-top: 15px;
   font-weight: bold;
   border-radius: 20px 0px 20px 20px;
-  padding: 25px;
-  width: 400px;
-  height: 250px;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -87,15 +84,54 @@ const FormSignup = styled.form`
 
 const FormLign = styled.div`
   display: flex;
-  justify-content: space-evenly;
-  padding: 5px;
+  align-items: center;
+  justify-content: space-between;
+  height: 25px;
+  padding: 25px 50px;
+  font-size: 1vw;
+`
+
+const InputStyle = styled.input`
+  padding-left: 3%;
+  font-size: 0.9vw;
+  width: 55%;
+  height: 30px;
+  border: none;
+  border-radius: 100px;
+  &::placeholder {
+    font-size: 0.9vw;
+  }
 `
 
 const FormSubmit = styled.div`
-  padding-top: 10px;
+  display: flex;
+  justify-content: center;
+  padding: 20px 0px;
   &hover {
     cursor: pointer;
   }
+`
+
+const LabelForButton = styled.label`
+  width: 45%;
+  padding: 10px 0px;
+  text-align: center;
+  font-size: 1.3vw;
+  border-radius: 100px;
+  border: 2px solid;
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 15px 1px ${colors.primary};
+  }
+`
+
+const HideButton = styled.div`
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
 `
 
 function SignupLogin() {
@@ -187,7 +223,7 @@ function SignupLogin() {
       // Redirect to the feed
       .then(function (value) {
         alert(
-          'Compte créé avec succès ! Vous pouvez vous connecter désormais :)'
+          'Compte créé avec succès ! Vous pouvez maintenant vous connecter :)'
         )
         setIsOpen(true)
       })
@@ -202,22 +238,16 @@ function SignupLogin() {
   return isAlreadyUser ? (
     <LoginContainer>
       <NavLinks>
-        <NavLinkActive to="/" className="nav-link">
-          Connexion
-        </NavLinkActive>
-        <NavLinkInactive
-          to="/"
-          onClick={() => setIsOpen(false)}
-          className="nav-link"
-        >
+        <NavLinkActive to="/">Connexion</NavLinkActive>
+        <NavLinkInactive to="/" onClick={() => setIsOpen(false)}>
           Inscription
         </NavLinkInactive>
       </NavLinks>
 
       <FormLogin onSubmit={handleSubmitLogin}>
         <FormLign>
-          <label>Email : </label>
-          <input
+          <label>Email : </label>{' '}
+          <InputStyle
             type="email"
             name="email"
             placeholder="exemple@groupomania.fr"
@@ -228,10 +258,10 @@ function SignupLogin() {
         </FormLign>
         <FormLign>
           <label>Mot de passe : </label>
-          <input
+          <InputStyle
             type="password"
             name="password"
-            placeholder="Mot de passe"
+            placeholder="motdepasse"
             value={loginInfo.password}
             onChange={handleChangeLogin}
             autoComplete="off"
@@ -239,7 +269,10 @@ function SignupLogin() {
           />
         </FormLign>
         <FormSubmit>
-          <button>Me connecter</button>
+          <HideButton>
+            <button id="connexion">Me connecter</button>
+          </HideButton>
+          <LabelForButton htmlFor="connexion">Me connecter</LabelForButton>
         </FormSubmit>
       </FormLogin>
     </LoginContainer>
@@ -255,8 +288,8 @@ function SignupLogin() {
       </NavLinks>
       <FormSignup onSubmit={handleSubmitSignup}>
         <FormLign>
-          <label>Entrez votre prénom : </label>
-          <input
+          <label>Prénom : </label>
+          <InputStyle
             type="text"
             name="firstName"
             placeholder="Prénom"
@@ -266,8 +299,8 @@ function SignupLogin() {
           />
         </FormLign>
         <FormLign>
-          <label>Entrez votre nom : </label>
-          <input
+          <label>Nom : </label>
+          <InputStyle
             type="text"
             name="lastName"
             placeholder="Nom"
@@ -277,8 +310,8 @@ function SignupLogin() {
           />
         </FormLign>
         <FormLign>
-          <label>Entrez votre email : </label>
-          <input
+          <label>Email : </label>
+          <InputStyle
             type="email"
             name="email"
             placeholder="exemple@groupomania.fr"
@@ -288,11 +321,11 @@ function SignupLogin() {
           />
         </FormLign>
         <FormLign>
-          <label>Entrez votre mot de passe : </label>
-          <input
+          <label>Mot de passe : </label>
+          <InputStyle
             type="password"
             name="password"
-            placeholder="Mot de passe"
+            placeholder="motdepasse"
             value={signupInfo.password}
             onChange={handleChangeSignup}
             autoComplete="off"
@@ -300,7 +333,12 @@ function SignupLogin() {
           />
         </FormLign>
         <FormSubmit>
-          <button>Créer mon compte</button>
+          <HideButton>
+            <button id="accountCreation">Créer mon compte</button>
+          </HideButton>
+          <LabelForButton htmlFor="accountCreation">
+            Créer mon compte
+          </LabelForButton>
         </FormSubmit>
       </FormSignup>
     </SignupContainer>

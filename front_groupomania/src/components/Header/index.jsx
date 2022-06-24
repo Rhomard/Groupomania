@@ -1,41 +1,60 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
-import colors from '../../utils/style/colors'
 import logo from '../../assets/logo.svg'
 import './index.css'
 import { Link } from 'react-router-dom'
 
+const Header = styled.header``
+
 const NavContainer = styled.div`
-  display: flex;
-  flex-direction: column;
+  height: 75px;
+  box-shadow: 0px 0px 10px 1px grey;
+  @media (max-width: 768px) {
+  }
+
+  @media (max-width: 992px) {
+  }
+  @media (max-width: 1440px) {
+  }
 `
 
-const NavControlStyle = styled.header`
+const NavControlStyle = styled.div`
   display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  height: 100%;
 `
 
 const Buttonstyle = styled.button`
   border: none;
   background: none;
+  text-decoration: none;
+  color: black;
   font-size: 15px;
   &:hover {
-    cursor: pointer;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    background-color: #ffd7d7;
+    color: black;
     font-weight: bold;
-    color: ${colors.primary};
+    height: 75px;
+    padding: 0px 15px;
+    font-size: 15px;
+    cursor: pointer;
   }
 `
 
 const HomeLogo = styled.img`
-  height: 250px;
+  width: 300px;
 `
 
 const SuperAdminStyle = styled.h1`
   text-align: center;
-  font-size: 25px;
+  font-size: 1.5vw;
+  @media (max-width: 1440px) {
+  }
 `
 
 function ProfileButton(props) {
@@ -109,17 +128,19 @@ class HeaderControl extends React.Component {
     }
 
     return (
-      <NavContainer>
-        <NavControlStyle>
-          <Link to="/">
-            <HomeLogo src={logo} />
-          </Link>
-          {button2}
-          {button1}
-          {button}
-        </NavControlStyle>
+      <Header>
+        <NavContainer>
+          <NavControlStyle>
+            <Link to="/">
+              <HomeLogo src={logo} />
+            </Link>
+            {button2}
+            {button1}
+            {button}
+          </NavControlStyle>
+        </NavContainer>
         {titleMaster}
-      </NavContainer>
+      </Header>
     )
   }
 }

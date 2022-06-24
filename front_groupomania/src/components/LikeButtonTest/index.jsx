@@ -4,30 +4,21 @@ import heartEmpty from '../../assets/heartEmpty.png'
 import heartFull from '../../assets/heartFull.png'
 import styled from 'styled-components'
 
-const LikeButtonStyle = styled.button`
-  border: none;
-  height: 30px;
-  margin-left: 10px;
-  background: none;
-  width: 30px;
-  &:hover {
-    cursor: pointer;
-  }
-  margin-bottom: 20px;
-`
-
-const LikeLogo = styled.img`
-  height: 30px;
-`
-
 const LikeLign = styled.div`
-  height: auto;
   display: flex;
   align-items: center;
 `
 
+const ButtonHeart = styled.img`
+  height: 40px;
+  &:hover {
+    cursor: pointer;
+  }
+`
+
 const LikeCount = styled.p`
-  margin: 0px 0px 15px 15px;
+  font-size: 1.1vw;
+  padding-left: 10px;
 `
 
 function LikeButton({ postId }) {
@@ -122,52 +113,48 @@ function LikeButton({ postId }) {
   if (likeCount === 0) {
     return isLiked ? (
       <LikeLign>
-        <LikeButtonStyle>
-          <LikeLogo
-            src={heartFull}
-            onClick={() => {
-              setApiCalled(false)
-            }}
-          />
-        </LikeButtonStyle>
+        <ButtonHeart
+          alt="Bouton coeur plein"
+          src={heartFull}
+          onClick={() => {
+            setApiCalled(false)
+          }}
+        />
       </LikeLign>
     ) : (
       <LikeLign>
-        <LikeButtonStyle>
-          <LikeLogo
-            src={heartEmpty}
-            onClick={() => {
-              setApiCalled(true)
-            }}
-          />
-        </LikeButtonStyle>
+        <ButtonHeart
+          alt="Bouton coeur vide"
+          src={heartEmpty}
+          onClick={() => {
+            setApiCalled(true)
+          }}
+        />
       </LikeLign>
     )
   } else {
     return isLiked ? (
       <LikeLign>
-        <LikeButtonStyle>
-          <LikeLogo
-            src={heartFull}
-            onClick={() => {
-              setApiCalled(false)
-            }}
-          />
-        </LikeButtonStyle>
+        <ButtonHeart
+          alt="Bouton coeur plein"
+          src={heartFull}
+          onClick={() => {
+            setApiCalled(false)
+          }}
+        />
         <LikeCount>
           {likeCount} {isPlural ? 'personnes ont liké' : 'personne a liké'}
         </LikeCount>
       </LikeLign>
     ) : (
       <LikeLign>
-        <LikeButtonStyle>
-          <LikeLogo
-            src={heartEmpty}
-            onClick={() => {
-              setApiCalled(true)
-            }}
-          />
-        </LikeButtonStyle>
+        <ButtonHeart
+          alt="Bouton coeur vide"
+          src={heartEmpty}
+          onClick={() => {
+            setApiCalled(true)
+          }}
+        />
         <LikeCount>
           {likeCount} {isPlural ? 'personnes ont liké' : 'personne a liké'}
         </LikeCount>
