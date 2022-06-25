@@ -5,12 +5,15 @@ import { useEffect } from 'react'
 import axios from 'axios'
 
 const ProfileContainer = styled.div`
+  min-height: calc(100vh - 115px);
+  padding-top: 50px;
   width: 500px;
   height: auto;
   margin: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 100px;
 `
 
 const LabelChangeProfilPicture = styled.label`
@@ -128,7 +131,7 @@ function Profile() {
           />
         </HideInput>
         <LabelChangeProfilPicture htmlFor="changeProfilPicture">
-          Choisir une nouvelle photo de profil
+          Changer ma photo de profil
         </LabelChangeProfilPicture>
         {selectedImage && (
           <div>
@@ -140,9 +143,9 @@ function Profile() {
             >
               Retirer cette image
             </button>
+            <button>Envoyer l'image</button>
           </div>
         )}
-        <button>Envoyer l'image</button>
       </form>
     </ProfileContainer>
   )

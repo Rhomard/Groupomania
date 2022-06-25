@@ -6,12 +6,23 @@ import ModifButton from '../ModifPost'
 import SupprButton from '../SupprPost'
 import { dateFormat } from '../../utils/DateFormat'
 import LikeButton from '../LikeButtonTest'
+import { device } from '../../utils/style/responsive'
 
 const PostContainer = styled.div`
-  border-top: 2px solid white;
-  width: 85%;
-  margin: auto;
-  padding: 20px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  padding: 30px 15px;
+  @media ${device.mobile} {
+    width: 100%;
+  }
+  @media ${device.tablet} {
+    width: 42%;
+  }
+  @media ${device.desktop} {
+    width: 25%;
+  }
 `
 
 const PostUser = styled.div`
@@ -35,7 +46,7 @@ const PostImg = styled.img`
 `
 
 const PostCreation = styled.p`
-  font-size: 1vw;
+  font-size: 12px;
 `
 
 const ButtonLign = styled.div``

@@ -8,7 +8,9 @@ import React from 'react'
 import feed from '../../assets/feed.png'
 
 const PageContainer = styled.div`
-  padding-top: 25px;
+  min-height: calc(100vh - 320px);
+  padding-top: 150px;
+  padding-bottom: 50px;
   width: 80%;
   margin: auto;
 `
@@ -25,20 +27,27 @@ const FeedTitle = styled.div`
   align-items: center;
   justify-content: space-evenly;
   padding-top: 20px;
-  font-size: 1.5vw;
+  font-size: 20px;
 `
 
 const FeedLogo = styled.img`
-  height: 5vw;
+  height: 50px;
 `
 
-const PostContainerOfPostContainer = styled.div`
+const PostContainer = styled.div`
   display: flex;
-  flex-direction: row;
-  width: 100%;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 0px 20px;
+  border-top: 2px solid black;
 `
 
-const PostContainer = styled.div``
+const NoPostContainer = styled.div`
+  padding: 0px 20px 1px 20px;
+  border-top: 2px solid black;
+  text-align: center;
+`
 
 function MapData() {
   let login = JSON.parse(localStorage.getItem('login'))
@@ -65,29 +74,27 @@ function MapData() {
   const isNoPost = postData.length !== 0 || !postData ? true : false
 
   return isNoPost ? (
-    <PostContainerOfPostContainer>
-      <PostContainer>
-        {postData.map((post, index) => (
-          <Post
-            key={`${post.id}-${index}`}
-            imageUrlPost={post.imageUrlPost}
-            firstName={post.firstName}
-            lastName={post.lastName}
-            title={post.title}
-            description={post.description}
-            creationTimePost={post.creationTimePost}
-            modificationTimePost={post.modificationTimePost}
-            postUserId={post.userId}
-            postId={post.id}
-            imageUrlUser={post.imageUrlUser}
-          />
-        ))}
-      </PostContainer>
-    </PostContainerOfPostContainer>
-  ) : (
     <PostContainer>
-      <h2>Pas de post pour l'instant</h2>
+      {postData.map((post, index) => (
+        <Post
+          key={`${post.id}-${index}`}
+          imageUrlPost={post.imageUrlPost}
+          firstName={post.firstName}
+          lastName={post.lastName}
+          title={post.title}
+          description={post.description}
+          creationTimePost={post.creationTimePost}
+          modificationTimePost={post.modificationTimePost}
+          postUserId={post.userId}
+          postId={post.id}
+          imageUrlUser={post.imageUrlUser}
+        />
+      ))}
     </PostContainer>
+  ) : (
+    <NoPostContainer>
+      <h2>Pas de post pour l'instant</h2>
+    </NoPostContainer>
   )
 }
 

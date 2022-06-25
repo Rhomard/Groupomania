@@ -2,32 +2,61 @@ import { useState } from 'react'
 import colors from '../../utils/style/colors'
 import styled from 'styled-components'
 import axios from 'axios'
+import post from '../../assets/post.png'
 
 const CreatePostContainer = styled.div`
-  width: 480px;
+  width: 100%;
+  margin: auto;
   background-color: ${colors.secondary};
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-  padding: 10px 10px;
 `
 
 const FormLign = styled.div`
-  padding-top: 10px;
-  padding-left: 20px;
-  padding-bottom: 10px;
+  padding: 10px 5px;
 `
 
-const CreatePostTitle = styled.h2``
+const CreatePostTitleLign = styled.div`
+  display: flex;
+  align-items: center;
+`
 
-const FormPost = styled.form``
+const CreatePostTitle = styled.h2`
+  padding-left: 5px;
+`
+
+const ImgCreatePostTitle = styled.img`
+  padding-left: 35px;
+  height: 25px;
+`
+
+const FormPost = styled.form`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 10px 35px 20px 35px;
+`
 
 const FormSubmit = styled.div`
-  padding-bottom: 30px;
-  padding-top: 10px;
-  padding-left: 20px;
   &hover {
     cursor: pointer;
+  }
+`
+
+const InputStyle = styled.input`
+  padding-left: 10px;
+  width: 190px;
+  font-size: 13px;
+  height: 30px;
+  border: none;
+  border-radius: 100px;
+  &::placeholder {
+    font-size: 13px;
+  }
+  &:focus {
+    outline: 2px solid black;
   }
 `
 
@@ -73,10 +102,13 @@ function CreatePost() {
 
   return (
     <CreatePostContainer>
-      <CreatePostTitle>Créez votre publication :</CreatePostTitle>
+      <CreatePostTitleLign>
+        <ImgCreatePostTitle src={post} alt="Crayon noir qui écrit" />
+        <CreatePostTitle>Créer ma publication :</CreatePostTitle>
+      </CreatePostTitleLign>
       <FormPost onSubmit={send}>
         <FormLign>
-          <input
+          <InputStyle
             type="text"
             placeholder="Titre de la publication"
             onChange={(event) => {
@@ -87,7 +119,7 @@ function CreatePost() {
           />
         </FormLign>
         <FormLign>
-          <input
+          <InputStyle
             type="text"
             placeholder="Description de la publication"
             onChange={(event) => {

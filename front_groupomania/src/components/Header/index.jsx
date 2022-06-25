@@ -2,21 +2,22 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 import logo from '../../assets/logo.svg'
+import admin from '../../assets/admin.png'
 import './index.css'
 import { Link } from 'react-router-dom'
+import colors from '../../utils/style/colors'
 
-const Header = styled.header``
+const HeaderContainer = styled.header`
+  position: fixed;
+  top: 0px;
+  max-width: 1440px;
+  width: 100%;
+  background-color: white;
+`
 
 const NavContainer = styled.div`
-  height: 75px;
-  box-shadow: 0px 0px 10px 1px grey;
-  @media (max-width: 768px) {
-  }
-
-  @media (max-width: 992px) {
-  }
-  @media (max-width: 1440px) {
-  }
+  height: 60px;
+  box-shadow: 0px 8px 10px -2px grey;
 `
 
 const NavControlStyle = styled.div`
@@ -29,32 +30,48 @@ const NavControlStyle = styled.div`
 const Buttonstyle = styled.button`
   border: none;
   background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 135px;
+  font-size: 15px;
   text-decoration: none;
   color: black;
-  font-size: 15px;
+  height: 60px;
   &:hover {
     display: flex;
     align-items: center;
+    justify-content: center;
+    width: 135px;
     text-decoration: none;
     background-color: #ffd7d7;
-    color: black;
+    color: ${colors.primary};
     font-weight: bold;
-    height: 75px;
-    padding: 0px 15px;
+    height: 60px;
     font-size: 15px;
     cursor: pointer;
   }
 `
 
 const HomeLogo = styled.img`
-  width: 300px;
+  width: 200px;
 `
 
 const SuperAdminStyle = styled.h1`
   text-align: center;
-  font-size: 1.5vw;
-  @media (max-width: 1440px) {
-  }
+  font-size: 15px;
+  padding-right: 5px;
+`
+const SuperAdminLign = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 13px 0px 3px 0px;
+  box-shadow: 0px 4px 10px -2px grey;
+`
+
+const ImgAdmin = styled.img`
+  height: 25px;
 `
 
 function ProfileButton(props) {
@@ -86,7 +103,12 @@ function LogoutButton(props) {
 }
 
 function SuperAdmin() {
-  return <SuperAdminStyle>Connecté(e) en tant que SUPERADMIN</SuperAdminStyle>
+  return (
+    <SuperAdminLign>
+      <SuperAdminStyle>Connecté(e) en tant que SUPERADMIN </SuperAdminStyle>
+      <ImgAdmin src={admin} alt="Crayon noir" />
+    </SuperAdminLign>
+  )
 }
 
 class HeaderControl extends React.Component {
@@ -128,7 +150,7 @@ class HeaderControl extends React.Component {
     }
 
     return (
-      <Header>
+      <HeaderContainer>
         <NavContainer>
           <NavControlStyle>
             <Link to="/">
@@ -140,7 +162,7 @@ class HeaderControl extends React.Component {
           </NavControlStyle>
         </NavContainer>
         {titleMaster}
-      </Header>
+      </HeaderContainer>
     )
   }
 }

@@ -1,29 +1,36 @@
 .active {
   display: flex;
   align-items: center;
+  justify-content: center;
+  width: 110px;
   text-decoration: none;
   background-color: #ffd7d7;
   color: black;
   font-weight: bold;
-  height: 75px;
-  padding: 0px 15px;
+  height: 60px;
   font-size: 15px;
 }
 
 .inactive {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 110px;
+  font-size: 15px;
   text-decoration: none;
   color: black;
-  font-size: 15px;
+  height: 60px;
 }
 
 .inactive:hover {
   display: flex;
   align-items: center;
+  justify-content: center;
+  width: 110px;
   text-decoration: none;
   background-color: #ffd7d7;
   color: black;
   font-weight: bold;
-  height: 75px;
-  padding: 0px 15px;
+  height: 60px;
   font-size: 15px;
 }

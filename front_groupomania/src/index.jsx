@@ -15,10 +15,10 @@ const root = createRoot(rootElement)
 
 const GlobalStyle = createGlobalStyle`
     * {
-      font-family: Montserra, Helvetica, sans-serif;
+      font-family: 'Montserrat', sans-serif;
     }
+
     body {
-      margin: 0;
       max-width: 1440px;
       margin: auto;
     }

@@ -1,25 +1,61 @@
 import styled from 'styled-components'
 import colors from '../../utils/style/colors'
 import { useState } from 'react'
+import { device } from '../../utils/style/responsive'
+
+const PageContainer = styled.div`
+  min-height: calc(100vh - 115px);
+  display: flex;
+  @media ${device.mobile} {
+    min-height: calc(100vh - 115px);
+    display: flex;
+  }
+  @media ${device.tablet} {
+    min-height: calc(100vh - 115px);
+    display: flex;
+  }
+  @media ${device.desktop} {
+    min-height: calc(100vh - 115px);
+    display: flex;
+  }
+`
 
 const LoginContainer = styled.div`
-  width: 30%;
+  height: 450px;
   margin: auto;
   background-color: lightgray;
-  border-radius: 20px;
-  @media (max-width: 768px) {
+
+  @media ${device.mobile} {
+    width: 100%;
+    border-radius: 0;
   }
-  @media (max-width: 992px) {
+  @media ${device.tablet} {
+    width: 70%;
+    border-radius: 20px;
   }
-  @media (max-width: 1440px) {
+  @media ${device.desktop} {
+    width: 40%;
+    border-radius: 20px;
   }
 `
 
 const SignupContainer = styled.div`
-  width: 30%;
+  height: 450px;
   margin: auto;
   background-color: lightgray;
-  border-radius: 20px;
+
+  @media ${device.mobile} {
+    width: 100%;
+    border-radius: 0px;
+  }
+  @media ${device.tablet} {
+    width: 70%;
+    border-radius: 20px;
+  }
+  @media ${device.desktop} {
+    width: 40%;
+    border-radius: 20px;
+  }
 `
 
 const NavLinks = styled.div`
@@ -34,7 +70,7 @@ const NavLinkActive = styled.nav`
   color: black;
   font-weight: bold;
   text-decoration: none;
-  font-size: 1vw;
+  font-size: 15px;
   text-align: center;
   background-color: ${colors.secondary};
   border-radius: 20px 20px 0px 0px;
@@ -48,7 +84,7 @@ const NavLinkInactive = styled.nav`
   padding: 25px 15px 15px 15px;
   color: ${colors.tertiary};
   text-decoration: none;
-  font-size: 1vw;
+  font-size: 15px;
   text-align: center;
   background-color: lightgray;
   border-radius: 20px 20px 0px 0px;
@@ -88,18 +124,21 @@ const FormLign = styled.div`
   justify-content: space-between;
   height: 25px;
   padding: 25px 50px;
-  font-size: 1vw;
+  font-size: 15px;
 `
 
 const InputStyle = styled.input`
-  padding-left: 3%;
-  font-size: 0.9vw;
+  padding-left: 10px;
+  font-size: 13px;
   width: 55%;
   height: 30px;
   border: none;
   border-radius: 100px;
   &::placeholder {
-    font-size: 0.9vw;
+    font-size: 13px;
+  }
+  &:focus {
+    outline: 2px solid black;
   }
 `
 
@@ -116,7 +155,7 @@ const LabelForButton = styled.label`
   width: 45%;
   padding: 10px 0px;
   text-align: center;
-  font-size: 1.3vw;
+  font-size: 17px;
   border-radius: 100px;
   border: 2px solid;
   &:hover {
@@ -236,112 +275,116 @@ function SignupLogin() {
   const [isAlreadyUser, setIsOpen] = useState(true)
 
   return isAlreadyUser ? (
-    <LoginContainer>
-      <NavLinks>
-        <NavLinkActive to="/">Connexion</NavLinkActive>
-        <NavLinkInactive to="/" onClick={() => setIsOpen(false)}>
-          Inscription
-        </NavLinkInactive>
-      </NavLinks>
+    <PageContainer>
+      <LoginContainer>
+        <NavLinks>
+          <NavLinkActive to="/">Connexion</NavLinkActive>
+          <NavLinkInactive to="/" onClick={() => setIsOpen(false)}>
+            Inscription
+          </NavLinkInactive>
+        </NavLinks>
 
-      <FormLogin onSubmit={handleSubmitLogin}>
-        <FormLign>
-          <label>Email : </label>{' '}
-          <InputStyle
-            type="email"
-            name="email"
-            placeholder="exemple@groupomania.fr"
-            value={loginInfo.email}
-            onChange={handleChangeLogin}
-            required
-          />
-        </FormLign>
-        <FormLign>
-          <label>Mot de passe : </label>
-          <InputStyle
-            type="password"
-            name="password"
-            placeholder="motdepasse"
-            value={loginInfo.password}
-            onChange={handleChangeLogin}
-            autoComplete="off"
-            required
-          />
-        </FormLign>
-        <FormSubmit>
-          <HideButton>
-            <button id="connexion">Me connecter</button>
-          </HideButton>
-          <LabelForButton htmlFor="connexion">Me connecter</LabelForButton>
-        </FormSubmit>
-      </FormLogin>
-    </LoginContainer>
+        <FormLogin onSubmit={handleSubmitLogin}>
+          <FormLign>
+            <label>Email : </label>{' '}
+            <InputStyle
+              type="email"
+              name="email"
+              placeholder="exemple@groupomania.fr"
+              value={loginInfo.email}
+              onChange={handleChangeLogin}
+              required
+            />
+          </FormLign>
+          <FormLign>
+            <label>Mot de passe : </label>
+            <InputStyle
+              type="password"
+              name="password"
+              placeholder="motdepasse"
+              value={loginInfo.password}
+              onChange={handleChangeLogin}
+              autoComplete="off"
+              required
+            />
+          </FormLign>
+          <FormSubmit>
+            <HideButton>
+              <button id="connexion">Me connecter</button>
+            </HideButton>
+            <LabelForButton htmlFor="connexion">Me connecter</LabelForButton>
+          </FormSubmit>
+        </FormLogin>
+      </LoginContainer>
+    </PageContainer>
   ) : (
-    <SignupContainer>
-      <NavLinks>
-        <NavLinkInactive to="/" onClick={() => setIsOpen(true)}>
-          Connexion
-        </NavLinkInactive>
-        <NavLinkActive to="/" onClick={() => setIsOpen(false)}>
-          Inscription
-        </NavLinkActive>
-      </NavLinks>
-      <FormSignup onSubmit={handleSubmitSignup}>
-        <FormLign>
-          <label>Prénom : </label>
-          <InputStyle
-            type="text"
-            name="firstName"
-            placeholder="Prénom"
-            value={signupInfo.firstName}
-            onChange={handleChangeSignup}
-            required
-          />
-        </FormLign>
-        <FormLign>
-          <label>Nom : </label>
-          <InputStyle
-            type="text"
-            name="lastName"
-            placeholder="Nom"
-            value={signupInfo.lastName}
-            onChange={handleChangeSignup}
-            required
-          />
-        </FormLign>
-        <FormLign>
-          <label>Email : </label>
-          <InputStyle
-            type="email"
-            name="email"
-            placeholder="exemple@groupomania.fr"
-            value={signupInfo.email}
-            onChange={handleChangeSignup}
-            required
-          />
-        </FormLign>
-        <FormLign>
-          <label>Mot de passe : </label>
-          <InputStyle
-            type="password"
-            name="password"
-            placeholder="motdepasse"
-            value={signupInfo.password}
-            onChange={handleChangeSignup}
-            autoComplete="off"
-            required
-          />
-        </FormLign>
-        <FormSubmit>
-          <HideButton>
-            <button id="accountCreation">Créer mon compte</button>
-          </HideButton>
-          <LabelForButton htmlFor="accountCreation">
-            Créer mon compte
-          </LabelForButton>
-        </FormSubmit>
-      </FormSignup>
-    </SignupContainer>
+    <PageContainer>
+      <SignupContainer>
+        <NavLinks>
+          <NavLinkInactive to="/" onClick={() => setIsOpen(true)}>
+            Connexion
+          </NavLinkInactive>
+          <NavLinkActive to="/" onClick={() => setIsOpen(false)}>
+            Inscription
+          </NavLinkActive>
+        </NavLinks>
+        <FormSignup onSubmit={handleSubmitSignup}>
+          <FormLign>
+            <label>Prénom : </label>
+            <InputStyle
+              type="text"
+              name="firstName"
+              placeholder="Prénom"
+              value={signupInfo.firstName}
+              onChange={handleChangeSignup}
+              required
+            />
+          </FormLign>
+          <FormLign>
+            <label>Nom : </label>
+            <InputStyle
+              type="text"
+              name="lastName"
+              placeholder="Nom"
+              value={signupInfo.lastName}
+              onChange={handleChangeSignup}
+              required
+            />
+          </FormLign>
+          <FormLign>
+            <label>Email : </label>
+            <InputStyle
+              type="email"
+              name="email"
+              placeholder="exemple@groupomania.fr"
+              value={signupInfo.email}
+              onChange={handleChangeSignup}
+              required
+            />
+          </FormLign>
+          <FormLign>
+            <label>Mot de passe : </label>
+            <InputStyle
+              type="password"
+              name="password"
+              placeholder="motdepasse"
+              value={signupInfo.password}
+              onChange={handleChangeSignup}
+              autoComplete="off"
+              required
+            />
+          </FormLign>
+          <FormSubmit>
+            <HideButton>
+              <button id="accountCreation">Créer mon compte</button>
+            </HideButton>
+            <LabelForButton htmlFor="accountCreation">
+              Créer mon compte
+            </LabelForButton>
+          </FormSubmit>
+        </FormSignup>
+      </SignupContainer>
+    </PageContainer>
   )
 }
 

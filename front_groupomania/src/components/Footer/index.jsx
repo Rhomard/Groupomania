@@ -6,10 +6,11 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { useEffect } from 'react'
 
+const FooterContainer = styled.div``
+
 const NavContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 125px 0px 0px 0px;
 `
 
 const NavControlStyle = styled.footer`
@@ -42,7 +43,7 @@ const ButtonStyle = styled.button`
 const ButtonStyleUserLogin = styled.button`
   border: none;
   background: none;
-  font-size: 1vw;
+  font-size: 15px;
   &:hover {
     cursor: pointer;
   }
@@ -51,11 +52,11 @@ const ButtonStyleUserLogin = styled.button`
 const CopyrightStyle = styled.p`
   border: none;
   background: none;
-  font-size: 1vw;
+  font-size: 15px;
 `
 
 const HomeLogo = styled.img`
-  height: 150px;
+  width: 200px;
 `
 
 function LogoutButton(props) {
@@ -140,19 +141,21 @@ class FooterControl extends React.Component {
     }
 
     return (
-      <NavContainer>
-        <NavControlStyle>
-          <Link to="/profil">{userLogin}</Link>
-          {button}
-          {logoFooter}
-        </NavControlStyle>
-        <NavControlStyleFooter>
-          <Link to="/mentions-legales">
-            <LegalNotice />
-          </Link>
-          <Copyright />
-        </NavControlStyleFooter>
-      </NavContainer>
+      <FooterContainer>
+        <NavContainer>
+          <NavControlStyle>
+            <Link to="/profil">{userLogin}</Link>
+            {button}
+            {logoFooter}
+          </NavControlStyle>
+          <NavControlStyleFooter>
+            <Link to="/mentions-legales">
+              <LegalNotice />
+            </Link>
+            <Copyright />
+          </NavControlStyleFooter>
+        </NavContainer>
+      </FooterContainer>
     )
   }
 }

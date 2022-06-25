@@ -17,7 +17,7 @@ const ButtonHeart = styled.img`
 `
 
 const LikeCount = styled.p`
-  font-size: 1.1vw;
+  font-size: 13px;
   padding-left: 10px;
 `
 
