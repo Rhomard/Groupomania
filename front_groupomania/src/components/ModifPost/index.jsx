@@ -1,5 +1,11 @@
 import { useState } from 'react'
 import axios from 'axios'
+import styled from 'styled-components'
+import post from '../../assets/post.png'
+
+const ImgButtonModif = styled.img`
+  height: 35px;
+`
 
 function ModifButton({ postId, titleInput, descriptionInput }) {
   const [isOpen, setIsOpen] = useState(false)
@@ -94,7 +100,11 @@ function ModifButton({ postId, titleInput, descriptionInput }) {
       <button onClick={() => setIsOpen(false)}>Annuler modification</button>
     </div>
   ) : (
-    <button onClick={() => setIsOpen(true)}>Modifier</button>
+    <ImgButtonModif
+      src={post}
+      alt="Crayon noir qui écrit"
+      onClick={() => setIsOpen(true)}
+    />
   )
 }
 

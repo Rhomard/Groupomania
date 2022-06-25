@@ -6,9 +6,10 @@ import { useState } from 'react'
 import CreatePost from '../../components/CreatePost'
 import React from 'react'
 import feed from '../../assets/feed.png'
+import './feed.css'
 
 const PageContainer = styled.div`
-  min-height: calc(100vh - 320px);
+  min-height: calc(100vh - 260px);
   padding-top: 150px;
   padding-bottom: 50px;
   width: 80%;
@@ -39,7 +40,7 @@ const PostContainer = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
-  margin: 0px 20px;
+  margin: 0px 30px;
   border-top: 2px solid black;
 `
 
@@ -93,7 +94,21 @@ function MapData() {
     </PostContainer>
   ) : (
     <NoPostContainer>
-      <h2>Pas de post pour l'instant</h2>
+      <div className="lds-default">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <h2>En attente de post</h2>
     </NoPostContainer>
   )
 }

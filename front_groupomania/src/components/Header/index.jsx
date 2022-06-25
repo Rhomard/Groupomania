@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 import logo from '../../assets/logo.svg'
 import admin from '../../assets/admin.png'
-import './index.css'
+import './header.css'
 import { Link } from 'react-router-dom'
 import colors from '../../utils/style/colors'
 
@@ -17,7 +17,7 @@ const HeaderContainer = styled.header`
 
 const NavContainer = styled.div`
   height: 60px;
-  box-shadow: 0px 8px 10px -2px grey;
+  box-shadow: 0px 8px 50px 2px grey;
 `
 
 const NavControlStyle = styled.div`

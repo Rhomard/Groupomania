@@ -5,15 +5,17 @@ import React from 'react'
 import ModifButton from '../ModifPost'
 import SupprButton from '../SupprPost'
 import { dateFormat } from '../../utils/DateFormat'
-import LikeButton from '../LikeButtonTest'
+import LikeButton from '../LikeButton'
 import { device } from '../../utils/style/responsive'
 
 const PostContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-
-  padding: 30px 15px;
+  box-shadow: 5px 5px 10px 1px grey;
+  border-radius: 25px;
+  padding: 15px 15px;
+  margin: 30px 0px;
   @media ${device.mobile} {
     width: 100%;
   }
@@ -21,7 +23,7 @@ const PostContainer = styled.div`
     width: 42%;
   }
   @media ${device.desktop} {
-    width: 25%;
+    width: 28%;
   }
 `
 
@@ -34,19 +36,43 @@ const PostUserName = styled.p`
   padding-left: 10px;
 `
 
-const PostTitle = styled.h2``
+const PostModifSuppr = styled.div`
+  display: flex;
+`
+
+const PostUserContainer = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+`
+
+const PostTitle = styled.h2`
+  font-size: 18px;
+`
 
 const PostDescription = styled.p`
   font-weight: bold;
+  font-size: 13px;
+`
+
+const PostImgContainer = styled.div`
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  height: 170px;
 `
 
 const PostImg = styled.img`
   width: 100%;
-  border-radius: 10px;
+  height: 100%;
+  object-fit: cover;
 `
 
 const PostCreation = styled.p`
   font-size: 12px;
+  padding-top: 13px;
+  margin: 0;
 `
 
 const ButtonLign = styled.div``
@@ -84,18 +110,36 @@ function Post({
 
   return (
     <PostContainer>
-      <PostUser>
-        {isProfilePicNull ? (
-          <ProfileUserImg src={imageUrlUser} />
-        ) : (
-          <ProfileUserImg src={profileDefault} />
-        )}
-        <PostUserName>
-          {firstName} {lastName}
-        </PostUserName>
-      </PostUser>
+      <PostUserContainer>
+        <PostUser>
+          {isProfilePicNull ? (
+            <ProfileUserImg src={imageUrlUser} />
+          ) : (
+            <ProfileUserImg src={profileDefault} />
+          )}
+          <PostUserName>
+            {firstName} {lastName}{' '}
+          </PostUserName>
+        </PostUser>
+        <PostModifSuppr>
+          {isAuth ? (
+            <ButtonLign>
+              <ModifButton
+                postId={postId}
+                titleInput={title}
+                descriptionInput={description}
+              />
+              <SupprButton postId={postId} />
+            </ButtonLign>
+          ) : null}
+        </PostModifSuppr>
+      </PostUserContainer>
       <PostTitle>{title}</PostTitle>
-      {isImage ? <PostImg src={imageUrlPost} /> : null}
+      {isImage ? (
+        <PostImgContainer>
+          <PostImg src={imageUrlPost} />{' '}
+        </PostImgContainer>
+      ) : null}
       <PostDescription>{description}</PostDescription>
 
       <LikeButton postId={postId} />
@@ -113,17 +157,6 @@ function Post({
             dateFormat(new Date(creationTimePost), 'MMM dd yyyy')}
         </PostCreation>
       )}
-
-      {isAuth ? (
-        <ButtonLign>
-          <SupprButton postId={postId} />
-          <ModifButton
-            postId={postId}
-            titleInput={title}
-            descriptionInput={description}
-          />
-        </ButtonLign>
-      ) : null}
     </PostContainer>
   )
 }

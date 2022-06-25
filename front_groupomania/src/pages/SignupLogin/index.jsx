@@ -4,19 +4,13 @@ import { useState } from 'react'
 import { device } from '../../utils/style/responsive'
 
 const PageContainer = styled.div`
-  min-height: calc(100vh - 115px);
+  min-height: calc(100vh - 60px);
   display: flex;
   @media ${device.mobile} {
-    min-height: calc(100vh - 115px);
-    display: flex;
   }
   @media ${device.tablet} {
-    min-height: calc(100vh - 115px);
-    display: flex;
   }
   @media ${device.desktop} {
-    min-height: calc(100vh - 115px);
-    display: flex;
   }
 `
 
@@ -27,10 +21,10 @@ const LoginContainer = styled.div`
 
   @media ${device.mobile} {
     width: 100%;
-    border-radius: 0;
+    border-radius: 20px;
   }
   @media ${device.tablet} {
-    width: 70%;
+    width: 60%;
     border-radius: 20px;
   }
   @media ${device.desktop} {
@@ -46,7 +40,7 @@ const SignupContainer = styled.div`
 
   @media ${device.mobile} {
     width: 100%;
-    border-radius: 0px;
+    border-radius: 20px;
   }
   @media ${device.tablet} {
     width: 70%;
@@ -62,7 +56,7 @@ const NavLinks = styled.div`
   display: flex;
   width: 100%;
   background-color: lightgray;
-  border-radius: 20px 20px 0px;
+  border-radius: 20px 20px 0px 0px;
 `
 
 const NavLinkActive = styled.nav`
@@ -73,10 +67,18 @@ const NavLinkActive = styled.nav`
   font-size: 15px;
   text-align: center;
   background-color: ${colors.secondary};
-  border-radius: 20px 20px 0px 0px;
   width: 55%;
   &:hover {
     cursor: pointer;
+  }
+  @media ${device.mobile} {
+    border-radius: 20px 20px 0px 0px;
+  }
+  @media ${device.tablet} {
+    border-radius: 20px 20px 0px 0px;
+  }
+  @media ${device.desktop} {
+    border-radius: 20px 20px 0px 0px;
   }
 `
 
@@ -87,35 +89,59 @@ const NavLinkInactive = styled.nav`
   font-size: 15px;
   text-align: center;
   background-color: lightgray;
-  border-radius: 20px 20px 0px 0px;
   width: 45%;
   &:hover {
     cursor: pointer;
+  }
+  @media ${device.mobile} {
+    border-radius: 20px 20px 0px 0px;
+  }
+  @media ${device.tablet} {
+    border-radius: 20px 20px 0px 0px;
+  }
+  @media ${device.desktop} {
+    border-radius: 20px 20px 0px 0px;
   }
 `
 
 const FormLogin = styled.form`
   padding-top: 15px;
   font-weight: bold;
-  border-radius: 0px 20px 20px 20px;
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   background-color: ${colors.secondary};
+  @media ${device.mobile} {
+    border-radius: 0px;
+  }
+  @media ${device.tablet} {
+    border-radius: 0px 20px 20px 20px;
+  }
+  @media ${device.desktop} {
+    border-radius: 0px 20px 20px 20px;
+  }
 `
 
 const FormSignup = styled.form`
   padding-top: 15px;
   font-weight: bold;
-  border-radius: 20px 0px 20px 20px;
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   background-color: ${colors.secondary};
+  @media ${device.mobile} {
+    border-radius: 0px;
+  }
+  @media ${device.tablet} {
+    border-radius: 20px 0px 20px 20px;
+  }
+  @media ${device.desktop} {
+    border-radius: 20px 0px 20px 20px;
+  }
 `
 
 const FormLign = styled.div`
@@ -123,8 +149,16 @@ const FormLign = styled.div`
   align-items: center;
   justify-content: space-between;
   height: 25px;
-  padding: 25px 50px;
   font-size: 15px;
+  @media ${device.mobile} {
+    padding: 25px 25px;
+  }
+  @media ${device.tablet} {
+    padding: 25px 50px;
+  }
+  @media ${device.desktop} {
+    padding: 25px 50px;
+  }
 `
 
 const InputStyle = styled.input`
@@ -152,7 +186,7 @@ const FormSubmit = styled.div`
 `
 
 const LabelForButton = styled.label`
-  width: 45%;
+  width: 200px;
   padding: 10px 0px;
   text-align: center;
   font-size: 17px;
