@@ -55,6 +55,8 @@ function MapData() {
 
   const [postData, setPostData] = useState([])
 
+  console.log(postData)
+
   useEffect(() => {
     fetch(`http://localhost:3000/api/post`, {
       headers: {
@@ -62,17 +64,23 @@ function MapData() {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${login.token}`,
       },
-    }).then((response) =>
-      response
-        .json()
-        .then((postData) => {
+    })
+      .then((response) =>
+        response.json().then((postData) => {
           setPostData(postData)
         })
-        .catch((error) => console.log(error))
-    )
+      )
+      .catch((error) => {
+        console.log(error)
+        alert(
+          "Toutes nos excuses, la base de données des posts n'est pas accessible :("
+        )
+      })
   }, [login.token])
 
-  const isNoPost = postData.length !== 0 || !postData ? true : false
+  const isNoPost = postData.length !== 0 ? true : false
+
+  const isNoConnexionDb = !postData
 
   return isNoPost ? (
     <PostContainer>
@@ -108,7 +116,7 @@ function MapData() {
         <div></div>
         <div></div>
       </div>
-      <h2>En attente de post</h2>
+      <h2>En attente de posts</h2>
     </NoPostContainer>
   )
 }

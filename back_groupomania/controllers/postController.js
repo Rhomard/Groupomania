@@ -12,21 +12,9 @@ exports.getAllPost = (req, res, next) => {
       const query = "SELECT post.*, user.firstName, user.lastName, user.imageUrlUser FROM post, user WHERE post.userId = user.id ORDER BY post.creationTimePost DESC";
       pool.query(query, (error, results) => {
             if (!results) {
-                  res.json({ status: "Not found!" });
+                  res.status(404).json({ status: "Not found!" });
             } else {
                   res.json(results);
-            }
-      });
-};
-
-exports.getOnePost = (req, res, next) => {
-      const query = `SELECT * FROM post where id = ${req.params.id} `;
-      pool.query(query, (error, results) => {
-            if (!results) {
-                  res.json({ status: "Not found!" });
-            } else {
-                  res.json(results);
-                  console.log(results);
             }
       });
 };

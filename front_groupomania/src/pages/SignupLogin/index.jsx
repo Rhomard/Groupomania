@@ -259,6 +259,8 @@ function SignupLogin() {
       // If the API cannot be called
       .catch(function (err) {
         console.log(err)
+        alert('Mauvais identifiants')
+        window.location = `./`
       })
   }
 

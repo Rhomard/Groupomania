@@ -15,4 +15,34 @@ const pool = mysql.createPool({
       database: dbDatabase,
 });
 
-module.exports = pool;
+// const pool = mysql.createPool({
+//       host: dbHost,
+//       user: dbUser,
+//       password: dbPassword,
+//       port: 3000,
+//       database: dbDatabase
+//     });
+      
+//     pool.getConnection(function(err) {
+//       if (err) throw err;
+//       console.log("Connected!");
+//       pool.query(`CREATE DATABASE IF NOT EXISTS ${dbDatabase}`, function (err, result) {
+//         if (err) throw err;
+//         console.log(`Database initialized !`)
+
+//         pool.query(`USE ${dbDatabase}`)
+
+//         pool.query("CREATE TABLE IF NOT EXISTS `role` (`id` INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,role VARCHAR(30) NOT NULL)")
+  
+//         pool = mysql.createPool({
+//             host: dbHost,
+//             user: dbUser,
+//             password: dbPassword,
+//             port: 3000,
+//             database: dbDatabase,
+//         });
+//       });
+//     }); 
+   
+  
+  module.exports = pool; 

@@ -15,7 +15,7 @@ const root = createRoot(rootElement)
 
 const GlobalStyle = createGlobalStyle`
     * {
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Lato', sans-serif;
     }
 
     body {
