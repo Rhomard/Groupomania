@@ -1,8 +1,6 @@
 // Connexion à la base de données
 const pool = require("../config/database");
 
-console.log("likeController connected with the database");
-
 exports.getLike = (req, res, next) => {
       const query = `SELECT * FROM postLike WHERE postLike.postId = ${req.params.id}`;
       pool.query(query, (error, results) => {

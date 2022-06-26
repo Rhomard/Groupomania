@@ -9,8 +9,6 @@ const secretToken = process.env.SECRET_TOKEN;
 // Connexion à la base de données
 const pool = require("../config/database");
 
-console.log("userController connected with the database");
-
 // On importe le package de cryptage de mot de passe
 const bcrypt = require("bcrypt");
 

@@ -38,7 +38,7 @@ const FeedLogo = styled.img`
 const PostContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: flex-start;
   margin: 0px 30px;
   border-top: 2px solid black;
@@ -55,8 +55,6 @@ function MapData() {
 
   const [postData, setPostData] = useState([])
 
-  console.log(postData)
-
   useEffect(() => {
     fetch(`http://localhost:3000/api/post`, {
       headers: {
@@ -72,15 +70,10 @@ function MapData() {
       )
       .catch((error) => {
         console.log(error)
-        alert(
-          "Toutes nos excuses, la base de données des posts n'est pas accessible :("
-        )
       })
-  }, [login.token])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const isNoPost = postData.length !== 0 ? true : false
-
-  const isNoConnexionDb = !postData
 
   return isNoPost ? (
     <PostContainer>

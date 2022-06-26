@@ -6,8 +6,6 @@ const { execFileSync } = require("child_process");
 const pool = require("../config/database");
 const { log } = require("console");
 
-console.log("postController connected with the database");
-
 exports.getAllPost = (req, res, next) => {
       const query = "SELECT post.*, user.firstName, user.lastName, user.imageUrlUser FROM post, user WHERE post.userId = user.id ORDER BY post.creationTimePost DESC";
       pool.query(query, (error, results) => {

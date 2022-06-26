@@ -58,7 +58,7 @@ function Profile() {
         })
         .catch((error) => console.log(error))
     )
-  }, [login.token])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const myProfile = [
     { firstName: '', lastName: '', imageUrlUser: '', creationTimeUser: '' },

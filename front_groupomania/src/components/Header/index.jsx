@@ -138,24 +138,39 @@ class HeaderControl extends React.Component {
     let button1
     let button2
     let titleMaster
+    let home
     if (login && login.roleId === 2) {
+      home = (
+        <Link to="/fildactu">
+          <HomeLogo src={logo} />
+        </Link>
+      )
       button = <LogoutButton onClick={this.handleLogoutClick} />
       button1 = <ProfileButton onClick={this.handleProfileClick} />
       button2 = <FeedButton onClick={this.handleFeedClick} />
     } else if (login && login.roleId === 1) {
       titleMaster = <SuperAdmin />
+      home = (
+        <Link to="/fildactu">
+          <HomeLogo src={logo} />
+        </Link>
+      )
       button = <LogoutButton onClick={this.handleLogoutClick} />
       button1 = <ProfileButton onClick={this.handleProfileClick} />
       button2 = <FeedButton onClick={this.handleFeedClick} />
+    } else if (!login) {
+      home = (
+        <Link to="/">
+          <HomeLogo src={logo} />
+        </Link>
+      )
     }
 
     return (
       <HeaderContainer>
         <NavContainer>
           <NavControlStyle>
-            <Link to="/">
-              <HomeLogo src={logo} />
-            </Link>
+            {home}
             {button2}
             {button1}
             {button}

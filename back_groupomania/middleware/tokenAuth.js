@@ -5,8 +5,6 @@ const secretToken = process.env.SECRET_TOKEN;
 // Connexion à la base de données
 const pool = require("../config/database");
 
-console.log("tokenAuth connected with the database");
-
 // On importe le package jsonwebtoken qui va permettre de créer des tokens et de les vérifier
 const jwt = require("jsonwebtoken");
 
