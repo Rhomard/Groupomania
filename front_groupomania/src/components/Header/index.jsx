@@ -4,6 +4,8 @@ import logo from '../../assets/logo.svg'
 import './header.css'
 import admin from '../../assets/admin.png'
 import logout from '../../assets/logout.png'
+import { device } from '../../utils/style/responsive'
+import colors from '../../utils/style/colors'
 
 const HeaderContainer = styled.header`
   position: fixed;
@@ -14,10 +16,30 @@ const HeaderContainer = styled.header`
 `
 
 const NavContainer = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  height: 60px;
   box-shadow: 0px 8px 50px 2px grey;
+  @media ${device.mobile} {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 200px;
+  }
+  @media ${device.tablet} {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    height: 60px;
+  }
+  @media ${device.desktop} {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    height: 60px;
+  }
+`
+
+const HomeLogoLign = styled.div`
+  display: flex;
+  justify-content: center;
 `
 
 const HomeLogo = styled.img`
@@ -47,9 +69,38 @@ const ImgAdmin = styled.img`
   height: 25px;
 `
 
+const ButtonStyleLogoutHeader = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  border: none;
+  background: none;
+  font-size: 15px;
+  &:hover {
+    font-weight: bold;
+    cursor: pointer;
+  }
+  @media ${device.mobile} {
+    width: 100%;
+    border-top: 1px solid black;
+    height: 60px;
+  }
+  @media ${device.tablet} {
+    width: auto;
+    border: none;
+    height: 60px;
+  }
+  @media ${device.desktop} {
+    width: auto;
+    border: none;
+    height: 60px;
+  }
+`
+
 function handleLogoutClick() {
   localStorage.clear()
-  window.location = `./`
+  window.location.reload()
 }
 
 function SuperAdmin() {
@@ -68,9 +119,11 @@ function Header() {
     return (
       <HeaderContainer>
         <NavContainer>
-          <Link to="/fildactu">
-            <HomeLogo src={logo} />
-          </Link>
+          <HomeLogoLign>
+            <Link to="/fildactu">
+              <HomeLogo src={logo} />
+            </Link>
+          </HomeLogoLign>
           <NavLink
             to="/fildactu"
             className={({ isActive }) => (isActive ? 'active' : 'inactive')}
@@ -83,13 +136,9 @@ function Header() {
           >
             Mon profil
           </NavLink>
-          <NavLink
-            to="/"
-            className={({ isActive }) => (isActive ? 'active' : 'inactive')}
-            onClick={handleLogoutClick}
-          >
+          <ButtonStyleLogoutHeader>
             Déconnexion <LogoutImg src={logout} alt="Flèche de sortie" />
-          </NavLink>
+          </ButtonStyleLogoutHeader>
         </NavContainer>
       </HeaderContainer>
     )
@@ -97,9 +146,11 @@ function Header() {
     return (
       <HeaderContainer>
         <NavContainer>
-          <Link to="/fildactu">
-            <HomeLogo src={logo} />
-          </Link>
+          <HomeLogoLign>
+            <Link to="/fildactu">
+              <HomeLogo src={logo} />
+            </Link>
+          </HomeLogoLign>
           <NavLink
             to="/fildactu"
             className={({ isActive }) => (isActive ? 'active' : 'inactive')}
@@ -127,9 +178,11 @@ function Header() {
     return (
       <HeaderContainer>
         <NavContainer>
-          <Link to="/">
-            <HomeLogo src={logo} />
-          </Link>
+          <HomeLogoLign>
+            <Link to="/">
+              <HomeLogo src={logo} />
+            </Link>
+          </HomeLogoLign>
         </NavContainer>
       </HeaderContainer>
     )

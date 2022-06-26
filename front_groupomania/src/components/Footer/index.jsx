@@ -1,16 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
-import colors from '../../utils/style/colors'
-import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { device } from '../../utils/style/responsive'
 import logout from '../../assets/logout.png'
+import { NavLink } from 'react-router-dom'
 
 const NavControlStyle = styled.footer`
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
   box-shadow: 0px -8px 50px 1px grey;
 
   @media ${device.mobile} {
@@ -18,7 +14,7 @@ const NavControlStyle = styled.footer`
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    height: 130px;
+    height: 150px;
   }
   @media ${device.tablet} {
     display: flex;
@@ -33,23 +29,6 @@ const NavControlStyle = styled.footer`
     align-items: center;
     justify-content: space-evenly;
     height: 60px;
-  }
-`
-
-const ButtonStyleFooter = styled.button`
-  border: none;
-  background: none;
-  &:hover {
-    cursor: pointer;
-  }
-  @media ${device.mobile} {
-    font-size: 12.5px;
-  }
-  @media ${device.tablet} {
-    font-size: 12.5px;
-  }
-  @media ${device.desktop} {
-    font-size: 15px;
   }
 `
 
@@ -59,11 +38,12 @@ const ButtonStyleLogoutFooter = styled.button`
   text-decoration: none;
   border: none;
   background: none;
+  font-size: 15px;
   &:hover {
     font-weight: bold;
     cursor: pointer;
   }
-  @media ${device.mobile} {
+  /* @media ${device.mobile} {
     font-size: 12.5px;
   }
   @media ${device.tablet} {
@@ -71,7 +51,7 @@ const ButtonStyleLogoutFooter = styled.button`
   }
   @media ${device.desktop} {
     font-size: 15px;
-  }
+  } */
 `
 
 const CopyrightStyle = styled.p`
@@ -79,7 +59,7 @@ const CopyrightStyle = styled.p`
   border: none;
   background: none;
 
-  @media ${device.mobile} {
+  /* @media ${device.mobile} {
     font-size: 12.5px;
   }
   @media ${device.tablet} {
@@ -87,7 +67,7 @@ const CopyrightStyle = styled.p`
   }
   @media ${device.desktop} {
     font-size: 15px;
-  }
+  } */
 `
 
 const LogoutImg = styled.img`
@@ -120,15 +100,20 @@ function UserLogin() {
   }, [login.token]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <ButtonStyleFooter>
+    <NavLink
+      to="/profil"
+      style={({ isActive }) =>
+        isActive ? {} : { textDecoration: 'none', color: 'black' }
+      }
+    >
       Connecté(e) en tant que {userData.firstName} {userData.lastName}
-    </ButtonStyleFooter>
+    </NavLink>
   )
 }
 
 function handleLogoutClick() {
   localStorage.clear()
-  window.location = `./`
+  window.location.reload()
 }
 
 function Footer() {
@@ -142,18 +127,28 @@ function Footer() {
           Déconnexion
           <LogoutImg src={logout} alt="Flèche de sortie" />
         </ButtonStyleLogoutFooter>
-        <Link to="/mentions-legales">
-          <ButtonStyleFooter>Mentions Légales</ButtonStyleFooter>
-        </Link>
+        <NavLink
+          to="/mentions-legales"
+          style={({ isActive }) =>
+            isActive ? {} : { textDecoration: 'none', color: 'black' }
+          }
+        >
+          Mentions Légales
+        </NavLink>
         <CopyrightStyle>Copyright © 2022 Groupomania</CopyrightStyle>
       </NavControlStyle>
     )
   } else {
     return (
       <NavControlStyle>
-        <Link to="/mentions-legales">
-          <ButtonStyleFooter>Mentions Légales</ButtonStyleFooter>
-        </Link>
+        <NavLink
+          to="/mentions-legales"
+          style={({ isActive }) =>
+            isActive ? {} : { textDecoration: 'none', color: 'black' }
+          }
+        >
+          Mentions Légales
+        </NavLink>
         <CopyrightStyle>Copyright © 2022 Groupomania</CopyrightStyle>
       </NavControlStyle>
     )

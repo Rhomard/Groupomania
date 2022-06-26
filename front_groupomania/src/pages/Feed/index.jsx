@@ -71,6 +71,9 @@ function MapData() {
       )
       .catch((error) => {
         console.log(error)
+        alert(
+          'Toutes nos excuses, impossible de se connecter à la base de données'
+        )
       })
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
