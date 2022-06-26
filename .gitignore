@@ -29,5 +29,5 @@
 /back_groupomania/node_modules
 /back_groupomania/.env
 /back_groupomania/.DS_STORE
-# /back_groupomania/imagesPost/
-# /back_groupomania/imagesUser/
+/back_groupomania/imagesPost/
+/back_groupomania/imagesUser/
