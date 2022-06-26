@@ -3,6 +3,7 @@ import ProfileInfo from '../../components/ProfileInfo'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import axios from 'axios'
+import { Navigate } from 'react-router-dom'
 
 const ProfileContainer = styled.div`
   min-height: calc(100vh - 115px);
@@ -107,6 +108,10 @@ function Profile() {
 
   const removeSelectedImage = () => {
     setSelectedImage()
+  }
+
+  if (!login) {
+    return <Navigate to="/" />
   }
 
   return (

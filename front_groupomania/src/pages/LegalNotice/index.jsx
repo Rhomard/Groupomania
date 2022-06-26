@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const LegalNoticeContainer = styled.div`
-  min-height: calc(100vh - 115px);
+  min-height: calc(100vh - 60px);
   display: flex;
   align-items: center;
   justify-content: center;

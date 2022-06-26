@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { device } from '../../utils/style/responsive'
+import logout from '../../assets/logout.png'
 
 const NavControlStyle = styled.footer`
   display: flex;
@@ -35,14 +36,11 @@ const NavControlStyle = styled.footer`
   }
 `
 
-const ButtonStyle = styled.button`
+const ButtonStyleFooter = styled.button`
   border: none;
   background: none;
-  font-size: 15px;
   &:hover {
     cursor: pointer;
-    font-weight: bold;
-    color: ${colors.primary};
   }
   @media ${device.mobile} {
     font-size: 12.5px;
@@ -55,10 +53,14 @@ const ButtonStyle = styled.button`
   }
 `
 
-const ButtonStyleUserLogin = styled.button`
+const ButtonStyleLogoutFooter = styled.button`
+  display: flex;
+  align-items: center;
+  text-decoration: none;
   border: none;
   background: none;
   &:hover {
+    font-weight: bold;
     cursor: pointer;
   }
   @media ${device.mobile} {
@@ -88,17 +90,10 @@ const CopyrightStyle = styled.p`
   }
 `
 
-function LogoutButton(props) {
-  return <ButtonStyle onClick={props.onClick}>Déconnexion</ButtonStyle>
-}
-
-function LegalNotice() {
-  return <ButtonStyleUserLogin>Mentions Légales</ButtonStyleUserLogin>
-}
-
-function Copyright() {
-  return <CopyrightStyle>Copyright © 2022 Groupomania</CopyrightStyle>
-}
+const LogoutImg = styled.img`
+  height: 25px;
+  padding-left: 5px;
+`
 
 function UserLogin() {
   let login = JSON.parse(localStorage.getItem('login'))
@@ -125,59 +120,44 @@ function UserLogin() {
   }, [login.token]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <ButtonStyleUserLogin>
+    <ButtonStyleFooter>
       Connecté(e) en tant que {userData.firstName} {userData.lastName}
-    </ButtonStyleUserLogin>
+    </ButtonStyleFooter>
   )
 }
 
-class FooterControl extends React.Component {
-  constructor(props) {
-    super(props)
-    this.handleLogoutClick = this.handleLogoutClick.bind(this)
-  }
+function handleLogoutClick() {
+  localStorage.clear()
+  window.location = `./`
+}
 
-  handleProfileClick() {
-    window.location = `./profil`
-  }
+function Footer() {
+  let login = JSON.parse(localStorage.getItem('login'))
 
-  handleFeedClick() {
-    window.location = `./fildactu`
-  }
-
-  handleLogoutClick() {
-    localStorage.clear()
-    window.location = `./`
-  }
-
-  handleUserLoginClick() {
-    window.location = `./profil`
-  }
-
-  render() {
-    let login = JSON.parse(localStorage.getItem('login'))
-    let button
-    let userLogin
-    if (login) {
-      userLogin = (
-        <Link to="/profil">
-          <UserLogin />
-        </Link>
-      )
-      button = <LogoutButton onClick={this.handleLogoutClick} />
-    }
-
+  if (login) {
     return (
       <NavControlStyle>
-        {userLogin}
-        {button}
+        <UserLogin />
+        <ButtonStyleLogoutFooter onClick={handleLogoutClick}>
+          Déconnexion
+          <LogoutImg src={logout} alt="Flèche de sortie" />
+        </ButtonStyleLogoutFooter>
         <Link to="/mentions-legales">
-          <LegalNotice />
+          <ButtonStyleFooter>Mentions Légales</ButtonStyleFooter>
         </Link>
-        <Copyright />
+        <CopyrightStyle>Copyright © 2022 Groupomania</CopyrightStyle>
+      </NavControlStyle>
+    )
+  } else {
+    return (
+      <NavControlStyle>
+        <Link to="/mentions-legales">
+          <ButtonStyleFooter>Mentions Légales</ButtonStyleFooter>
+        </Link>
+        <CopyrightStyle>Copyright © 2022 Groupomania</CopyrightStyle>
       </NavControlStyle>
     )
   }
 }
 
-export default FooterControl
+export default Footer

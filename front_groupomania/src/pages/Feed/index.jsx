@@ -7,6 +7,7 @@ import CreatePost from '../../components/CreatePost'
 import React from 'react'
 import feed from '../../assets/feed.png'
 import './feed.css'
+import { Navigate } from 'react-router-dom'
 
 const PageContainer = styled.div`
   min-height: calc(100vh - 260px);
@@ -118,7 +119,7 @@ function Feed() {
   let login = JSON.parse(localStorage.getItem('login'))
 
   if (!login) {
-    window.location = `./`
+    return <Navigate to="/" />
   }
 
   return (

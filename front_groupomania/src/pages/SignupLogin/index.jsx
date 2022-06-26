@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import colors from '../../utils/style/colors'
 import { useState } from 'react'
 import { device } from '../../utils/style/responsive'
+import { Navigate } from 'react-router-dom'
 
 const PageContainer = styled.div`
   min-height: calc(100vh - 60px);
@@ -210,12 +211,6 @@ const HideButton = styled.div`
 function SignupLogin() {
   let login = JSON.parse(localStorage.getItem('login'))
 
-  if (login) {
-    window.location = `./fildactu`
-  } else if (login === undefined) {
-    window.location = `./`
-  }
-
   // ============================ LOGIN ============================
 
   const [loginInfo, setLoginInfo] = useState({
@@ -248,13 +243,13 @@ function SignupLogin() {
       })
       // Redirect to the feed
       .then(function (value) {
-        window.location = `./fildactu`
         let login = {
           roleId: value.roleId,
           userId: value.userId,
           token: value.token,
         }
         localStorage.setItem('login', JSON.stringify(login))
+        window.location = `./fildactu`
       })
       // If the API cannot be called
       .catch(function (err) {
@@ -309,6 +304,12 @@ function SignupLogin() {
   }
 
   const [isAlreadyUser, setIsOpen] = useState(true)
+
+  if (login) {
+    return <Navigate to="/fildactu" />
+  } else if (login === undefined) {
+    return <Navigate to="/" />
+  }
 
   return isAlreadyUser ? (
     <PageContainer>
