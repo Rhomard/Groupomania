@@ -4,10 +4,9 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import axios from 'axios'
 import { Navigate } from 'react-router-dom'
+import { device } from '../../utils/style/responsive'
 
 const ProfileContainer = styled.div`
-  min-height: calc(100vh - 115px);
-  padding-top: 50px;
   width: 500px;
   height: auto;
   margin: auto;
@@ -15,6 +14,18 @@ const ProfileContainer = styled.div`
   flex-direction: column;
   align-items: center;
   padding-bottom: 100px;
+  @media ${device.mobile} {
+    min-height: calc(100vh - 115px);
+    padding-top: 175px;
+  }
+  @media ${device.tablet} {
+    min-height: calc(100vh - 115px);
+    padding-top: 50px;
+  }
+  @media ${device.desktop} {
+    min-height: calc(100vh - 115px);
+    padding-top: 50px;
+  }
 `
 
 const LabelChangeProfilPicture = styled.label`

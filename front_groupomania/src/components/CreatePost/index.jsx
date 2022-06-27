@@ -60,7 +60,7 @@ const InputStyle = styled.input`
   }
 `
 
-function CreatePost() {
+function CreatePost({ setApiCalled }) {
   const [title, setTitle] = useState()
   const [description, setDescription] = useState()
   const [imageUrlPost, setImageUrlPost] = useState()
@@ -84,10 +84,22 @@ function CreatePost() {
       })
       .then((res) => console.log(res))
       .then(function (value) {
-        window.location = `./fildactu`
+        setApiCalled(true)
       })
       .catch((err) => console.log(err))
+
+    let titleInput = document.getElementById('titleInput')
+    titleInput.value = ''
+
+    let descriptionInput = document.getElementById('descriptionInput')
+    descriptionInput.value = ''
+
+    let imgInput = document.getElementById('imgInput')
+    imgInput.value = null
+
+    removeSelectedImage()
   }
+
   const [selectedImage, setSelectedImage] = useState()
 
   const imageChange = (event) => {
@@ -109,6 +121,7 @@ function CreatePost() {
       <FormPost onSubmit={send}>
         <FormLign>
           <InputStyle
+            id="titleInput"
             type="text"
             placeholder="Titre de la publication"
             onChange={(event) => {
@@ -120,6 +133,7 @@ function CreatePost() {
         </FormLign>
         <FormLign>
           <InputStyle
+            id="descriptionInput"
             type="text"
             placeholder="Description de la publication"
             onChange={(event) => {
@@ -131,6 +145,7 @@ function CreatePost() {
         </FormLign>
         <FormLign>
           <input
+            id="imgInput"
             type="file"
             accept="image/*"
             onChange={(event) => {

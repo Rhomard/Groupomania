@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 import { device } from '../../utils/style/responsive'
 import logout from '../../assets/logout.png'
 import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const NavControlStyle = styled.footer`
   box-shadow: 0px -8px 50px 1px grey;
@@ -100,20 +101,15 @@ function UserLogin() {
   }, [login.token]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <NavLink
-      to="/profil"
-      style={({ isActive }) =>
-        isActive ? {} : { textDecoration: 'none', color: 'black' }
-      }
-    >
+    <Link to="/profil" style={{ textDecoration: 'none', color: 'black' }}>
       Connecté(e) en tant que {userData.firstName} {userData.lastName}
-    </NavLink>
+    </Link>
   )
 }
 
 function handleLogoutClick() {
   localStorage.clear()
-  window.location.reload()
+  window.location = `./`
 }
 
 function Footer() {
@@ -130,7 +126,9 @@ function Footer() {
         <NavLink
           to="/mentions-legales"
           style={({ isActive }) =>
-            isActive ? {} : { textDecoration: 'none', color: 'black' }
+            isActive
+              ? { textDecoration: 'none', color: 'black' }
+              : { textDecoration: 'none', color: 'black' }
           }
         >
           Mentions Légales
@@ -144,7 +142,13 @@ function Footer() {
         <NavLink
           to="/mentions-legales"
           style={({ isActive }) =>
-            isActive ? {} : { textDecoration: 'none', color: 'black' }
+            isActive
+              ? {
+                  textDecoration: 'none',
+                  color: 'black',
+                  backgroundColor: 'none',
+                }
+              : { textDecoration: 'none', color: 'black' }
           }
         >
           Mentions Légales

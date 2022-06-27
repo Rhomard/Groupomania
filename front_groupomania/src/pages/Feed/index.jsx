@@ -8,13 +8,26 @@ import React from 'react'
 import feed from '../../assets/feed.png'
 import './feed.css'
 import { Navigate } from 'react-router-dom'
+import { device } from '../../utils/style/responsive'
 
 const PageContainer = styled.div`
-  min-height: calc(100vh - 260px);
-  padding-top: 150px;
   padding-bottom: 50px;
-  width: 80%;
   margin: auto;
+  @media ${device.mobile} {
+    min-height: calc(100vh - 260px);
+    width: 100%;
+    padding-top: 275px;
+  }
+  @media ${device.tablet} {
+    min-height: calc(100vh - 260px);
+    width: 80%;
+    padding-top: 150px;
+  }
+  @media ${device.desktop} {
+    min-height: calc(100vh - 260px);
+    width: 80%;
+    padding-top: 150px;
+  }
 `
 
 const FeedWrapper = styled.div`
@@ -24,16 +37,35 @@ const FeedWrapper = styled.div`
   margin: 25px auto 0px auto;
 `
 
-const FeedTitle = styled.div`
+const FeedTitleLign = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   padding-top: 20px;
-  font-size: 20px;
+`
+
+const FeedTitle = styled.h1`
+  @media ${device.mobile} {
+    font-size: 30px;
+  }
+  @media ${device.tablet} {
+    font-size: 40px;
+  }
+  @media ${device.desktop} {
+    font-size: 40px;
+  }
 `
 
 const FeedLogo = styled.img`
-  height: 50px;
+  @media ${device.mobile} {
+    height: 40px;
+  }
+  @media ${device.tablet} {
+    height: 50px;
+  }
+  @media ${device.desktop} {
+    height: 50px;
+  }
 `
 
 const PostContainer = styled.div`
@@ -51,7 +83,7 @@ const NoPostContainer = styled.div`
   text-align: center;
 `
 
-function MapData() {
+function MapData({ apiCalled, setApiCalled }) {
   let login = JSON.parse(localStorage.getItem('login'))
 
   const [postData, setPostData] = useState([])
@@ -67,6 +99,7 @@ function MapData() {
       .then((response) =>
         response.json().then((postData) => {
           setPostData(postData)
+          setApiCalled(null)
         })
       )
       .catch((error) => {
@@ -75,7 +108,7 @@ function MapData() {
           'Toutes nos excuses, impossible de se connecter à la base de données'
         )
       })
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [apiCalled]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const isNoPost = postData.length !== 0 ? true : false
 
@@ -94,6 +127,7 @@ function MapData() {
           postUserId={post.userId}
           postId={post.id}
           imageUrlUser={post.imageUrlUser}
+          setApiCalled={setApiCalled}
         />
       ))}
     </PostContainer>
@@ -119,6 +153,8 @@ function MapData() {
 }
 
 function Feed() {
+  const [apiCalled, setApiCalled] = useState(null)
+
   let login = JSON.parse(localStorage.getItem('login'))
 
   if (!login) {
@@ -127,14 +163,14 @@ function Feed() {
 
   return (
     <PageContainer>
-      <CreatePost />
+      <CreatePost setApiCalled={setApiCalled} />
       <FeedWrapper>
-        <FeedTitle>
+        <FeedTitleLign>
           <FeedLogo alt="Fil d'actualités logo" src={feed} />
-          <h1>Fil d'actualités</h1>
+          <FeedTitle>Fil d'actualités</FeedTitle>
           <FeedLogo alt="Fil d'actualités logo" src={feed} />
-        </FeedTitle>
-        <MapData />
+        </FeedTitleLign>
+        <MapData apiCalled={apiCalled} setApiCalled={setApiCalled} />
       </FeedWrapper>
     </PageContainer>
   )

@@ -5,13 +5,21 @@ import { device } from '../../utils/style/responsive'
 import { Navigate } from 'react-router-dom'
 
 const PageContainer = styled.div`
-  min-height: calc(100vh - 60px);
   display: flex;
   @media ${device.mobile} {
+    min-height: calc(100vh - 60px);
+    padding-top: 175px;
+    padding-bottom: 50px;
   }
   @media ${device.tablet} {
+    min-height: calc(100vh - 60px);
+    padding-top: 0px;
+    padding-bottom: 0px;
   }
   @media ${device.desktop} {
+    min-height: calc(100vh - 60px);
+    padding-top: 0px;
+    padding-bottom: 0px;
   }
 `
 
@@ -307,8 +315,6 @@ function SignupLogin() {
 
   if (login) {
     return <Navigate to="/fildactu" />
-  } else if (login === undefined) {
-    return <Navigate to="/" />
   }
 
   return isAlreadyUser ? (

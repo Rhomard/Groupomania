@@ -1,17 +1,27 @@
-function SupprButton({ postId }) {
+import styled from 'styled-components'
+import cross from '../../assets/cross.png'
+
+const ImgButtonCross = styled.img`
+  height: 35px;
+  &:hover {
+    cursor: pointer;
+  }
+`
+
+function SupprButton({ postId, setApiCalled }) {
   return (
-    <button
+    <ImgButtonCross
+      src={cross}
+      alt="Croix noir"
       onClick={(e) => {
         e.preventDefault()
-        handleSupprClick({ postId })
+        handleSupprClick({ postId, setApiCalled })
       }}
-    >
-      Supprimer
-    </button>
+    />
   )
 }
 
-function SupprOnePost({ postId }) {
+function SupprOnePost({ postId, setApiCalled }) {
   let login = JSON.parse(localStorage.getItem('login'))
   fetch(`http://localhost:3000/api/post/${postId}`, {
     method: 'DELETE',
@@ -28,7 +38,7 @@ function SupprOnePost({ postId }) {
       }
     })
     .then((value) => {
-      window.location = `./fildactu`
+      setApiCalled(true)
     })
     // If the API cannot be called
     .catch(function (err) {
@@ -36,8 +46,8 @@ function SupprOnePost({ postId }) {
     })
 }
 
-function handleSupprClick({ postId }) {
-  SupprOnePost({ postId })
+function handleSupprClick({ postId, setApiCalled }) {
+  SupprOnePost({ postId, setApiCalled })
 }
 
 export default SupprButton

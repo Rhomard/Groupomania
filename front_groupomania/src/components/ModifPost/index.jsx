@@ -5,6 +5,10 @@ import post from '../../assets/post.png'
 
 const ImgButtonModif = styled.img`
   height: 35px;
+  padding-right: 10px;
+  &:hover {
+    cursor: pointer;
+  }
 `
 
 function ModifButton({ postId, titleInput, descriptionInput }) {

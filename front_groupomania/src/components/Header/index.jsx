@@ -5,7 +5,6 @@ import './header.css'
 import admin from '../../assets/admin.png'
 import logout from '../../assets/logout.png'
 import { device } from '../../utils/style/responsive'
-import colors from '../../utils/style/colors'
 
 const HeaderContainer = styled.header`
   position: fixed;
@@ -100,7 +99,7 @@ const ButtonStyleLogoutHeader = styled.button`
 
 function handleLogoutClick() {
   localStorage.clear()
-  window.location.reload()
+  window.location = `./`
 }
 
 function SuperAdmin() {
@@ -136,7 +135,7 @@ function Header() {
           >
             Mon profil
           </NavLink>
-          <ButtonStyleLogoutHeader>
+          <ButtonStyleLogoutHeader onClick={handleLogoutClick}>
             Déconnexion <LogoutImg src={logout} alt="Flèche de sortie" />
           </ButtonStyleLogoutHeader>
         </NavContainer>

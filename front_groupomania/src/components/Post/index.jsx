@@ -38,6 +38,7 @@ const PostUserName = styled.p`
 
 const PostModifSuppr = styled.div`
   display: flex;
+  align-items: center;
 `
 
 const PostUserContainer = styled.div`
@@ -94,6 +95,7 @@ function Post({
   postUserId,
   postId,
   imageUrlUser,
+  setApiCalled,
 }) {
   let login = JSON.parse(localStorage.getItem('login'))
 
@@ -129,7 +131,7 @@ function Post({
                 titleInput={title}
                 descriptionInput={description}
               />
-              <SupprButton postId={postId} />
+              <SupprButton postId={postId} setApiCalled={setApiCalled} />
             </ButtonLign>
           ) : null}
         </PostModifSuppr>
