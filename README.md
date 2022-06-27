@@ -35,7 +35,7 @@ npm run start-mac
 
 Pour Windows :
 ```
-npm run start-windows
+npm run start-win
 ```
 
 :white_check_mark: &nbsp;Front
