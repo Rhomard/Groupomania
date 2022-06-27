@@ -17,7 +17,7 @@ Si ce n'est pas le cas :point_right: https://dev.mysql.com/downloads/installer/
 Ouvrir un terminal :
 
 ```
-cd front
+cd front_groupomania
 ```
 
 ```
@@ -38,10 +38,25 @@ npm run start-windows
 
 **Pour le dossier back :**
 
+Dans le dossier **back_groupomania** créer un fichier .env
+
+**(Veiller à ce que votre éditeur de code le détecte comme du texte brut !)**
+
+Copier puis coller ceci dans le fichier .env en remplissant les lignes :
+```
+DB_HOST=
+DB_USER=
+DB_PASSWORD=
+DB_NAME=
+
+SECRET_TOKEN=
+```
+ Sauvegarder le fichier :floppy_disk:
+
 Ouvrir un terminal :
 
 ```
-cd back
+cd back_groupomania
 ```
 
 ```
