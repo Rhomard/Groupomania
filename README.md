@@ -8,7 +8,7 @@ Si ce n'est pas le cas :point_right: https://nodejs.org/en/download/
 
 Avoir installer **mysql** sur sa machine.
 
-Si ce n'est pas le cas :point_right: https://dev.mysql.com/downloads/installer/
+Si ce n'est pas le cas :point_right: https://openclassrooms.com/fr/courses/6971126-implementez-vos-bases-de-donnees-relationnelles-avec-sql/7152681-installez-le-sgbd-mysql
 
 ## Installation :
 
