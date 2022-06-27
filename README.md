@@ -12,6 +12,10 @@ Si ce n'est pas le cas :point_right: https://dev.mysql.com/downloads/installer/
 
 ## Installation :
 
+Avec le terminal, depuis le dossier dans lequel vous souhaitez enregistrer le projet, clonez le projet avec la commande :
+```
+git clone https://github.com/Rhomard/Groupomania.git
+```
 **Pour le dossier front :**
 
 Ouvrir un terminal :
