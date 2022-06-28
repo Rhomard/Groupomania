@@ -2,17 +2,17 @@
 
 ## Prérequis :
 
-Avoir installer **nodejs** sur sa machine.
+Avoir installé **nodejs** sur sa machine.
 
 Si ce n'est pas le cas :point_right: https://nodejs.org/en/download/
 
-Avoir installer **mysql** sur sa machine.
+Avoir installé **mysql** sur sa machine.
 
 Si ce n'est pas le cas :point_right: https://openclassrooms.com/fr/courses/6971126-implementez-vos-bases-de-donnees-relationnelles-avec-sql/7152681-installez-le-sgbd-mysql
 
 ## Installation :
 
-Avec le terminal, depuis le dossier dans lequel vous souhaitez enregistrer le projet, clonez le projet avec la commande :
+Avec le terminal, depuis le dossier dans lequel vous souhaitez enregistrer le projet, cloner le projet avec la commande :
 ```
 git clone https://github.com/Rhomard/Groupomania.git
 ```
