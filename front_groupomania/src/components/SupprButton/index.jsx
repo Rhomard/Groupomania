@@ -25,7 +25,6 @@ function SupprOnePost({ postId, setApiCalled }) {
   let login = JSON.parse(localStorage.getItem('login'))
   fetch(`http://localhost:3000/api/post/${postId}`, {
     method: 'DELETE',
-    // Tell to the API that I will give it json object
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -40,7 +39,6 @@ function SupprOnePost({ postId, setApiCalled }) {
     .then((value) => {
       setApiCalled(true)
     })
-    // If the API cannot be called
     .catch(function (err) {
       console.log(err)
     })

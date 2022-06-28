@@ -217,9 +217,9 @@ const HideButton = styled.div`
 `
 
 function SignupLogin() {
-  let login = JSON.parse(localStorage.getItem('login'))
-
   // ============================ LOGIN ============================
+
+  let login = JSON.parse(localStorage.getItem('login'))
 
   const [loginInfo, setLoginInfo] = useState({
     email: '',
@@ -236,20 +236,20 @@ function SignupLogin() {
 
     fetch('http://localhost:3000/api/auth/login', {
       method: 'POST',
-      // Tell to the API that I will give it json object
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      // Send my json object
       body: JSON.stringify(loginInfo),
     })
       .then(function (res) {
         if (res.ok) {
           return res.json()
         }
+        if (res.status === 404) {
+          alert('Utilisateur non trouvé')
+        } else alert('Mauvais mot de passe')
       })
-      // Redirect to the feed
       .then(function (value) {
         let login = {
           roleId: value.roleId,
@@ -259,10 +259,8 @@ function SignupLogin() {
         localStorage.setItem('login', JSON.stringify(login))
         window.location = `./fildactu`
       })
-      // If the API cannot be called
       .catch(function (err) {
         console.log(err)
-        alert('Mauvais identifiants')
         window.location = `./`
       })
   }
@@ -285,12 +283,10 @@ function SignupLogin() {
 
     fetch('http://localhost:3000/api/auth/signup', {
       method: 'POST',
-      // Tell to the API that I will give it json object
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      // Send my json object
       body: JSON.stringify(signupInfo),
     })
       .then(function (res) {
@@ -304,17 +300,10 @@ function SignupLogin() {
             'La création de compte à échouée, veuillez réessayer ultérieurement..'
           )
         }
-        //   if (res.ok) {
-        //     return res.json()
-        //   }
       })
-      // // Redirect to the feed
-      // .then(function (value) {
-      // })
-      // If the API cannot be called
+
       .catch(function (err) {
         console.log(err)
-        console.log(err.response.status)
       })
   }
 

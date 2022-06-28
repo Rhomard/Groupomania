@@ -191,8 +191,6 @@ function ModifButton({
   imageUrlPostRN,
   firstName,
   lastName,
-  creationTimePost,
-  modificationTimePost,
   postUserId,
   postId,
   imageUrlUser,

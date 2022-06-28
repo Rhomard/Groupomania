@@ -15,9 +15,7 @@ const bcrypt = require("bcrypt");
 // On importe le package jsonwebtoken qui va permettre de créer des tokens et de les vérifier
 const jwt = require("jsonwebtoken");
 
-// Middleware pour connecter des utilisateurs existants
 exports.users = (req, res, next) => {
-      // On cherche dans la base de données un utilisateur qui à la même adresse mail que celle envoyée dans la requête
       const user = "SELECT user.id, user.firstName, user.lastName, user.imageUrlUser, user.creationTimeUser FROM user"
   pool.query(user, (error, results) => {
       if (!results) {
@@ -36,7 +34,7 @@ exports.modifyUser = (req, res, next) => {
                       const filename = results[0].imageUrlUser.split("/imagesUser/")[1];
                        fs.unlink(`imagesUser/${filename}`, function (err) {
                                   if (err) throw err;
-                                  // if no error, file has been deleted successfully
+                                 // Si pas d'erreur, le fichier a bien été supprimé
                                   console.log('File deleted!');
                               });
                 }
@@ -93,21 +91,21 @@ exports.login = (req, res, next) => {
       const user = `SELECT * FROM user WHERE email = "${req.body.email}"`;
       pool.query(user, (error, results) => {
             if (!results.length) {
-                  return res.status(404).json({ error: "Utilisateur non trouvé !" });
+                  return res.status(404).json({ error: "User not find" });
             } else {
                   bcrypt.compare(req.body.password, results[0].password)
                         .then((valid) => {
                               // Si l'utilisateur entre le mauvais mot de passe
                               if (!valid) {
                                     console.log(results);
-                                    return res.status(401).json({ error: "Mot de passe incorrect !" });
+                                    return res.status(401).json({ error: "Incorrect password" });
                               } else {
                                     // Si l'utilisateur entre le bon mot de passe
                                     res.status(200).json({
                                           userId: results[0].id,
                                           roleId: results[0].roleId,
                                           
-                                          // On encode le userId pour que seul l'utilisateur qui a entré une sauce puisse la modifier ou supprimer
+                                          // On encode le userId pour que seul l'utilisateur qui a publié un post puisse la modifier ou supprimer
                                           token: jwt.sign({ userId: results[0].id }, secretToken, { expiresIn: "24h" }),
                                     });
                               }

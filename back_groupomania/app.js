@@ -2,7 +2,7 @@ const express = require("express");
 
 const app = express();
 
-// On importe le routeur pour les sauces
+// On importe le routeur pour les posts
 const postRoutes = require("./routes/postRoutes");
 
 // On importe le routeur pour les users
@@ -24,10 +24,10 @@ app.use((req, res, next) => {
       next();
 });
 
-// Middlware qui répond aux requêtes envoyées au dossier static /images
+// Middlware qui répond aux requêtes envoyées au dossier static /imagesPost
 app.use("/imagesPost", express.static(path.join(__dirname, "imagesPost")));
 
-// Middlware qui répond aux requêtes envoyées au dossier static /images
+// Middlware qui répond aux requêtes envoyées au dossier static /imagesUser
 app.use("/imagesUser", express.static(path.join(__dirname, "imagesUser")));
 
 // On enregistre les routes pour les posts
@@ -36,7 +36,7 @@ app.use("/api/post", postRoutes);
 // On enregistre les routes pour les users
 app.use("/api/auth", userRoutes);
 
-// On enregistre les routes pour les users
+// On enregistre les routes pour les likes
 app.use("/api/like", likesRoutes);
 
 module.exports = app;

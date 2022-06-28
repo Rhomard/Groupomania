@@ -131,8 +131,6 @@ function Post({
       lastName={lastName}
       titleInput={title}
       descriptionInput={description}
-      creationTimePost={creationTimePost}
-      modificationTimePost={modificationTimePost}
       postUserId={postUserId}
       postId={postId}
       imageUrlUser={imageUrlUser}

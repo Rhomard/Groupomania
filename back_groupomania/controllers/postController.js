@@ -124,7 +124,7 @@ exports.deletePost = (req, res, next) => {
                   const filename = results[0].imageUrlPost.split("/imagesPost/")[1];
                    fs.unlink(`imagesPost/${filename}`, function (err) {
                               if (err) throw err;
-                              // if no error, file has been deleted successfully
+                               // Si pas d'erreur, le fichier a bien été supprimé
                               console.log('File deleted!');
                           });
             }

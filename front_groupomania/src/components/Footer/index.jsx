@@ -44,31 +44,12 @@ const ButtonStyleLogoutFooter = styled.button`
     font-weight: bold;
     cursor: pointer;
   }
-  /* @media ${device.mobile} {
-    font-size: 12.5px;
-  }
-  @media ${device.tablet} {
-    font-size: 12.5px;
-  }
-  @media ${device.desktop} {
-    font-size: 15px;
-  } */
 `
 
 const CopyrightStyle = styled.p`
   margin: 0;
   border: none;
   background: none;
-
-  /* @media ${device.mobile} {
-    font-size: 12.5px;
-  }
-  @media ${device.tablet} {
-    font-size: 12.5px;
-  }
-  @media ${device.desktop} {
-    font-size: 15px;
-  } */
 `
 
 const LogoutImg = styled.img`

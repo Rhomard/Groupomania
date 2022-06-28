@@ -46,6 +46,7 @@ const server = http.createServer(app);
 
 // On enregistre la fonction errorHandler dans le serveur
 server.on("error", errorHandler);
+
 // Ecouteur d'évènements qui consigne le port sur lequel le serveur s'exécute dans la console
 server.on("listening", () => {
       const address = server.address();
