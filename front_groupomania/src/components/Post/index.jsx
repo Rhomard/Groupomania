@@ -2,11 +2,14 @@ import styled from 'styled-components'
 import profileDefault from '../../assets/profileDefault.png'
 import PropTypes from 'prop-types'
 import React from 'react'
-import ModifButton from '../ModifPost'
+// import ModifButton from '../ModifPost'
 import SupprButton from '../SupprPost'
 import { dateFormat } from '../../utils/DateFormat'
 import LikeButton from '../LikeButton'
 import { device } from '../../utils/style/responsive'
+import { useState } from 'react'
+import post from '../../assets/post.png'
+import ModifButton from '../ModifButton'
 
 const PostContainer = styled.div`
   display: flex;
@@ -76,12 +79,21 @@ const PostCreation = styled.p`
   margin: 0;
 `
 
-const ButtonLign = styled.div``
+const ButtonLign = styled.div`
+  display: flex;
+`
 
 const ProfileUserImg = styled.img`
   height: 50px;
   width: 50px;
   border-radius: 50%;
+`
+const ImgButtonModif = styled.img`
+  height: 35px;
+  padding-right: 10px;
+  &:hover {
+    cursor: pointer;
+  }
 `
 
 function Post({
@@ -110,7 +122,24 @@ function Post({
 
   const isProfilePicNull = imageUrlUser === null ? false : true
 
-  return (
+  const [isModifRN, setIsModifRN] = useState(false)
+
+  return isModifRN ? (
+    <ModifButton
+      imageUrlPostRN={imageUrlPost}
+      firstName={firstName}
+      lastName={lastName}
+      titleInput={title}
+      descriptionInput={description}
+      creationTimePost={creationTimePost}
+      modificationTimePost={modificationTimePost}
+      postUserId={postUserId}
+      postId={postId}
+      imageUrlUser={imageUrlUser}
+      setApiCalled={setApiCalled}
+      setIsModifRN={setIsModifRN}
+    />
+  ) : (
     <PostContainer>
       <PostUserContainer>
         <PostUser>
@@ -126,10 +155,13 @@ function Post({
         <PostModifSuppr>
           {isAuth ? (
             <ButtonLign>
-              <ModifButton
-                postId={postId}
-                titleInput={title}
-                descriptionInput={description}
+              <ImgButtonModif
+                src={post}
+                alt="Crayon noir qui écrit"
+                onClick={(e) => {
+                  e.preventDefault()
+                  setIsModifRN(true)
+                }}
               />
               <SupprButton postId={postId} setApiCalled={setApiCalled} />
             </ButtonLign>

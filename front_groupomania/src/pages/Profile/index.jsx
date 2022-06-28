@@ -5,6 +5,8 @@ import { useEffect } from 'react'
 import axios from 'axios'
 import { Navigate } from 'react-router-dom'
 import { device } from '../../utils/style/responsive'
+import folder from '../../assets/folder.png'
+import colors from '../../utils/style/colors'
 
 const ProfileContainer = styled.div`
   width: 500px;
@@ -20,25 +22,17 @@ const ProfileContainer = styled.div`
   }
   @media ${device.tablet} {
     min-height: calc(100vh - 115px);
-    padding-top: 50px;
+    padding-top: 150px;
   }
   @media ${device.desktop} {
     min-height: calc(100vh - 115px);
-    padding-top: 50px;
+    padding-top: 150px;
   }
 `
 
-const LabelChangeProfilPicture = styled.label`
-  margin-top: 100px;
-  &:hover {
-    cursor: pointer;
-  }
-`
-
-const ImgPreview = styled.img`
-  height: 200px;
-  width: 200px;
-  border-radius: 50%;
+const ImgLabelPostImg = styled.img`
+  padding-left: 10px;
+  height: 30px;
 `
 
 const HideInput = styled.div`
@@ -48,6 +42,60 @@ const HideInput = styled.div`
   overflow: hidden;
   position: absolute;
   z-index: -1;
+`
+
+const PreviewImgColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+`
+
+const LabelPostImg = styled.label`
+  display: flex;
+  align-items: center;
+  &:hover {
+    cursor: pointer;
+  }
+`
+
+const PreviewImgContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 350px;
+`
+
+const PreviewImg = styled.img`
+  width: 300px;
+  padding: 10px 0px;
+`
+const HideButton = styled.div`
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+`
+
+const FormSubmit = styled.div`
+  &hover {
+    cursor: pointer;
+  }
+`
+
+const LabelForButton = styled.label`
+  padding: 10px 20px;
+  text-align: center;
+  font-size: 15px;
+  border-radius: 100px;
+  border: 2px solid;
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 15px 1px ${colors.primary};
+  }
 `
 
 function Profile() {
@@ -151,22 +199,42 @@ function Profile() {
             }}
           />
         </HideInput>
-        <LabelChangeProfilPicture htmlFor="changeProfilPicture">
-          Changer ma photo de profil
-        </LabelChangeProfilPicture>
-        {selectedImage && (
-          <div>
-            <ImgPreview src={URL.createObjectURL(selectedImage)} alt="Aperçu" />
-            <button
-              onClick={() => {
-                removeSelectedImage()
-              }}
-            >
-              Retirer cette image
-            </button>
-            <button>Envoyer l'image</button>
-          </div>
-        )}
+        <PreviewImgColumn>
+          <LabelPostImg htmlFor="changeProfilPicture">
+            Choisir une nouvelle photo de profil
+            <ImgLabelPostImg alt="Dossier" src={folder} />
+          </LabelPostImg>
+          {selectedImage && (
+            <PreviewImgContainer>
+              <PreviewImg
+                src={URL.createObjectURL(selectedImage)}
+                alt="Aperçu"
+                width="200"
+              />
+              <HideButton>
+                <button
+                  id="removeImg"
+                  onClick={() => {
+                    removeSelectedImage()
+                  }}
+                >
+                  Retirer cette image
+                </button>
+              </HideButton>
+              <LabelPostImg htmlFor="removeImg">
+                Retirer cette image
+              </LabelPostImg>
+              <FormSubmit>
+                <HideButton>
+                  <button id="createPost">Changer ma photo de profil</button>
+                </HideButton>
+                <LabelForButton htmlFor="createPost">
+                  Changer ma photo de profil
+                </LabelForButton>
+              </FormSubmit>
+            </PreviewImgContainer>
+          )}
+        </PreviewImgColumn>
       </form>
     </ProfileContainer>
   )

@@ -308,6 +308,9 @@ function SignupLogin() {
       // If the API cannot be called
       .catch(function (err) {
         console.log(err)
+        alert(
+          'La création de compte à échouée, veuillez réessayer ultérieurement..'
+        )
       })
   }
 

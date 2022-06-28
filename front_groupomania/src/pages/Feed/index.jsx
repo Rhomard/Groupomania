@@ -32,9 +32,17 @@ const PageContainer = styled.div`
 
 const FeedWrapper = styled.div`
   background-color: ${colors.secondary};
-  border-radius: 20px;
   width: 100%;
   margin: 25px auto 0px auto;
+  @media ${device.mobile} {
+    border-radius: 0px;
+  }
+  @media ${device.tablet} {
+    border-radius: 20px;
+  }
+  @media ${device.desktop} {
+    border-radius: 20px;
+  }
 `
 
 const FeedTitleLign = styled.div`
