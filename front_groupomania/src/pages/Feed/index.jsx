@@ -136,6 +136,7 @@ function MapData({ apiCalled, setApiCalled }) {
           postId={post.id}
           imageUrlUser={post.imageUrlUser}
           setApiCalled={setApiCalled}
+          index={index}
         />
       ))}
     </PostContainer>

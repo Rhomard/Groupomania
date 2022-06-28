@@ -235,11 +235,8 @@ function CreatePost({ setApiCalled }) {
     let descriptionInput = document.getElementById('descriptionInput')
     descriptionInput.value = ''
 
-    let imgInput = document.getElementById('imgInput')
-    imgInput.value = null
-    console.log(imgInput.value)
-
     removeSelectedImage()
+    setImageUrlPost(undefined)
   }
 
   const [selectedImage, setSelectedImage] = useState()
@@ -252,8 +249,7 @@ function CreatePost({ setApiCalled }) {
 
   const removeSelectedImage = () => {
     setSelectedImage()
-    let imgInput = document.getElementById('imgInput')
-    imgInput.value = null
+    setImageUrlPost(undefined)
   }
 
   return (

@@ -107,6 +107,7 @@ function Post({
   postId,
   imageUrlUser,
   setApiCalled,
+  index,
 }) {
   let login = JSON.parse(localStorage.getItem('login'))
 
@@ -137,6 +138,7 @@ function Post({
       imageUrlUser={imageUrlUser}
       setApiCalled={setApiCalled}
       setIsModifRN={setIsModifRN}
+      index={index}
     />
   ) : (
     <PostContainer>

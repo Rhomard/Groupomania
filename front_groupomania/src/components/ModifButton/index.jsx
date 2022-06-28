@@ -198,6 +198,7 @@ function ModifButton({
   imageUrlUser,
   setApiCalled,
   setIsModifRN,
+  index,
 }) {
   const [title, setTitle] = useState(titleInput)
   const [description, setDescription] = useState(descriptionInput)
@@ -275,7 +276,7 @@ function ModifButton({
           ) : null}
         </PostModifSuppr>
       </PostUserContainer>
-      <form onSubmit={send}>
+      <form>
         <FormLign>
           <InputStyleText
             id="titleInput"
@@ -297,7 +298,7 @@ function ModifButton({
         <FormLignImg>
           <HideButton>
             <input
-              id="changeImgInput"
+              id={index}
               type="file"
               accept="image/*"
               onChange={(event) => {
@@ -307,7 +308,7 @@ function ModifButton({
               }}
             />
           </HideButton>
-          <LabelPostImg htmlFor="changeImgInput">
+          <LabelPostImg htmlFor={index}>
             Changer d'image
             <ImgLabelPostImg alt="Dossier" src={folder} />
           </LabelPostImg>
@@ -321,17 +322,11 @@ function ModifButton({
                 width="200"
               />
             </PreviewImgDiv>
-            <HideButton>
-              <button
-                id="changeRemoveImg"
-                onClick={() => {
-                  removeSelectedImage()
-                }}
-              >
-                Retirer cette image
-              </button>
-            </HideButton>
-            <LabelPostImg htmlFor="changeRemoveImg">
+            <LabelPostImg
+              onClick={() => {
+                removeSelectedImage()
+              }}
+            >
               Retirer cette image
             </LabelPostImg>
           </PreviewImgContainer>
@@ -350,20 +345,12 @@ function ModifButton({
           />
         </FormLign>
         <FormLignImg>
-          <HideButton>
-            <button id="cancelModif" onClick={() => setIsModifRN(false)}>
-              Annuler la modification
-            </button>
-          </HideButton>
-          <LabelPostImg htmlFor="cancelModif">
+          <LabelPostImg onClick={() => setIsModifRN(false)}>
             Annuler la modification
           </LabelPostImg>
         </FormLignImg>
         <FormSubmit>
-          <HideButton>
-            <button id="modifPost">Modifier</button>
-          </HideButton>
-          <LabelForButton htmlFor="modifPost">Modifier</LabelForButton>
+          <LabelForButton onClick={send}>Modifier</LabelForButton>
         </FormSubmit>
       </form>
     </PostContainer>
