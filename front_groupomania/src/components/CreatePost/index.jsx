@@ -271,6 +271,9 @@ function CreatePost({ setApiCalled }) {
               }}
               required
             />
+            <label htmlFor="titleInput" style={{ display: 'none' }}>
+              Titre de la publication
+            </label>
           </FormLign>
 
           <FormLign>
@@ -284,6 +287,9 @@ function CreatePost({ setApiCalled }) {
               }}
               required
             />
+            <label htmlFor="descriptionInput" style={{ display: 'none' }}>
+              Description de la publication
+            </label>
           </FormLign>
         </InputTextColumn>
         <FormLign>

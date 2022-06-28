@@ -36,9 +36,12 @@ function ProfileInfo({ firstName, lastName, imageUrlUser, creationTimeUser }) {
     <ProfileContainer>
       <ProfileUser>
         {isProfilePicNull ? (
-          <ProfileUserImg src={imageUrlUser} />
+          <ProfileUserImg src={imageUrlUser} alt="Photo de profil" />
         ) : (
-          <ProfileUserImg src={profileDefault} />
+          <ProfileUserImg
+            src={profileDefault}
+            alt="Photo de profil par défault"
+          />
         )}
 
         <ProfileUserName>

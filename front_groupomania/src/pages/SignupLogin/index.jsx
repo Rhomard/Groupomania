@@ -294,23 +294,27 @@ function SignupLogin() {
       body: JSON.stringify(signupInfo),
     })
       .then(function (res) {
-        if (res.ok) {
-          return res.json()
+        if (res.status !== 404) {
+          alert(
+            'Compte créé avec succès ! Vous pouvez maintenant vous connecter :)'
+          )
+          setIsOpen(true)
+        } else {
+          alert(
+            'La création de compte à échouée, veuillez réessayer ultérieurement..'
+          )
         }
+        //   if (res.ok) {
+        //     return res.json()
+        //   }
       })
-      // Redirect to the feed
-      .then(function (value) {
-        alert(
-          'Compte créé avec succès ! Vous pouvez maintenant vous connecter :)'
-        )
-        setIsOpen(true)
-      })
+      // // Redirect to the feed
+      // .then(function (value) {
+      // })
       // If the API cannot be called
       .catch(function (err) {
         console.log(err)
-        alert(
-          'La création de compte à échouée, veuillez réessayer ultérieurement..'
-        )
+        console.log(err.response.status)
       })
   }
 
@@ -332,8 +336,9 @@ function SignupLogin() {
 
         <FormLogin onSubmit={handleSubmitLogin}>
           <FormLign>
-            <label>Email : </label>{' '}
+            <label for="inputMailLogin">Email : </label>
             <InputStyle
+              id="inputMailLogin"
               type="email"
               name="email"
               placeholder="exemple@groupomania.fr"
@@ -343,8 +348,9 @@ function SignupLogin() {
             />
           </FormLign>
           <FormLign>
-            <label>Mot de passe : </label>
+            <label for="inputPasswordLogin">Mot de passe : </label>
             <InputStyle
+              id="inputPasswordLogin"
               type="password"
               name="password"
               placeholder="motdepasse"
@@ -356,9 +362,9 @@ function SignupLogin() {
           </FormLign>
           <FormSubmit>
             <HideButton>
-              <button id="connexion">Me connecter</button>
+              <button id="login">Me connecter</button>
             </HideButton>
-            <LabelForButton htmlFor="connexion">Me connecter</LabelForButton>
+            <LabelForButton for="login">Me connecter</LabelForButton>
           </FormSubmit>
         </FormLogin>
       </LoginContainer>
@@ -376,8 +382,9 @@ function SignupLogin() {
         </NavLinks>
         <FormSignup onSubmit={handleSubmitSignup}>
           <FormLign>
-            <label>Prénom : </label>
+            <label htmlFor="inputFistnameSignup">Prénom : </label>
             <InputStyle
+              id="inputFistnameSignup"
               type="text"
               name="firstName"
               placeholder="Prénom"
@@ -387,8 +394,9 @@ function SignupLogin() {
             />
           </FormLign>
           <FormLign>
-            <label>Nom : </label>
+            <label htmlFor="inputLastnameSignup">Nom : </label>
             <InputStyle
+              id="inputLastnameSignup"
               type="text"
               name="lastName"
               placeholder="Nom"
@@ -398,8 +406,9 @@ function SignupLogin() {
             />
           </FormLign>
           <FormLign>
-            <label>Email : </label>
+            <label htmlFor="inputemailSignup">Email : </label>
             <InputStyle
+              id="inputemailSignup"
               type="email"
               name="email"
               placeholder="exemple@groupomania.fr"
@@ -409,8 +418,9 @@ function SignupLogin() {
             />
           </FormLign>
           <FormLign>
-            <label>Mot de passe : </label>
+            <label htmlFor="inputSignup">Mot de passe : </label>
             <InputStyle
+              id="inputSignup"
               type="password"
               name="password"
               placeholder="motdepasse"

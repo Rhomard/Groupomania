@@ -93,7 +93,7 @@ exports.login = (req, res, next) => {
       const user = `SELECT * FROM user WHERE email = "${req.body.email}"`;
       pool.query(user, (error, results) => {
             if (!results.length) {
-                  return res.status(401).json({ error: "Utilisateur non trouvé !" });
+                  return res.status(404).json({ error: "Utilisateur non trouvé !" });
             } else {
                   bcrypt.compare(req.body.password, results[0].password)
                         .then((valid) => {

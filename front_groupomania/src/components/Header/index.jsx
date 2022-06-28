@@ -120,7 +120,7 @@ function Header() {
         <NavContainer>
           <HomeLogoLign>
             <Link to="/fildactu">
-              <HomeLogo src={logo} />
+              <HomeLogo src={logo} alt="Logo Groupomania" />
             </Link>
           </HomeLogoLign>
           <NavLink
@@ -147,7 +147,7 @@ function Header() {
         <NavContainer>
           <HomeLogoLign>
             <Link to="/fildactu">
-              <HomeLogo src={logo} />
+              <HomeLogo src={logo} alt="Logo Groupomania" />
             </Link>
           </HomeLogoLign>
           <NavLink
@@ -179,7 +179,7 @@ function Header() {
         <NavContainer>
           <HomeLogoLign>
             <Link to="/">
-              <HomeLogo src={logo} />
+              <HomeLogo src={logo} alt="Logo Groupomania" />
             </Link>
           </HomeLogoLign>
         </NavContainer>
