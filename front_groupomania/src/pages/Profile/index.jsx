@@ -68,7 +68,9 @@ const PreviewImgContainer = styled.div`
 `
 
 const PreviewImg = styled.img`
-  width: 300px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
   padding: 10px 0px;
 `
 const HideButton = styled.div`
@@ -209,7 +211,6 @@ function Profile() {
               <PreviewImg
                 src={URL.createObjectURL(selectedImage)}
                 alt="Aperçu"
-                width="200"
               />
               <HideButton>
                 <button

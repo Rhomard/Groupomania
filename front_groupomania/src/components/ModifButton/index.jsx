@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { device } from '../../utils/style/responsive'
 import profileDefault from '../../assets/profileDefault.png'
 import post from '../../assets/post.png'
-import SupprButton from '../SupprPost'
+import SupprButton from '../SupprButton'
 import colors from '../../utils/style/colors'
 import axios from 'axios'
 
