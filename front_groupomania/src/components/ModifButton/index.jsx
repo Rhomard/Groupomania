@@ -27,9 +27,20 @@ const PostContainer = styled.div`
   }
 `
 
+const PostUserContainer = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+`
+
 const PostUser = styled.div`
   display: flex;
   align-items: center;
+`
+const ProfileUserImg = styled.img`
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
 `
 
 const PostUserName = styled.p`
@@ -41,34 +52,19 @@ const PostModifSuppr = styled.div`
   align-items: center;
 `
 
-const PostUserContainer = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-`
-
-const PostImgContainer = styled.div`
-  border-radius: 10px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  height: 170px;
-`
-
-const PostImg = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-`
-
 const ButtonLign = styled.div`
   display: flex;
 `
 
-const ProfileUserImg = styled.img`
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
+const ImgButtonModif = styled.img`
+  height: 35px;
+  padding-right: 10px;
+  &:hover {
+    cursor: pointer;
+  }
+`
+const FormLign = styled.div`
+  padding: 10px 5px;
 `
 
 const InputStyleText = styled.input`
@@ -85,12 +81,25 @@ const InputStyleText = styled.input`
     outline: 2px solid black;
   }
 `
-const ImgButtonModif = styled.img`
-  height: 35px;
-  padding-right: 10px;
-  &:hover {
-    cursor: pointer;
-  }
+
+const PostImgContainer = styled.div`
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  height: 170px;
+`
+
+const PostImg = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`
+
+const FormLignImg = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 10px 5px;
 `
 
 const HideButton = styled.div`
@@ -151,16 +160,6 @@ const InputStyleDescription = styled.textarea`
   &:focus {
     outline: 2px solid black;
   }
-`
-
-const FormLign = styled.div`
-  padding: 10px 5px;
-`
-
-const FormLignImg = styled.div`
-  display: flex;
-  justify-content: center;
-  padding: 10px 5px;
 `
 
 const FormSubmit = styled.div`
@@ -236,6 +235,7 @@ function ModifButton({
 
   const removeSelectedImage = () => {
     setSelectedImage()
+    setImageUrlPost(undefined)
   }
 
   const isImage = imageUrlPostRN !== 'undefined' ? true : false

@@ -8,19 +8,6 @@ const ImgButtonCross = styled.img`
   }
 `
 
-function SupprButton({ postId, setApiCalled }) {
-  return (
-    <ImgButtonCross
-      src={cross}
-      alt="Croix noir"
-      onClick={(e) => {
-        e.preventDefault()
-        handleSupprClick({ postId, setApiCalled })
-      }}
-    />
-  )
-}
-
 function SupprOnePost({ postId, setApiCalled }) {
   let login = JSON.parse(localStorage.getItem('login'))
   fetch(`http://localhost:3000/api/post/${postId}`, {
@@ -46,6 +33,19 @@ function SupprOnePost({ postId, setApiCalled }) {
 
 function handleSupprClick({ postId, setApiCalled }) {
   SupprOnePost({ postId, setApiCalled })
+}
+
+function SupprButton({ postId, setApiCalled }) {
+  return (
+    <ImgButtonCross
+      src={cross}
+      alt="Croix noir"
+      onClick={(e) => {
+        e.preventDefault()
+        handleSupprClick({ postId, setApiCalled })
+      }}
+    />
+  )
 }
 
 export default SupprButton

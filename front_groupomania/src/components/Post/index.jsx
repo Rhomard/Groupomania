@@ -29,9 +29,21 @@ const PostContainer = styled.div`
   }
 `
 
+const PostUserContainer = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+`
+
 const PostUser = styled.div`
   display: flex;
   align-items: center;
+`
+
+const ProfileUserImg = styled.img`
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
 `
 
 const PostUserName = styled.p`
@@ -43,19 +55,20 @@ const PostModifSuppr = styled.div`
   align-items: center;
 `
 
-const PostUserContainer = styled.div`
+const ButtonLign = styled.div`
   display: flex;
-  width: 100%;
-  justify-content: space-between;
+`
+
+const ImgButtonModif = styled.img`
+  height: 35px;
+  padding-right: 10px;
+  &:hover {
+    cursor: pointer;
+  }
 `
 
 const PostTitle = styled.h2`
   font-size: 18px;
-`
-
-const PostDescription = styled.p`
-  font-weight: bold;
-  font-size: 13px;
 `
 
 const PostImgContainer = styled.div`
@@ -72,27 +85,15 @@ const PostImg = styled.img`
   object-fit: cover;
 `
 
+const PostDescription = styled.p`
+  font-weight: bold;
+  font-size: 13px;
+`
+
 const PostCreation = styled.p`
   font-size: 12px;
   padding-top: 13px;
   margin: 0;
-`
-
-const ButtonLign = styled.div`
-  display: flex;
-`
-
-const ProfileUserImg = styled.img`
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-`
-const ImgButtonModif = styled.img`
-  height: 35px;
-  padding-right: 10px;
-  &:hover {
-    cursor: pointer;
-  }
 `
 
 function Post({

@@ -46,15 +46,15 @@ const ButtonStyleLogoutFooter = styled.button`
   }
 `
 
+const LogoutImg = styled.img`
+  height: 25px;
+  padding-left: 5px;
+`
+
 const CopyrightStyle = styled.p`
   margin: 0;
   border: none;
   background: none;
-`
-
-const LogoutImg = styled.img`
-  height: 25px;
-  padding-left: 5px;
 `
 
 function UserLogin() {

@@ -15,10 +15,6 @@ const ProfileUser = styled.div`
   justify-content: center;
 `
 
-const MemberSince = styled.p`
-  margin: 50px 0px;
-`
-
 const ProfileUserImg = styled.img`
   height: 150px;
   width: 150px;
@@ -27,6 +23,10 @@ const ProfileUserImg = styled.img`
 
 const ProfileUserName = styled.p`
   font-size: 50px;
+`
+
+const MemberSince = styled.p`
+  margin: 50px 0px;
 `
 
 function ProfileInfo({ firstName, lastName, imageUrlUser, creationTimeUser }) {

@@ -30,11 +30,6 @@ const ProfileContainer = styled.div`
   }
 `
 
-const ImgLabelPostImg = styled.img`
-  padding-left: 10px;
-  height: 30px;
-`
-
 const HideInput = styled.div`
   width: 0.1px;
   height: 0.1px;
@@ -57,6 +52,11 @@ const LabelPostImg = styled.label`
   &:hover {
     cursor: pointer;
   }
+`
+
+const ImgLabelPostImg = styled.img`
+  padding-left: 10px;
+  height: 30px;
 `
 
 const PreviewImgContainer = styled.div`

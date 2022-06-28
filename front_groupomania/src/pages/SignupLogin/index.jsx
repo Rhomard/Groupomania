@@ -194,6 +194,15 @@ const FormSubmit = styled.div`
   }
 `
 
+const HideButton = styled.div`
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+`
+
 const LabelForButton = styled.label`
   width: 200px;
   padding: 10px 0px;
@@ -205,15 +214,6 @@ const LabelForButton = styled.label`
     cursor: pointer;
     box-shadow: 0px 0px 15px 1px ${colors.primary};
   }
-`
-
-const HideButton = styled.div`
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
 `
 
 function SignupLogin() {

@@ -10,6 +10,21 @@ import './feed.css'
 import { Navigate } from 'react-router-dom'
 import { device } from '../../utils/style/responsive'
 
+const PostContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  margin: 0px 30px;
+  border-top: 2px solid black;
+`
+
+const NoPostContainer = styled.div`
+  padding: 0px 20px 1px 20px;
+  border-top: 2px solid black;
+  text-align: center;
+`
+
 const PageContainer = styled.div`
   padding-bottom: 50px;
   margin: auto;
@@ -52,18 +67,6 @@ const FeedTitleLign = styled.div`
   padding-top: 20px;
 `
 
-const FeedTitle = styled.h1`
-  @media ${device.mobile} {
-    font-size: 30px;
-  }
-  @media ${device.tablet} {
-    font-size: 40px;
-  }
-  @media ${device.desktop} {
-    font-size: 40px;
-  }
-`
-
 const FeedLogo = styled.img`
   @media ${device.mobile} {
     height: 40px;
@@ -76,19 +79,16 @@ const FeedLogo = styled.img`
   }
 `
 
-const PostContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  align-items: flex-start;
-  margin: 0px 30px;
-  border-top: 2px solid black;
-`
-
-const NoPostContainer = styled.div`
-  padding: 0px 20px 1px 20px;
-  border-top: 2px solid black;
-  text-align: center;
+const FeedTitle = styled.h1`
+  @media ${device.mobile} {
+    font-size: 30px;
+  }
+  @media ${device.tablet} {
+    font-size: 40px;
+  }
+  @media ${device.desktop} {
+    font-size: 40px;
+  }
 `
 
 function MapData({ apiCalled, setApiCalled }) {

@@ -6,6 +6,24 @@ import admin from '../../assets/admin.png'
 import logout from '../../assets/logout.png'
 import { device } from '../../utils/style/responsive'
 
+const SuperAdminLign = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 13px 0px 3px 0px;
+  box-shadow: 0px 4px 10px -2px grey;
+`
+
+const SuperAdminStyle = styled.h1`
+  text-align: center;
+  font-size: 15px;
+  padding-right: 5px;
+`
+
+const ImgAdmin = styled.img`
+  height: 25px;
+`
+
 const HeaderContainer = styled.header`
   position: fixed;
   top: 0px;
@@ -45,29 +63,6 @@ const HomeLogo = styled.img`
   width: 200px;
 `
 
-const LogoutImg = styled.img`
-  height: 25px;
-  padding-left: 5px;
-`
-
-const SuperAdminLign = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 13px 0px 3px 0px;
-  box-shadow: 0px 4px 10px -2px grey;
-`
-
-const SuperAdminStyle = styled.h1`
-  text-align: center;
-  font-size: 15px;
-  padding-right: 5px;
-`
-
-const ImgAdmin = styled.img`
-  height: 25px;
-`
-
 const ButtonStyleLogoutHeader = styled.button`
   display: flex;
   align-items: center;
@@ -95,6 +90,11 @@ const ButtonStyleLogoutHeader = styled.button`
     border: none;
     height: 60px;
   }
+`
+
+const LogoutImg = styled.img`
+  height: 25px;
+  padding-left: 5px;
 `
 
 function handleLogoutClick() {

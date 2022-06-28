@@ -6,12 +6,11 @@ const LegalNoticeContainer = styled.div`
   align-items: center;
   justify-content: center;
 `
-const LegalNoticeTitle = styled.h1``
 
 function LegalNotice() {
   return (
     <LegalNoticeContainer>
-      <LegalNoticeTitle>Mentions Légales à venir...</LegalNoticeTitle>
+      <h1>Mentions Légales à venir...</h1>
     </LegalNoticeContainer>
   )
 }

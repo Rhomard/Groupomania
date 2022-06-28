@@ -33,10 +33,6 @@ const CreatePostContainer = styled.div`
   }
 `
 
-const FormLign = styled.div`
-  padding: 10px 5px;
-`
-
 const CreatePostTitleLign = styled.div`
   @media ${device.mobile} {
     display: flex;
@@ -55,10 +51,6 @@ const CreatePostTitleLign = styled.div`
   }
 `
 
-const CreatePostTitle = styled.h2`
-  padding-left: 5px;
-`
-
 const ImgCreatePostTitle = styled.img`
   padding-left: 35px;
   height: 25px;
@@ -71,6 +63,10 @@ const ImgCreatePostTitle = styled.img`
   @media ${device.desktop} {
     padding-left: 35px;
   }
+`
+
+const CreatePostTitle = styled.h2`
+  padding-left: 5px;
 `
 
 const FormPost = styled.form`
@@ -97,10 +93,13 @@ const FormPost = styled.form`
   }
 `
 
-const FormSubmit = styled.div`
-  &hover {
-    cursor: pointer;
-  }
+const InputTextColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+const FormLign = styled.div`
+  padding: 10px 5px;
 `
 
 const InputStyleText = styled.input`
@@ -144,16 +143,10 @@ const HideButton = styled.div`
   z-index: -1;
 `
 
-const LabelForButton = styled.label`
-  padding: 10px 20px;
-  text-align: center;
-  font-size: 15px;
-  border-radius: 100px;
-  border: 2px solid;
-  &:hover {
-    cursor: pointer;
-    box-shadow: 0px 0px 15px 1px ${colors.primary};
-  }
+const PreviewImgColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `
 
 const LabelPostImg = styled.label`
@@ -190,15 +183,22 @@ const PreviewImg = styled.img`
   object-fit: cover;
 `
 
-const PreviewImgColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+const FormSubmit = styled.div`
+  &hover {
+    cursor: pointer;
+  }
 `
 
-const InputTextColumn = styled.div`
-  display: flex;
-  flex-direction: column;
+const LabelForButton = styled.label`
+  padding: 10px 20px;
+  text-align: center;
+  font-size: 15px;
+  border-radius: 100px;
+  border: 2px solid;
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 15px 1px ${colors.primary};
+  }
 `
 
 function CreatePost({ setApiCalled }) {
