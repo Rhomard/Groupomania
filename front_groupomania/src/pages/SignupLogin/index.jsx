@@ -294,7 +294,7 @@ function SignupLogin() {
           alert(
             'Compte créé avec succès ! Vous pouvez maintenant vous connecter :)'
           )
-          setIsOpen(true)
+          setIsAlreadyUser(true)
         } else {
           alert(
             'La création de compte à échouée, veuillez réessayer ultérieurement..'
@@ -307,7 +307,7 @@ function SignupLogin() {
       })
   }
 
-  const [isAlreadyUser, setIsOpen] = useState(true)
+  const [isAlreadyUser, setIsAlreadyUser] = useState(true)
 
   if (login) {
     return <Navigate to="/fildactu" />
@@ -318,14 +318,14 @@ function SignupLogin() {
       <LoginContainer>
         <NavLinks>
           <NavLinkActive to="/">Connexion</NavLinkActive>
-          <NavLinkInactive to="/" onClick={() => setIsOpen(false)}>
+          <NavLinkInactive to="/" onClick={() => setIsAlreadyUser(false)}>
             Inscription
           </NavLinkInactive>
         </NavLinks>
 
         <FormLogin onSubmit={handleSubmitLogin}>
           <FormLign>
-            <label for="inputMailLogin">Email : </label>
+            <label htmlFor="inputMailLogin">Email : </label>
             <InputStyle
               id="inputMailLogin"
               type="email"
@@ -337,7 +337,7 @@ function SignupLogin() {
             />
           </FormLign>
           <FormLign>
-            <label for="inputPasswordLogin">Mot de passe : </label>
+            <label htmlFor="inputPasswordLogin">Mot de passe : </label>
             <InputStyle
               id="inputPasswordLogin"
               type="password"
@@ -353,7 +353,7 @@ function SignupLogin() {
             <HideButton>
               <button id="login">Me connecter</button>
             </HideButton>
-            <LabelForButton for="login">Me connecter</LabelForButton>
+            <LabelForButton htmlFor="login">Me connecter</LabelForButton>
           </FormSubmit>
         </FormLogin>
       </LoginContainer>
@@ -362,10 +362,10 @@ function SignupLogin() {
     <PageContainer>
       <SignupContainer>
         <NavLinks>
-          <NavLinkInactive to="/" onClick={() => setIsOpen(true)}>
+          <NavLinkInactive to="/" onClick={() => setIsAlreadyUser(true)}>
             Connexion
           </NavLinkInactive>
-          <NavLinkActive to="/" onClick={() => setIsOpen(false)}>
+          <NavLinkActive to="/" onClick={() => setIsAlreadyUser(false)}>
             Inscription
           </NavLinkActive>
         </NavLinks>
