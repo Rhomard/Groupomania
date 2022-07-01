@@ -290,14 +290,16 @@ function SignupLogin() {
       body: JSON.stringify(signupInfo),
     })
       .then(function (res) {
-        if (res.status !== 404) {
-          alert(
-            'Compte créé avec succès ! Vous pouvez maintenant vous connecter :)'
-          )
-          setIsAlreadyUser(true)
-        } else {
+        if (res.status === 404) {
           alert(
             'La création de compte à échouée, veuillez réessayer ultérieurement..'
+          )
+          setIsAlreadyUser(true)
+        } else if (res.status === 400) {
+          alert('Cette adresse mail est déjà utilisée')
+        } else {
+          alert(
+            'Compte créé avec succès ! Vous pouvez maintenant vous connecter :)'
           )
         }
       })

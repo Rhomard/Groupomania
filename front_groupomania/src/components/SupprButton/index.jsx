@@ -32,7 +32,10 @@ function SupprOnePost({ postId, setApiCalled }) {
 }
 
 function handleSupprClick({ postId, setApiCalled }) {
-  SupprOnePost({ postId, setApiCalled })
+  var res = window.confirm('Êtes-vous sûr de vouloir supprimer?')
+  if (res) {
+    SupprOnePost({ postId, setApiCalled })
+  }
 }
 
 function SupprButton({ postId, setApiCalled }) {
