@@ -166,7 +166,11 @@ function Post({
                   setIsModifRN(true)
                 }}
               />
-              <SupprButton postId={postId} setApiCalled={setApiCalled} />
+              <SupprButton
+                postId={postId}
+                setApiCalled={setApiCalled}
+                title={title}
+              />
             </ButtonLign>
           ) : null}
         </PostModifSuppr>

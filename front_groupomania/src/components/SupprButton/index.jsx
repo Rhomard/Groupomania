@@ -31,21 +31,23 @@ function SupprOnePost({ postId, setApiCalled }) {
     })
 }
 
-function handleSupprClick({ postId, setApiCalled }) {
-  var res = window.confirm('Êtes-vous sûr de vouloir supprimer?')
+function handleSupprClick({ postId, setApiCalled, title }) {
+  let res = window.confirm(
+    `Êtes-vous sûr de vouloir supprimer ce post : ${title} ?`
+  )
   if (res) {
     SupprOnePost({ postId, setApiCalled })
   }
 }
 
-function SupprButton({ postId, setApiCalled }) {
+function SupprButton({ postId, setApiCalled, title }) {
   return (
     <ImgButtonCross
       src={cross}
       alt="Croix noir"
       onClick={(e) => {
         e.preventDefault()
-        handleSupprClick({ postId, setApiCalled })
+        handleSupprClick({ postId, setApiCalled, title })
       }}
     />
   )
