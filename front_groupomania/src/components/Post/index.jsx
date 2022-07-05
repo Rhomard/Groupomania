@@ -113,7 +113,7 @@ function Post({
   let login = JSON.parse(localStorage.getItem('login'))
 
   let isAuth = false
-  if (postUserId === login.userId || login.userId === 1) {
+  if (postUserId === login.userId || login.roleId === 1) {
     isAuth = true
   }
 

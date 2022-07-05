@@ -244,7 +244,8 @@ function ModifButton({
 
   let login = JSON.parse(localStorage.getItem('login'))
 
-  const isAuth = postUserId === login.userId || postUserId === 1 ? true : false
+  const isAuth =
+    postUserId === login.userId || login.roleId === 1 ? true : false
   return (
     <PostContainer>
       <PostUserContainer>
@@ -269,7 +270,11 @@ function ModifButton({
                   setIsModifRN(false)
                 }}
               />
-              <SupprButton postId={postId} setApiCalled={setApiCalled} />
+              <SupprButton
+                postId={postId}
+                setApiCalled={setApiCalled}
+                title={titleInput}
+              />
             </ButtonLign>
           ) : null}
         </PostModifSuppr>
