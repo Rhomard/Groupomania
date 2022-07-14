@@ -25,11 +25,11 @@ const LikeCount = styled.p`
 function LikeButton({ postId }) {
   const [isLiked, setIsLiked] = useState(false)
 
-  const [apiCalled, setApiCalled] = useState(null)
+  const [changeOnLike, setChangeOnLike] = useState(null)
 
   useEffect(() => {
-    if (apiCalled !== null) {
-      if (apiCalled === true) {
+    if (changeOnLike !== null) {
+      if (changeOnLike === true) {
         fetch('http://localhost:3000/api/like', {
           method: 'POST',
           headers: {
@@ -50,7 +50,7 @@ function LikeButton({ postId }) {
           .catch(function (err) {
             console.log(err)
           })
-      } else if (apiCalled === false) {
+      } else if (changeOnLike === false) {
         fetch(`http://localhost:3000/api/like/${postId}`, {
           method: 'DELETE',
           headers: {
@@ -73,7 +73,7 @@ function LikeButton({ postId }) {
           })
       }
     }
-  }, [apiCalled]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [changeOnLike]) // eslint-disable-line react-hooks/exhaustive-deps
 
   let login = JSON.parse(localStorage.getItem('login'))
 
@@ -112,7 +112,7 @@ function LikeButton({ postId }) {
           alt="Bouton coeur plein"
           src={heartFull}
           onClick={() => {
-            setApiCalled(false)
+            setChangeOnLike(false)
           }}
         />
       </LikeLign>
@@ -122,7 +122,7 @@ function LikeButton({ postId }) {
           alt="Bouton coeur vide"
           src={heartEmpty}
           onClick={() => {
-            setApiCalled(true)
+            setChangeOnLike(true)
           }}
         />
       </LikeLign>
@@ -134,7 +134,7 @@ function LikeButton({ postId }) {
           alt="Bouton coeur plein"
           src={heartFull}
           onClick={() => {
-            setApiCalled(false)
+            setChangeOnLike(false)
           }}
         />
         <LikeCount>
@@ -147,7 +147,7 @@ function LikeButton({ postId }) {
           alt="Bouton coeur vide"
           src={heartEmpty}
           onClick={() => {
-            setApiCalled(true)
+            setChangeOnLike(true)
           }}
         />
         <LikeCount>
